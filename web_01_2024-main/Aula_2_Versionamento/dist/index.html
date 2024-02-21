@@ -7,11 +7,51 @@
 </head>
 <body>
     <h1>Questionário - Para exemplos utilize o console do browser</h1>
-    <h2>01 - Na definição de uma variável em TypeScript, qual é a diferença entre a atribuição por anotação e por inferência de tipos? Poderia citar exemplos de situações em que cada abordagem é mais apropriada?</h2>
-    <h3>Resposta: </h3>
-    <h2>02 - Quais são algumas das características-chave dos arrays em TypeScript e como eles diferem dos arrays em JavaScript puro? Além disso, você poderia fornecer exemplos de como usar arrays em TypeScript para lidar com diferentes tipos de dados?</h2>
-    <h3>Resposta: </h3>
-    <h2>03 - Quais são as principais características e benefícios de usar objetos em TypeScript em comparação com JavaScript puro? Além disso, como você pode definir e trabalhar com objetos em TypeScript de uma maneira que aproveite ao máximo o sistema de tipos estáticos?</h3>
-    <h3>Resposta: </h3>  
+
+    <h2>01 - Na definição de uma variável em TypeScript, qual é a diferença entre a atribuição por anotação e 
+        por inferência de tipos? Poderia citar exemplos de situações em que cada abordagem é mais apropriada?</h2>
+    <p>Resposta: 
+       Atribuição por anotação é quando indicamos diretamente o tipo da variável/objeto (let nome:string = 'Ana').
+       Já uma declaração por inferência é quando não dizemos diretamente o tipo de uma variável, ao invés disso, ela adquire o 
+       tipo da primeira coisa que recebe (let variavel = 2  -> logo, tipo number).
+    
+       Creio que seja importante existir a possibilidade de atribuição por inferência em casos onde não se sabe que tipo dado 
+       que você vai receber.</p>
+
+    <!-- ---------------------------------------------------------- -->
+
+    <h2>02 - Quais são algumas das características-chave dos arrays em TypeScript e como eles diferem dos arrays 
+        em JavaScript puro? Além disso, você poderia fornecer exemplos de como usar arrays em TypeScript para lidar com diferentes tipos de dados?</h2>
+    <p>Resposta: 
+        No caso de Arrays, também podemos criá-los por anotação ou inferência. Além disso, podemos criar um Array com mais de um tipo de dado ao mesmo tempo.
+
+        let lista:string[] = ["banana", "papel", "lápis", "a lua"]
+        let numeros:number[] = [1, 2, 3, 4, 5]
+        let mista:[string, number, boolean] = ["Brunno", 19, False]</p>
+
+    <!-- ---------------------------------------------------------- -->
+
+    <h2>03 - Quais são as principais características e benefícios de usar objetos em TypeScript em comparação com JavaScript puro? 
+        Além disso, como você pode definir e trabalhar com objetos em TypeScript de uma maneira que aproveite ao máximo o sistema de tipos estáticos?</h3>
+    <p>Resposta: 
+        Ter a garantia de que os tipos dentro de um objetos sejam estáveis fazem toda a diferença, pois garente uma ordem e segurança.
+
+        // anotation
+        type aluno = {
+            nome: "Brunno",
+            idade: 19,
+            bt: "bt303884x",
+        }
+
+        // inferência
+        type aluno = {nome:string, idade:number, bt:string}
+
+        // povoando
+        aluno = {
+            nome: "Brunno",
+            idade: 19,
+            bt: "bt303884x",
+        }
+    </p>  
 </body>
 </html>

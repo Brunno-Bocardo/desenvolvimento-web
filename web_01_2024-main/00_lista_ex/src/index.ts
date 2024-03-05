@@ -94,10 +94,46 @@ function porcentagem(valor:number, porcentagem:number) {
 // FUNÇÃO 8
 function reverterFrase(frase:string) {
     let fraseArray:string[] = frase.split(" ")
-    return fraseArray.length
+    let newPhrase = []
+
+    for (let i=0; i<=fraseArray.length; i++) {
+        let aux = fraseArray.pop()
+        newPhrase.push(aux)
+    }
+
+    return newPhrase.join(' ')
 }
 // console.log(reverterFrase("ola pessoas")) 
 
-let string:string = 'oi pessoal'
-let palavra:string[] = string.split(" ")
-console.log(palavra)
+
+// FUNÇÃO 9
+function somarPares(...array:number[]) {
+    let soma:number = 0
+    let tamanho:number = array.length
+
+    for (let i=0; i<=tamanho; i++) {
+        if (array[i] % 2 == 0) {
+            soma += array[i]
+        }
+    }
+
+    return soma
+}
+// console.log(somarPares(1,2,3,4,2))
+
+
+// FUNÇÃO 10
+function fatorial(valor:number) : number {
+    let resultado:number = 1
+
+
+    for (let i=valor; i!=0; i--) {
+        resultado *= valor
+        valor --
+    }
+
+    return resultado
+}
+// console.log(fatorial(5))
+// console.log(fatorial(3))
+// console.log(fatorial(13))

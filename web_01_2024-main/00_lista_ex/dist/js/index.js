@@ -79,9 +79,35 @@ function porcentagem(valor, porcentagem) {
 // FUNÇÃO 8
 function reverterFrase(frase) {
     let fraseArray = frase.split(" ");
-    return fraseArray.length;
+    let newPhrase = [];
+    for (let i = 0; i <= fraseArray.length; i++) {
+        let aux = fraseArray.pop();
+        newPhrase.push(aux);
+    }
+    return newPhrase.join(' ');
 }
 // console.log(reverterFrase("ola pessoas")) 
-let string = 'oi pessoal';
-let palavra = string.split(" ");
-console.log(palavra);
+// FUNÇÃO 9
+function somarPares(...array) {
+    let soma = 0;
+    let tamanho = array.length;
+    for (let i = 0; i <= tamanho; i++) {
+        if (array[i] % 2 == 0) {
+            soma += array[i];
+        }
+    }
+    return soma;
+}
+// console.log(somarPares(1,2,3,4,2))
+// FUNÇÃO 10
+function fatorial(valor) {
+    let resultado = 1;
+    for (let i = valor; i != 0; i--) {
+        resultado *= valor;
+        valor--;
+    }
+    return resultado;
+}
+// console.log(fatorial(5))
+// console.log(fatorial(3))
+// console.log(fatorial(13))

@@ -123,6 +123,7 @@ class Calculadora {
 
 
 
+// EXERCÍCIO 3
 class Produto {
     private nome:string
     private preco:number
@@ -161,6 +162,18 @@ class Produto {
 
     get getQuantidadeEmEstoque() {
         return this.quantidadeEmEstoque
+    }
+
+    set setNome(nome:string) {
+        this.nome = nome
+    }
+
+    set setPreco(preco:number) {
+        this.preco = preco
+    }
+
+    set setQuantidadeEmEstoque(quantidadeEmEstoque:number) {
+        this.quantidadeEmEstoque = quantidadeEmEstoque
     }
 }
 

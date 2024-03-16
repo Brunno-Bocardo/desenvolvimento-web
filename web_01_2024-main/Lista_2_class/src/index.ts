@@ -178,8 +178,14 @@ class Produto {
 }
 
 const bananas = new Produto("banana", 10, 200)
-console.log(bananas.calcularValorTotalEmEstoque())
-console.log(bananas.reporEstoque(300))
-console.log(bananas.getQuantidadeEmEstoque)
-console.log(bananas.vender(150))
-console.log(bananas.getQuantidadeEmEstoque)
+console.log("Produto analisado: ", bananas.getNome)
+console.log("Seu valor unitário é: ", bananas.getPreco)
+console.log("Valor em estoque: ", bananas.calcularValorTotalEmEstoque())
+bananas.reporEstoque(300)
+console.log("Quantidade em estoque: ", bananas.getQuantidadeEmEstoque)
+console.log("Vendido. Novo estoque: ", bananas.vender(150))
+
+bananas.setPreco=12
+console.log("\nA inflação veio ao mercadinho")
+console.log("Seu valor unitário é: ", bananas.getPreco)
+console.log("Valor em estoque: ", bananas.calcularValorTotalEmEstoque())

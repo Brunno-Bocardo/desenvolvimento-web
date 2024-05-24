@@ -6,8 +6,8 @@ export function criarModalidade(req:Request, res:Response) {
     try {
         const novaModalidade = modalidadeService.cadastrarModalidade(req.body)
         res.status(201).json({
-                mensagem: "Nova modalidade de pães adicionada 😊",
-                produto: novaModalidade
+            mensagem: "Nova modalidade de pães adicionada 😊",
+            produto: novaModalidade
         })
     } catch(error: any) {
         res.status(400).json({ mensagem: error.message })
@@ -28,16 +28,26 @@ export function recuperarModalidadePorID(req:Request, res:Response) {
         console.log("ID: ", id)
         const produto = modalidadeService.consultarModalidade(id);
         if(produto){
-        res.status(201).json(
-            {
-                mensagem:"Modalidade de pão encontrada com sucesso 😊",
-                produto:produto
-            }
-            );
+        res.status(201).json({
+            mensagem:"Modalidade de pão encontrada com sucesso 😊",
+            produto:produto
+        });
         }else{
             res.status(400).json({mensagem:"Pão não encontrado... 😞"});
         }
     } catch (error: any) {
         res.status(400).json({ message: error.message});
+    }
+}
+
+export function alterarModalidade(req:Request, res:Response) {
+    try {
+        const novaModalidade = modalidadeService.alterarModalidade(req.body)
+        res.status(201).json({
+            mensagem: "Sua modalidade de pão foi editada 🫡",
+            produto: novaModalidade
+        })
+    } catch(error: any) {
+        res.status(400).json({ mensagem: error.message })
     }
 }

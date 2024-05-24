@@ -24,5 +24,15 @@ export class ModalidadeService {
         console.log(id)
         return this.modalidadeRepository.filtraProdutoPorId(id);
     }
+
+    alterarModalidade(modalidadeData: any):ModalidadePaes|undefined {
+        const {id, name, vegan} = modalidadeData
+
+        if (!id || !name || typeof vegan !== "boolean") {
+            throw new Error("Informações incompletas");
+        }
+
+        return this.modalidadeRepository.updateModalidade(id, name, vegan)
+    }
 }
 

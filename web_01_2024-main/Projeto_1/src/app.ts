@@ -1,5 +1,5 @@
 import express from "express";
-import { criarModalidade, recuprarTodasAsModalidades, recuperarModalidadePorID } from "./controller/ModalidadeController";
+import { criarModalidade, recuprarTodasAsModalidades, recuperarModalidadePorID, alterarModalidade } from "./controller/ModalidadeController";
 
 // import { criarModalidade, recuprarTodasAsModalidades, recuperarModalidade, alterarModalidade, deletarModalidade } from "./controller/ModalidadeController";
 // import { addItem, recuperaItensEstoque, buscarItem, addQuantidade, deleteQuantidade } from "./controller/EstoqueController";
@@ -16,8 +16,8 @@ function logInfo() {
 // Modalidade 
 app.post("/api/modalidade", criarModalidade) //OK
 app.get("/api/modalidade/todas", recuprarTodasAsModalidades) //OK
-app.get("/api/modalidade/:id", recuperarModalidadePorID)
-// app.put("/api/modalidade", alterarModalidade)
+app.get("/api/modalidade/:id", recuperarModalidadePorID) //OK
+app.put("/api/modalidade/:id", alterarModalidade)
 // app.delete("/api/modalidade", deletarModalidade)
 
 // Estoque 

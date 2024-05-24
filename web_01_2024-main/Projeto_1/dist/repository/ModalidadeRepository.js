@@ -14,5 +14,16 @@ class ModalidadePaesRepository {
     filtraProdutoPorId(id) {
         return this.modalidadeList.find(product => product.id === id);
     }
+    updateModalidade(id, name, vegan) {
+        const modalidade = this.filtraProdutoPorId(id);
+        if (modalidade) {
+            modalidade.name = name;
+            modalidade.vegan = vegan;
+            return modalidade;
+        }
+        else {
+            return undefined;
+        }
+    }
 }
 exports.ModalidadePaesRepository = ModalidadePaesRepository;

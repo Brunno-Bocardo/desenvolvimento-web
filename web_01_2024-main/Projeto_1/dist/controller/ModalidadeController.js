@@ -1,6 +1,6 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.recuperarModalidadePorID = exports.recuprarTodasAsModalidades = exports.criarModalidade = void 0;
+exports.alterarModalidade = exports.recuperarModalidadePorID = exports.recuprarTodasAsModalidades = exports.criarModalidade = void 0;
 const ModalidadeService_1 = require("../service/ModalidadeService");
 const modalidadeService = new ModalidadeService_1.ModalidadeService();
 function criarModalidade(req, res) {
@@ -45,3 +45,16 @@ function recuperarModalidadePorID(req, res) {
     }
 }
 exports.recuperarModalidadePorID = recuperarModalidadePorID;
+function alterarModalidade(req, res) {
+    try {
+        const novaModalidade = modalidadeService.alterarModalidade(req.body);
+        res.status(201).json({
+            mensagem: "Sua modalidade de pão foi editada 🫡",
+            produto: novaModalidade
+        });
+    }
+    catch (error) {
+        res.status(400).json({ mensagem: error.message });
+    }
+}
+exports.alterarModalidade = alterarModalidade;

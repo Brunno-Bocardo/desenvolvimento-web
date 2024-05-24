@@ -18,8 +18,8 @@ function logInfo() {
 // Modalidade 
 app.post("/api/modalidade", ModalidadeController_1.criarModalidade); //OK
 app.get("/api/modalidade/todas", ModalidadeController_1.recuprarTodasAsModalidades); //OK
-app.get("/api/modalidade/:id", ModalidadeController_1.recuperarModalidadePorID);
-// app.put("/api/modalidade", alterarModalidade)
+app.get("/api/modalidade/:id", ModalidadeController_1.recuperarModalidadePorID); //OK
+app.put("/api/modalidade/:id", ModalidadeController_1.alterarModalidade);
 // app.delete("/api/modalidade", deletarModalidade)
 // Estoque 
 // app.post("/api/estoque", addItem)

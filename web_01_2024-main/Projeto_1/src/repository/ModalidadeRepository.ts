@@ -25,4 +25,15 @@ export class ModalidadePaesRepository {
             return undefined
         }
     }
+
+    deleteModalidade(id:number):boolean {
+        const index = this.modalidadeList.findIndex(modalidade => modalidade.id === id);
+        if(index !== -1) {
+            console.log("Produto ", id, " deletado")
+            this.modalidadeList.splice(index, 1)
+            return true
+        } else {
+            return false
+        }
+    }
 }

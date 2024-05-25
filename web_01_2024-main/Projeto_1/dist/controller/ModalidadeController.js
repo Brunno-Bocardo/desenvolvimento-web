@@ -1,6 +1,6 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.alterarModalidade = exports.recuperarModalidadePorID = exports.recuprarTodasAsModalidades = exports.criarModalidade = void 0;
+exports.deletarModalidade = exports.alterarModalidade = exports.recuperarModalidadePorID = exports.recuprarTodasAsModalidades = exports.criarModalidade = void 0;
 const ModalidadeService_1 = require("../service/ModalidadeService");
 const modalidadeService = new ModalidadeService_1.ModalidadeService();
 function criarModalidade(req, res) {
@@ -58,3 +58,16 @@ function alterarModalidade(req, res) {
     }
 }
 exports.alterarModalidade = alterarModalidade;
+function deletarModalidade(req, res) {
+    try {
+        modalidadeService.deletarModalidade(req.body);
+        res.status(201).json({
+            mensagem: "Sua modalidade de pão foi apagada da existência 🫡",
+            produto: "Não existe né"
+        });
+    }
+    catch (error) {
+        res.status(400).json({ mensagem: error.message });
+    }
+}
+exports.deletarModalidade = deletarModalidade;

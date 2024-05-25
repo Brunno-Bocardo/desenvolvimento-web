@@ -34,5 +34,15 @@ export class ModalidadeService {
 
         return this.modalidadeRepository.updateModalidade(id, name, vegan)
     }
+
+    deletarModalidade(modalidadeData: any):boolean {
+        const {id, name, vegan} = modalidadeData
+
+        if (!id || !name || typeof vegan !== "boolean") {
+            throw new Error("Informações incompletas");
+        }
+
+        return this.modalidadeRepository.deleteModalidade(id)
+    }
 }
 

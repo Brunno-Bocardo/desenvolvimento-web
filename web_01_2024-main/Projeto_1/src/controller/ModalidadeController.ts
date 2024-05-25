@@ -51,3 +51,15 @@ export function alterarModalidade(req:Request, res:Response) {
         res.status(400).json({ mensagem: error.message })
     }
 }
+
+export function deletarModalidade(req:Request, res:Response) {
+    try {
+        modalidadeService.deletarModalidade(req.body)
+        res.status(201).json({
+            mensagem: "Sua modalidade de pão foi apagada da existência 🫡",
+            produto: "Não existe né"
+        })
+    } catch(error: any) {
+        res.status(400).json({ mensagem: error.message })
+    }
+}

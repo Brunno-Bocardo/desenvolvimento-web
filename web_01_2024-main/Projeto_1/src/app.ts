@@ -1,6 +1,6 @@
 import express from "express";
 import { criarModalidade, recuprarTodasAsModalidades, recuperarModalidadePorID, alterarModalidade, deletarModalidade } from "./controller/ModalidadeController";
-// import { addItem, recuperaItensEstoque, buscarItem, addQuantidade, deleteQuantidade } from "./controller/EstoqueController";
+import { addItem } from "./controller/EstoqueController";
 // import { realizarVenda, recuperarVenda } from "./controller/VendaController";
 
 const app = express();
@@ -12,14 +12,14 @@ function logInfo() {
 }
 
 // Modalidade 
-app.post("/api/modalidade", criarModalidade) //OK
+app.post("/api/modalidade", criarModalidade)                 //OK
 app.get("/api/modalidade/todas", recuprarTodasAsModalidades) //OK
-app.get("/api/modalidade/:id", recuperarModalidadePorID) //OK
-app.put("/api/modalidade/:id", alterarModalidade) //OK
-app.delete("/api/modalidade", deletarModalidade) 
+app.get("/api/modalidade/:id", recuperarModalidadePorID)     //OK
+app.put("/api/modalidade/:id", alterarModalidade)            //OK
+app.delete("/api/modalidade", deletarModalidade)             //OK
 
 // Estoque 
-// app.post("/api/estoque", addItem)
+app.post("/api/estoque", addItem)
 // app.get("/api/estoque/todos", recuperaItensEstoque)
 // app.get("/api/estoque", buscarItem)
 // app.put("/api/estoque", addQuantidade)

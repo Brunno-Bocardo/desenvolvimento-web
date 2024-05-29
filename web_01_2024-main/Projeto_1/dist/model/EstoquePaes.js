@@ -2,9 +2,12 @@
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.Estoque = void 0;
 class Estoque {
-    constructor(modalidadeId, amount) {
-        this.id = modalidadeId;
+    constructor(amount, modalidadeID, price) {
+        this.id = Estoque.nextId++;
         this.amount = amount;
+        this.modalidadeID = modalidadeID;
+        this.price = price;
     }
 }
 exports.Estoque = Estoque;
+Estoque.nextId = 1;

@@ -58,3 +58,28 @@ export function alterarItem(req:Request, res:Response) {
         res.status(400).json({ mensagem: error.message })
     }
 }
+
+export function deleteQuantidade(req:Request, res:Response) {
+    try {
+        const id = parseInt(req.body.id);
+        console.log("ID: ", id);
+        const item = estoqueService.consultarItemPorId(id);
+        if (item) {
+            const resultado = estoqueService.deletarQuantidadeEstoque(req.body);
+            if (resultado) {
+                res.status(201).json({
+                    mensagem: "Essa quantidade foi apagada da existência 🫡",
+                    quantidadeDeletada: req.body.amount
+                });
+            } else {
+                res.status(400).json({
+                    mensagem: "Erro: Quantidade a remover é maior do que a disponível no estoque 😞"
+                });
+            }
+        } else {
+            res.status(400).json({ mensagem: "Item não encontrado... 😞" });
+        }
+    } catch (error:any) {
+        res.status(400).json({ mensagem: error.message });
+    }
+}

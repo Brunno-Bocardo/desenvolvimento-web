@@ -39,14 +39,25 @@ export class EstoqueRepository {
     }
 
     updateItem(id:number, amount:number, price:number):Estoque|undefined {
-        const modalidade = this.filtraProdutoPorId(id)
-        if(modalidade) {
-            modalidade.id = id
-            modalidade.amount = amount
-            modalidade.price = price
-            return modalidade
+        const item = this.filtraProdutoPorId(id)
+        if(item) {
+            item.id = id
+            item.amount = amount
+            item.price = price
+            return item
         } else {
             return undefined
         }
+    }
+
+    updateQuantidade(id:number, amount:number):Estoque|undefined {
+        const item = this.filtraProdutoPorId(id);
+        if (item) {
+            if (item.amount >= amount) {
+                item.amount -= amount;
+                return item;
+            }
+        } 
+        return undefined;  
     }
 }

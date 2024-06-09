@@ -15,14 +15,14 @@ function logInfo() {
     console.log(`API em execução no URL: http:localhost:${PORT}`);
 }
 // Modalidade 
-app.post("/api/modalidade", ModalidadeController_1.criarModalidade); //OK
-app.get("/api/modalidade/todas", ModalidadeController_1.recuprarTodasAsModalidades); //OK
-app.get("/api/modalidade/:id", ModalidadeController_1.recuperarModalidadePorID); //OK
-app.put("/api/modalidade/:id", ModalidadeController_1.alterarModalidade); //OK
-app.delete("/api/modalidade", ModalidadeController_1.deletarModalidade); //OK
+app.post("/api/modalidade", ModalidadeController_1.criarModalidade); // OK
+app.get("/api/modalidade/todas", ModalidadeController_1.recuprarTodasAsModalidades); // OK
+app.get("/api/modalidade/:id", ModalidadeController_1.recuperarModalidadePorID); // OK
+app.put("/api/modalidade/:id", ModalidadeController_1.alterarModalidade); // OK
+app.delete("/api/modalidade", ModalidadeController_1.deletarModalidade); // OK
 // Estoque 
-app.post("/api/estoque", EstoqueController_1.addItem);
-// app.get("/api/estoque/todos", recuperaItensEstoque)
+app.post("/api/estoque", EstoqueController_1.addItem); // Falta fazer a verificação de se o item existe
+app.get("/api/estoque/todos", EstoqueController_1.recuperaItensEstoque);
 // app.get("/api/estoque", buscarItem)
 // app.put("/api/estoque", addQuantidade)
 // app.delete("/api/estoque", deleteQuantidade)

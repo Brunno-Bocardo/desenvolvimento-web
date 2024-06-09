@@ -2,9 +2,10 @@
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.ModalidadePaes = void 0;
 class ModalidadePaes {
-    constructor(name, vegan) {
+    constructor(name, price, vegan) {
         this.id = ModalidadePaes.nextId++;
         this.name = name;
+        this.price = price;
         this.vegan = vegan;
     }
 }

@@ -15,10 +15,11 @@ export class ModalidadePaesRepository {
         return this.modalidadeList.find(product => product.id === id);
     }
 
-    updateModalidade(id:number, name:string, vegan:boolean):ModalidadePaes|undefined {
+    updateModalidade(id:number, name:string, price:number, vegan:boolean):ModalidadePaes|undefined {
         const modalidade = this.filtraProdutoPorId(id)
         if(modalidade) {
             modalidade.name = name
+            modalidade.price = price
             modalidade.vegan = vegan
             return modalidade
         } else {

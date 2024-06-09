@@ -8,11 +8,11 @@ class ModalidadeService {
         this.modalidadeRepository = new ModalidadeRepository_1.ModalidadePaesRepository();
     }
     cadastrarModalidade(modalidadeData) {
-        const { name, vegan } = modalidadeData;
+        const { name, price, vegan } = modalidadeData;
         if (!name || typeof vegan !== "boolean") {
             throw new Error("Informações incompletas");
         }
-        const novaModalidade = new ModalidadePaes_1.ModalidadePaes(name, vegan);
+        const novaModalidade = new ModalidadePaes_1.ModalidadePaes(name, price, vegan);
         this.modalidadeRepository.insereModalidade(novaModalidade);
         return novaModalidade;
     }
@@ -24,11 +24,11 @@ class ModalidadeService {
         return this.modalidadeRepository.filtraProdutoPorId(id);
     }
     alterarModalidade(modalidadeData) {
-        const { id, name, vegan } = modalidadeData;
+        const { id, name, price, vegan } = modalidadeData;
         if (!id || !name || typeof vegan !== "boolean") {
             throw new Error("Informações incompletas");
         }
-        return this.modalidadeRepository.updateModalidade(id, name, vegan);
+        return this.modalidadeRepository.updateModalidade(id, name, price, vegan);
     }
     deletarModalidade(modalidadeData) {
         const { id, name, vegan } = modalidadeData;

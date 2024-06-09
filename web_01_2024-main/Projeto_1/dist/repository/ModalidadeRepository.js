@@ -14,10 +14,11 @@ class ModalidadePaesRepository {
     filtraProdutoPorId(id) {
         return this.modalidadeList.find(product => product.id === id);
     }
-    updateModalidade(id, name, vegan) {
+    updateModalidade(id, name, price, vegan) {
         const modalidade = this.filtraProdutoPorId(id);
         if (modalidade) {
             modalidade.name = name;
+            modalidade.price = price;
             modalidade.vegan = vegan;
             return modalidade;
         }

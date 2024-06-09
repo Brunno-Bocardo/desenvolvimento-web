@@ -1,6 +1,6 @@
 import express from "express";
 import { criarModalidade, recuprarTodasAsModalidades, recuperarModalidadePorID, alterarModalidade, deletarModalidade } from "./controller/ModalidadeController";
-import { addItem } from "./controller/EstoqueController";
+import { addItem, recuperaItensEstoque, buscarItemPorID, alterarItem } from "./controller/EstoqueController";
 // import { realizarVenda, recuperarVenda } from "./controller/VendaController";
 
 const app = express();
@@ -12,17 +12,17 @@ function logInfo() {
 }
 
 // Modalidade 
-app.post("/api/modalidade", criarModalidade)                 //OK
-app.get("/api/modalidade/todas", recuprarTodasAsModalidades) //OK
-app.get("/api/modalidade/:id", recuperarModalidadePorID)     //OK
-app.put("/api/modalidade/:id", alterarModalidade)            //OK
-app.delete("/api/modalidade", deletarModalidade)             //OK
+app.post("/api/modalidade", criarModalidade)                 // OK
+app.get("/api/modalidade/todas", recuprarTodasAsModalidades) // OK
+app.get("/api/modalidade/:id", recuperarModalidadePorID)     // OK - Verificar o parametro de ID
+app.put("/api/modalidade/:id", alterarModalidade)            // OK - Verificar o parametro de ID
+app.delete("/api/modalidade", deletarModalidade)             // OK
 
 // Estoque 
-app.post("/api/estoque", addItem)
-// app.get("/api/estoque/todos", recuperaItensEstoque)
-// app.get("/api/estoque", buscarItem)
-// app.put("/api/estoque", addQuantidade)
+app.post("/api/estoque", addItem)                            // Falta fazer a verificação de se o item existe
+app.get("/api/estoque/todos", recuperaItensEstoque)          // OK
+app.get("/api/estoque/:id", buscarItemPorID)                 // OK - Verificar o parametro de ID
+app.put("/api/estoque", alterarItem)
 // app.delete("/api/estoque", deleteQuantidade)
 
 // Venda 

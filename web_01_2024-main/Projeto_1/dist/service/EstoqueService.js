@@ -16,5 +16,8 @@ class EstoqueService {
         this.estoqueRepository.inserirItem(novoItem);
         return novoItem;
     }
+    recuperarItens() {
+        return this.estoqueRepository.recupararTodosOsItens();
+    }
 }
 exports.EstoqueService = EstoqueService;

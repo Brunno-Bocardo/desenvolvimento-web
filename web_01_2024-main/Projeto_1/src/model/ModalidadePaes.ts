@@ -5,13 +5,11 @@ export class ModalidadePaes {
     // Sendo assim, a cada nova instância, ela aumenta seu valor em 1
     id:number;
     name:string;
-    price:number;
     vegan:boolean;
 
-    constructor(name:string, price:number, vegan:boolean) {
+    constructor(name:string, vegan:boolean) {
         this.id = ModalidadePaes.nextId++;
         this.name = name;
-        this.price = price;
         this.vegan =vegan;
     }
 }

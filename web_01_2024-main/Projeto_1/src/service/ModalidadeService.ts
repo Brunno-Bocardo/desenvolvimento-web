@@ -5,13 +5,13 @@ export class ModalidadeService {
     modalidadeRepository:ModalidadePaesRepository = new ModalidadePaesRepository();
 
     cadastrarModalidade(modalidadeData: any): ModalidadePaes {
-        const {name, price, vegan} = modalidadeData
+        const {name, vegan} = modalidadeData
 
         if (!name || typeof vegan !== "boolean") {
             throw new Error("Informações incompletas");
         }
 
-        const novaModalidade = new ModalidadePaes(name, price, vegan);
+        const novaModalidade = new ModalidadePaes(name, vegan);
         this.modalidadeRepository.insereModalidade(novaModalidade)
         return novaModalidade
     }
@@ -26,13 +26,13 @@ export class ModalidadeService {
     }
 
     alterarModalidade(modalidadeData: any):ModalidadePaes|undefined {
-        const {id, name, price, vegan} = modalidadeData
+        const {id, name, vegan} = modalidadeData
 
         if (!id || !name || typeof vegan !== "boolean") {
             throw new Error("Informações incompletas");
         }
 
-        return this.modalidadeRepository.updateModalidade(id, name, price, vegan)
+        return this.modalidadeRepository.updateModalidade(id, name, vegan)
     }
 
     deletarModalidade(modalidadeData: any):boolean {

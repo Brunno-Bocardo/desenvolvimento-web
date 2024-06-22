@@ -1,6 +1,7 @@
 import { imprimir, concatenar, somar } from "./callback";
 import { testTimeout, testInterval } from "./settimeout_setinterval";
 import { testClearTimeout, testClearInterval } from "./cleartimeout_clearinterval";
+import { reverterString, exibe } from "./ex1"
 
 // //Callback
 // concatenar("Hello", "ADS",imprimir);
@@ -12,5 +13,7 @@ import { testClearTimeout, testClearInterval } from "./cleartimeout_clearinterva
 
 //ClearTimeout
 // testClearTimeout();
-testClearInterval();
+// testClearInterval();
 
+
+reverterString('brunno', exibe)

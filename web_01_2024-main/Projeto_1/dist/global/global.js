@@ -8,6 +8,9 @@ class GlobalClass {
         // Lista do estoque 
         this.estoqueList = [];
         // Lista das vendas
+        this.vendaList = [];
+        // Lista das itens
+        this.itensList = [];
     }
 }
 exports.GlobalClass = GlobalClass;

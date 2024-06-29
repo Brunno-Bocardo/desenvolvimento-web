@@ -1,6 +1,10 @@
 import { Estoque } from "../model/EstoquePaes";
 import { globalData } from "../global/global";
 
+// usado para verifica se a modalidade existe
+import { ModalidadeService } from "../service/ModalidadeService";
+const modalidadeService = new ModalidadeService();
+
 export class EstoqueRepository {
 
     inserirItem(novoItem: Estoque) {
@@ -8,16 +12,11 @@ export class EstoqueRepository {
         console.log(modalidadeID);
 
         try {
-            // // Faz uma solicitação para verificar se a modalidade existe
-            // console.log("ID AQUI: ", modalidadeID)
-            // const response = await axios.get(`http://127.0.0.1:3000/api/modalidade/${modalidadeID}`);
-            // const modalidade = response.data;
-            // console.log(response)
-            // console.log(modalidade)
-
-            // if (!modalidade) {
-            //     throw new Error("Modalidade não encontrada");
-            // }
+            // verifica se a modalidade existe antes de criar um estoque pra ela 
+            const modalidade = modalidadeService.consultarModalidade(modalidadeID);
+            if (!modalidade) {
+                throw new Error("Modalidade não encontrada");
+            }
 
             // Se a modalidade existir, insere o item no estoque
             globalData.estoqueList.push(novoItem);

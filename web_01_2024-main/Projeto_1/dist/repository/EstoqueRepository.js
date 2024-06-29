@@ -1,47 +1,33 @@
 "use strict";
-var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, generator) {
-    function adopt(value) { return value instanceof P ? value : new P(function (resolve) { resolve(value); }); }
-    return new (P || (P = Promise))(function (resolve, reject) {
-        function fulfilled(value) { try { step(generator.next(value)); } catch (e) { reject(e); } }
-        function rejected(value) { try { step(generator["throw"](value)); } catch (e) { reject(e); } }
-        function step(result) { result.done ? resolve(result.value) : adopt(result.value).then(fulfilled, rejected); }
-        step((generator = generator.apply(thisArg, _arguments || [])).next());
-    });
-};
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.EstoqueRepository = void 0;
+const global_1 = require("../global/global");
+// usado para verifica se a modalidade existe
+const ModalidadeService_1 = require("../service/ModalidadeService");
+const modalidadeService = new ModalidadeService_1.ModalidadeService();
 class EstoqueRepository {
-    constructor() {
-        this.estoqueList = [];
-    }
     inserirItem(novoItem) {
-        return __awaiter(this, void 0, void 0, function* () {
-            const modalidadeID = novoItem.modalidadeID;
-            console.log(modalidadeID);
-            try {
-                // // Faz uma solicitação para verificar se a modalidade existe
-                // console.log("ID AQUI: ", modalidadeID)
-                // const response = await axios.get(`http://127.0.0.1:3000/api/modalidade/${modalidadeID}`);
-                // const modalidade = response.data;
-                // console.log(response)
-                // console.log(modalidade)
-                // if (!modalidade) {
-                //     throw new Error("Modalidade não encontrada");
-                // }
-                // Se a modalidade existir, insere o item no estoque
-                this.estoqueList.push(novoItem);
+        const modalidadeID = novoItem.modalidadeID;
+        console.log(modalidadeID);
+        try {
+            // verifica se a modalidade existe antes de criar um estoque pra ela 
+            const modalidade = modalidadeService.consultarModalidade(modalidadeID);
+            if (!modalidade) {
+                throw new Error("Modalidade não encontrada");
             }
-            catch (error) {
-                console.error('Erro ao inserir item:', error.message);
-                throw error;
-            }
-        });
+            // Se a modalidade existir, insere o item no estoque
+            global_1.globalData.estoqueList.push(novoItem);
+        }
+        catch (error) {
+            console.error('Erro ao inserir item:', error.message);
+            throw error;
+        }
     }
     recupararTodosOsItens() {
-        return this.estoqueList;
+        return global_1.globalData.estoqueList;
     }
     filtraProdutoPorId(id) {
-        return this.estoqueList.find(product => product.id === id);
+        return global_1.globalData.estoqueList.find(product => product.id === id);
     }
     updateItem(id, amount, price) {
         const item = this.filtraProdutoPorId(id);

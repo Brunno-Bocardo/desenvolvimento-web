@@ -2,15 +2,12 @@
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.VendaPaes = void 0;
 class VendaPaes {
-    constructor(cpf, idModalidade, amount, price) {
-        this.cpf = cpf;
-        this.idModalidade = idModalidade;
-        this.amount = amount;
-        this.price = price;
-        this.totalPrice = this.calculateTotalPrice();
-    }
-    calculateTotalPrice() {
-        return this.amount * this.price;
+    constructor(cpfCliente, valorTotal, itensComprados) {
+        this.id = VendaPaes.nextId++;
+        this.cpfCliente = cpfCliente;
+        this.valorTotal = valorTotal;
+        this.itensComprados = itensComprados;
     }
 }
 exports.VendaPaes = VendaPaes;
+VendaPaes.nextId = 1;

@@ -1,24 +1,21 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.ModalidadePaesRepository = void 0;
+const global_1 = require("../global/global");
 class ModalidadePaesRepository {
-    constructor() {
-        this.modalidadeList = [];
-    }
     insereModalidade(novaModalidade) {
-        this.modalidadeList.push(novaModalidade);
+        global_1.globalData.modalidadeList.push(novaModalidade);
     }
     pegarTodasModalidades() {
-        return this.modalidadeList;
+        return global_1.globalData.modalidadeList;
     }
     filtraProdutoPorId(id) {
-        return this.modalidadeList.find(product => product.id === id);
+        return global_1.globalData.modalidadeList.find(product => product.id === id);
     }
-    updateModalidade(id, name, price, vegan) {
+    updateModalidade(id, name, vegan) {
         const modalidade = this.filtraProdutoPorId(id);
         if (modalidade) {
             modalidade.name = name;
-            modalidade.price = price;
             modalidade.vegan = vegan;
             return modalidade;
         }
@@ -27,10 +24,10 @@ class ModalidadePaesRepository {
         }
     }
     deleteModalidade(id) {
-        const index = this.modalidadeList.findIndex(modalidade => modalidade.id === id);
+        const index = global_1.globalData.modalidadeList.findIndex(modalidade => modalidade.id === id);
         if (index !== -1) {
             console.log("Produto ", id, " deletado");
-            this.modalidadeList.splice(index, 1);
+            global_1.globalData.modalidadeList.splice(index, 1);
             return true;
         }
         else {

@@ -17,15 +17,15 @@ function logInfo() {
 // Modalidade 
 app.post("/api/modalidade", ModalidadeController_1.criarModalidade); // OK
 app.get("/api/modalidade/todas", ModalidadeController_1.recuprarTodasAsModalidades); // OK
-app.get("/api/modalidade/:id", ModalidadeController_1.recuperarModalidadePorID); // OK
-app.put("/api/modalidade/:id", ModalidadeController_1.alterarModalidade); // OK
+app.get("/api/modalidade/:id", ModalidadeController_1.recuperarModalidadePorID); // OK 
+app.put("/api/modalidade/:id", ModalidadeController_1.alterarModalidade); // OK 
 app.delete("/api/modalidade", ModalidadeController_1.deletarModalidade); // OK
 // Estoque 
 app.post("/api/estoque", EstoqueController_1.addItem); // Falta fazer a verificação de se o item existe
-app.get("/api/estoque/todos", EstoqueController_1.recuperaItensEstoque);
-// app.get("/api/estoque", buscarItem)
-// app.put("/api/estoque", addQuantidade)
-// app.delete("/api/estoque", deleteQuantidade)
+app.get("/api/estoque/todos", EstoqueController_1.recuperaItensEstoque); // OK
+app.get("/api/estoque/:id", EstoqueController_1.buscarItemPorID); // OK 
+app.put("/api/estoque", EstoqueController_1.alterarItem); // OK
+app.delete("/api/estoque", EstoqueController_1.deleteQuantidade); // OK
 // Venda 
 // app.post("/api/venda", realizarVenda)
 // app.get("/api/venda", recuperarVenda)

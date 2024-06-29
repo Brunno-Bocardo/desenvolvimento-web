@@ -19,5 +19,24 @@ class EstoqueService {
     recuperarItens() {
         return this.estoqueRepository.recupararTodosOsItens();
     }
+    consultarItemPorId(id) {
+        console.log(id);
+        return this.estoqueRepository.filtraProdutoPorId(id);
+    }
+    alterarItemNoEstoque(itemData) {
+        const { id, amount, modalidadeID, price } = itemData;
+        if (!id || !amount || !modalidadeID || !price) {
+            throw new Error("Informações incompletas");
+        }
+        // não passar o modalidadeID pq não acho que faça sentido
+        return this.estoqueRepository.updateItem(id, amount, price);
+    }
+    deletarQuantidadeEstoque(itemData) {
+        const { id, amount, modalidadeID, price } = itemData;
+        if (!id || !amount || !modalidadeID || !price) {
+            throw new Error("Informações incompletas");
+        }
+        return this.estoqueRepository.updateQuantidade(id, amount);
+    }
 }
 exports.EstoqueService = EstoqueService;

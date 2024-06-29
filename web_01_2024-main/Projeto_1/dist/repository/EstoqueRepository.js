@@ -40,5 +40,30 @@ class EstoqueRepository {
     recupararTodosOsItens() {
         return this.estoqueList;
     }
+    filtraProdutoPorId(id) {
+        return this.estoqueList.find(product => product.id === id);
+    }
+    updateItem(id, amount, price) {
+        const item = this.filtraProdutoPorId(id);
+        if (item) {
+            item.id = id;
+            item.amount = amount;
+            item.price = price;
+            return item;
+        }
+        else {
+            return undefined;
+        }
+    }
+    updateQuantidade(id, amount) {
+        const item = this.filtraProdutoPorId(id);
+        if (item) {
+            if (item.amount >= amount) {
+                item.amount -= amount;
+                return item;
+            }
+        }
+        return undefined;
+    }
 }
 exports.EstoqueRepository = EstoqueRepository;

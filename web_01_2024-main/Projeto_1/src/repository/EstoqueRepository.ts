@@ -1,11 +1,9 @@
-import axios from 'axios';
 import { Estoque } from "../model/EstoquePaes";
+import { globalData } from "../global/global";
 
 export class EstoqueRepository {
-    estoqueList: Estoque[] = [];
 
-
-    async inserirItem(novoItem: Estoque) {
+    inserirItem(novoItem: Estoque) {
         const modalidadeID = novoItem.modalidadeID;
         console.log(modalidadeID);
 
@@ -22,7 +20,7 @@ export class EstoqueRepository {
             // }
 
             // Se a modalidade existir, insere o item no estoque
-            this.estoqueList.push(novoItem);
+            globalData.estoqueList.push(novoItem);
         } catch (error:any) {
             console.error('Erro ao inserir item:', error.message);
             throw error;
@@ -31,11 +29,11 @@ export class EstoqueRepository {
 
 
     recupararTodosOsItens() {
-        return this.estoqueList
+        return globalData.estoqueList
     }
 
     filtraProdutoPorId(id:number): Estoque|undefined {
-        return this.estoqueList.find(product => product.id === id);
+        return globalData.estoqueList.find(product => product.id === id);
     }
 
     updateItem(id:number, amount:number, price:number):Estoque|undefined {

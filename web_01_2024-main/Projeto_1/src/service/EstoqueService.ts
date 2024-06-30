@@ -1,3 +1,7 @@
+// O service verifica se as informações estão corretas e completas
+// Se estiverem, segue com a lógica para o Repository 
+// Se não estiverem, retorna um erro 
+
 import { Estoque } from "../model/EstoquePaes";
 import { EstoqueRepository } from "../repository/EstoqueRepository";
 
@@ -32,7 +36,6 @@ export class EstoqueService {
             throw new Error("Informações incompletas");
         }
 
-        // não passar o modalidadeID pq não acho que faça sentido
         return this.estoqueRepository.updateItem(id, amount, price)
     }
 

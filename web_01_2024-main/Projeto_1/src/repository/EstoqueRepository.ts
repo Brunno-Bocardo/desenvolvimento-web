@@ -1,3 +1,6 @@
+// A camada Repository interage diretamente com a camada dos dados (model - vetor) 
+// Ela adiciona, busca, deleta ou edita diretamente dessa camada 
+
 import { Estoque } from "../model/EstoquePaes";
 import { globalData } from "../global/global";
 
@@ -25,7 +28,6 @@ export class EstoqueRepository {
             throw error;
         }
     }
-
 
     recupararTodosOsItens() {
         return globalData.estoqueList

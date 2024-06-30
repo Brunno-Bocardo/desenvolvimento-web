@@ -1,7 +1,12 @@
+// O service verifica se as informações estão corretas e completas
+// Se estiverem, segue com a lógica para o Repository 
+// Se não estiverem, retorna um erro 
+
 import { ModalidadePaes } from "../model/ModalidadePaes";
 import { ModalidadePaesRepository } from "../repository/ModalidadeRepository";
 
 export class ModalidadeService {
+    // cria uma instancia de ModalidadePaesRepository para usarmos as funções
     modalidadeRepository:ModalidadePaesRepository = new ModalidadePaesRepository();
 
     cadastrarModalidade(modalidadeData: any): ModalidadePaes {

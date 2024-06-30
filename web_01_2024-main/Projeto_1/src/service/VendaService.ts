@@ -1,3 +1,7 @@
+// O service verifica se as informações estão corretas e completas
+// Se estiverem, segue com a lógica para o Repository 
+// Se não estiverem, retorna um erro 
+
 import { VendaPaes } from '../model/VendaPaes';
 import { VendaRepository } from '../repository/VendaRepository';
 

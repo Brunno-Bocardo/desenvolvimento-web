@@ -1,4 +1,6 @@
 "use strict";
+// O controller lida diretamente com as chamadas HTTP
+// Ela passa pra frente o body e retorna uma resposta ao usuário
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.deleteQuantidade = exports.alterarItem = exports.buscarItemPorID = exports.recuperaItensEstoque = exports.addItem = void 0;
 const EstoqueService_1 = require("../service/EstoqueService");
@@ -6,7 +8,7 @@ const estoqueService = new EstoqueService_1.EstoqueService();
 function addItem(req, res) {
     try {
         const itemAdicionado = estoqueService.inserirNoEstoque(req.body);
-        res.status(201).json({
+        res.status(200).json({
             mensagem: "Novo item adicionado ao estoque 😊",
             item: itemAdicionado
         });
@@ -18,7 +20,7 @@ function addItem(req, res) {
 exports.addItem = addItem;
 function recuperaItensEstoque(req, res) {
     try {
-        res.status(201).json(estoqueService.recuperarItens());
+        res.status(200).json(estoqueService.recuperarItens());
     }
     catch (error) {
         res.status(400).json({ message: error.message });
@@ -31,7 +33,7 @@ function buscarItemPorID(req, res) {
         console.log("ID: ", id);
         const item = estoqueService.consultarItemPorId(id);
         if (item) {
-            res.status(201).json({
+            res.status(200).json({
                 mensagem: "Item no estoque encontrado com sucesso 😊",
                 item: item
             });
@@ -48,12 +50,11 @@ exports.buscarItemPorID = buscarItemPorID;
 function alterarItem(req, res) {
     try {
         const id = parseInt(req.body.id);
-        console.log("ID: ", id);
         const item = estoqueService.consultarItemPorId(id);
         if (item) {
             const novaModalidade = estoqueService.alterarItemNoEstoque(req.body);
-            res.status(201).json({
-                mensagem: "Seu item foi alterado 🫡",
+            res.status(200).json({
+                mensagem: "Seu item foi alterado 😊",
                 produto: novaModalidade
             });
         }
@@ -74,8 +75,8 @@ function deleteQuantidade(req, res) {
         if (item) {
             const resultado = estoqueService.deletarQuantidadeEstoque(req.body);
             if (resultado) {
-                res.status(201).json({
-                    mensagem: "Essa quantidade foi apagada da existência 🫡",
+                res.status(200).json({
+                    mensagem: "Essa quantidade foi apagada da existência 😊",
                     quantidadeDeletada: req.body.amount
                 });
             }

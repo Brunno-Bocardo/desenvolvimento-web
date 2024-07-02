@@ -1,4 +1,6 @@
 "use strict";
+// A camada Repository interage diretamente com a camada dos dados (model - vetor) 
+// Ela adiciona, busca, deleta ou edita diretamente dessa camada 
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.VendaRepository = void 0;
 const VendaPaes_1 = require("../model/VendaPaes");

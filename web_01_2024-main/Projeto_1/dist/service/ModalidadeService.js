@@ -1,10 +1,14 @@
 "use strict";
+// O service verifica se as informações estão corretas e completas
+// Se estiverem, segue com a lógica para o Repository 
+// Se não estiverem, retorna um erro 
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.ModalidadeService = void 0;
 const ModalidadePaes_1 = require("../model/ModalidadePaes");
 const ModalidadeRepository_1 = require("../repository/ModalidadeRepository");
 class ModalidadeService {
     constructor() {
+        // cria uma instancia de ModalidadePaesRepository para usarmos as funções
         this.modalidadeRepository = new ModalidadeRepository_1.ModalidadePaesRepository();
     }
     cadastrarModalidade(modalidadeData) {

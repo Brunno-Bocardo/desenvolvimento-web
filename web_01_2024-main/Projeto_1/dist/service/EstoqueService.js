@@ -1,4 +1,7 @@
 "use strict";
+// O service verifica se as informações estão corretas e completas
+// Se estiverem, segue com a lógica para o Repository 
+// Se não estiverem, retorna um erro 
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.EstoqueService = void 0;
 const EstoquePaes_1 = require("../model/EstoquePaes");
@@ -28,7 +31,6 @@ class EstoqueService {
         if (!id || !amount || !modalidadeID || !price) {
             throw new Error("Informações incompletas");
         }
-        // não passar o modalidadeID pq não acho que faça sentido
         return this.estoqueRepository.updateItem(id, amount, price);
     }
     deletarQuantidadeEstoque(itemData) {

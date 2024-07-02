@@ -12,7 +12,7 @@ export class VendaRepository {
         let total = 0
 
         for (const item of itens) {
-            const estoqueItem = globalData.estoqueList.find((e) => e.id === item.estoquePaesID);
+            const estoqueItem = globalData.estoqueList.find((itemEstoque) => itemEstoque.id === item.estoquePaesID);
 
             if (!estoqueItem) {
                 throw new Error(`Item com ID ${item.estoquePaesID} não encontrado`);

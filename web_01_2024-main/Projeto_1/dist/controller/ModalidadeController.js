@@ -1,4 +1,6 @@
 "use strict";
+// O controller lida diretamente com as chamadas HTTP
+// Ela passa pra frente o body e retorna uma resposta ao usuário
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.deletarModalidade = exports.alterarModalidade = exports.recuperarModalidadePorID = exports.recuprarTodasAsModalidades = exports.criarModalidade = void 0;
 const ModalidadeService_1 = require("../service/ModalidadeService");
@@ -6,7 +8,7 @@ const modalidadeService = new ModalidadeService_1.ModalidadeService();
 function criarModalidade(req, res) {
     try {
         const novaModalidade = modalidadeService.cadastrarModalidade(req.body);
-        res.status(201).json({
+        res.status(200).json({
             mensagem: "Nova modalidade de pães adicionada 😊",
             produto: novaModalidade
         });
@@ -18,7 +20,7 @@ function criarModalidade(req, res) {
 exports.criarModalidade = criarModalidade;
 function recuprarTodasAsModalidades(req, res) {
     try {
-        res.status(201).json(modalidadeService.pegarModalidades());
+        res.status(200).json(modalidadeService.pegarModalidades());
     }
     catch (error) {
         res.status(400).json({ message: error.message });
@@ -31,7 +33,7 @@ function recuperarModalidadePorID(req, res) {
         console.log("ID: ", id);
         const produto = modalidadeService.consultarModalidade(id);
         if (produto) {
-            res.status(201).json({
+            res.status(200).json({
                 mensagem: "Modalidade de pão encontrada com sucesso 😊",
                 produto: produto
             });
@@ -48,8 +50,8 @@ exports.recuperarModalidadePorID = recuperarModalidadePorID;
 function alterarModalidade(req, res) {
     try {
         const novaModalidade = modalidadeService.alterarModalidade(req.body);
-        res.status(201).json({
-            mensagem: "Sua modalidade de pão foi editada 🫡",
+        res.status(200).json({
+            mensagem: "Sua modalidade de pão foi editada 😊",
             produto: novaModalidade
         });
     }
@@ -61,8 +63,8 @@ exports.alterarModalidade = alterarModalidade;
 function deletarModalidade(req, res) {
     try {
         modalidadeService.deletarModalidade(req.body);
-        res.status(201).json({
-            mensagem: "Sua modalidade de pão foi apagada da existência 🫡",
+        res.status(200).json({
+            mensagem: "Sua modalidade de pão foi apagada da existência 😊",
             produto: "Não existe né"
         });
     }

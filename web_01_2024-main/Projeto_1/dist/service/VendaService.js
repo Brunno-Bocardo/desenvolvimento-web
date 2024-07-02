@@ -1,4 +1,7 @@
 "use strict";
+// O service verifica se as informações estão corretas e completas
+// Se estiverem, segue com a lógica para o Repository 
+// Se não estiverem, retorna um erro 
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.VendaService = void 0;
 const VendaRepository_1 = require("../repository/VendaRepository");

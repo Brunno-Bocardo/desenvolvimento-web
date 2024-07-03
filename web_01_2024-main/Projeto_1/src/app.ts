@@ -26,7 +26,7 @@ app.put("/api/estoque", alterarItem)                         // OK
 app.delete("/api/estoque", deleteQuantidade)                 // OK
 
 // Venda 
-app.post("/api/venda", realizarVenda)                        // OK - falta retornar o nome
+app.post("/api/venda", realizarVenda)                        // OK
 app.get("/api/venda/:id", recuperarVendaPorID)               // OK
 
 

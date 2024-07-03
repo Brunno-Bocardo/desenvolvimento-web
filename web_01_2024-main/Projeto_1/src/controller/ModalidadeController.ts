@@ -28,12 +28,11 @@ export function recuprarTodasAsModalidades(req:Request, res:Response) {
 export function recuperarModalidadePorID(req:Request, res:Response) {
     try {
         const id = parseInt(req.params.id); 
-        console.log("ID: ", id)
         const produto = modalidadeService.consultarModalidade(id);
         if(produto){
         res.status(200).json({
             mensagem:"Modalidade de pão encontrada com sucesso 😊",
-            produto:produto
+            produto: produto
         });
         }else{
             res.status(400).json({mensagem:"Pão não encontrado... 😞"});

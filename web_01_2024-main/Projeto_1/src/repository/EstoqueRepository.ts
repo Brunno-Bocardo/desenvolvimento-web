@@ -41,7 +41,7 @@ export class EstoqueRepository {
         const item = this.filtraProdutoPorId(id)
         if(item) {
             item.id = id
-            item.amount = amount
+            item.amount += amount
             item.price = price
             return item
         } else {

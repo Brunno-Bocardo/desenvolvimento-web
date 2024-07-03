@@ -30,7 +30,6 @@ exports.recuprarTodasAsModalidades = recuprarTodasAsModalidades;
 function recuperarModalidadePorID(req, res) {
     try {
         const id = parseInt(req.params.id);
-        console.log("ID: ", id);
         const produto = modalidadeService.consultarModalidade(id);
         if (produto) {
             res.status(200).json({

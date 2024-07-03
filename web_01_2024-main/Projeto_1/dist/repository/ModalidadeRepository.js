@@ -5,15 +5,27 @@ Object.defineProperty(exports, "__esModule", { value: true });
 exports.ModalidadePaesRepository = void 0;
 const global_1 = require("../global/global");
 class ModalidadePaesRepository {
+    // create 
     insereModalidade(novaModalidade) {
         global_1.globalData.modalidadeList.push(novaModalidade);
     }
+    // busca
     pegarTodasModalidades() {
         return global_1.globalData.modalidadeList;
     }
+    // busca
     filtraProdutoPorId(id) {
         return global_1.globalData.modalidadeList.find(product => product.id === id);
     }
+    // busca
+    rastrearModalidade(name, vegan) {
+        return global_1.globalData.modalidadeList.find(product => product.name === name && product.vegan === vegan);
+    }
+    // busca
+    rastrearModalidadeGeral(id, name, vegan) {
+        return global_1.globalData.modalidadeList.find(modalidade => modalidade.id === id && modalidade.name === name && modalidade.vegan === vegan);
+    }
+    // update
     updateModalidade(id, name, vegan) {
         const modalidade = this.filtraProdutoPorId(id);
         if (modalidade) {
@@ -25,16 +37,17 @@ class ModalidadePaesRepository {
             return undefined;
         }
     }
-    deleteModalidade(id) {
-        const index = global_1.globalData.modalidadeList.findIndex(modalidade => modalidade.id === id);
-        if (index !== -1) {
-            console.log("Produto ", id, " deletado");
-            global_1.globalData.modalidadeList.splice(index, 1);
-            return true;
+    // delete 
+    deleteModalidade(id, name, vegan) {
+        const modalidade = this.rastrearModalidadeGeral(id, name, vegan);
+        if (modalidade) {
+            const index = global_1.globalData.modalidadeList.indexOf(modalidade);
+            if (index !== -1) {
+                global_1.globalData.modalidadeList.splice(index, 1);
+                return true;
+            }
         }
-        else {
-            return false;
-        }
+        throw new Error("Modalidade não encontrada com o body fornecido");
     }
 }
 exports.ModalidadePaesRepository = ModalidadePaesRepository;

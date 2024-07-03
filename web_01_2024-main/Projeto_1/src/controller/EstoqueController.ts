@@ -75,7 +75,7 @@ export function deleteQuantidade(req:Request, res:Response) {
                 });
             } else {
                 res.status(400).json({
-                    mensagem: "Erro: Quantidade a remover é maior do que a disponível no estoque 😞"
+                    mensagem: "Quantidade a remover é maior do que a disponível no estoque... 😞"
                 });
             }
         } else {

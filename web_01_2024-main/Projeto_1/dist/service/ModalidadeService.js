@@ -16,6 +16,10 @@ class ModalidadeService {
         if (!name || typeof vegan !== "boolean") {
             throw new Error("Informações incompletas");
         }
+        const modalidadeEncontrada = this.modalidadeRepository.rastrearModalidade(name, vegan);
+        if (modalidadeEncontrada) {
+            throw new Error("Modalidade já cadastrada >:(");
+        }
         const novaModalidade = new ModalidadePaes_1.ModalidadePaes(name, vegan);
         this.modalidadeRepository.insereModalidade(novaModalidade);
         return novaModalidade;
@@ -24,7 +28,6 @@ class ModalidadeService {
         return this.modalidadeRepository.pegarTodasModalidades();
     }
     consultarModalidade(id) {
-        console.log(id);
         return this.modalidadeRepository.filtraProdutoPorId(id);
     }
     alterarModalidade(modalidadeData) {
@@ -39,7 +42,7 @@ class ModalidadeService {
         if (!id || !name || typeof vegan !== "boolean") {
             throw new Error("Informações incompletas");
         }
-        return this.modalidadeRepository.deleteModalidade(id);
+        return this.modalidadeRepository.deleteModalidade(id, name, vegan);
     }
 }
 exports.ModalidadeService = ModalidadeService;

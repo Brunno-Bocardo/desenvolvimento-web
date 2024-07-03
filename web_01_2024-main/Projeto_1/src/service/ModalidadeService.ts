@@ -16,6 +16,11 @@ export class ModalidadeService {
             throw new Error("Informações incompletas");
         }
 
+        const modalidadeEncontrada = this.modalidadeRepository.rastrearModalidade(name, vegan);
+        if(modalidadeEncontrada){
+            throw new Error("Modalidade já cadastrada >:(");
+        }
+
         const novaModalidade = new ModalidadePaes(name, vegan);
         this.modalidadeRepository.insereModalidade(novaModalidade)
         return novaModalidade
@@ -26,7 +31,6 @@ export class ModalidadeService {
     }
 
     consultarModalidade(id: number):ModalidadePaes|undefined{  
-        console.log(id)
         return this.modalidadeRepository.filtraProdutoPorId(id);
     }
 
@@ -47,7 +51,7 @@ export class ModalidadeService {
             throw new Error("Informações incompletas");
         }
 
-        return this.modalidadeRepository.deleteModalidade(id)
+        return this.modalidadeRepository.deleteModalidade(id, name, vegan);
     }
 }
 

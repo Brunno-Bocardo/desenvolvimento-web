@@ -11,7 +11,7 @@ class VendaRepository {
         let resumoItens = [];
         let total = 0;
         for (const item of itens) {
-            const estoqueItem = global_1.globalData.estoqueList.find((e) => e.id === item.estoquePaesID);
+            const estoqueItem = global_1.globalData.estoqueList.find((itemEstoque) => itemEstoque.id === item.estoquePaesID);
             if (!estoqueItem) {
                 throw new Error(`Item com ID ${item.estoquePaesID} não encontrado`);
             }

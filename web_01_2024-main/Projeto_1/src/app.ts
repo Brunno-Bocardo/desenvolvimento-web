@@ -19,17 +19,14 @@ app.put("/api/modalidade/:id", alterarModalidade)            // OK
 app.delete("/api/modalidade", deletarModalidade)             // OK
 
 // Estoque 
-app.post("/api/estoque", addItem)                            // quase
-                                                             // pode mais de 1 estoque por modalidade?
-                                                             // está somando ids pra modalidades não encontradas 
-
+app.post("/api/estoque", addItem)                            // OK
 app.get("/api/estoque/todos", recuperaItensEstoque)          // OK
 app.get("/api/estoque/:id", buscarItemPorID)                 // OK
 app.put("/api/estoque", alterarItem)                         // OK
 app.delete("/api/estoque", deleteQuantidade)                 // OK
 
 // Venda 
-app.post("/api/venda", realizarVenda)                        // OK
+app.post("/api/venda", realizarVenda)                        // OK - falta retornar o nome
 app.get("/api/venda/:id", recuperarVendaPorID)               // OK
 
 

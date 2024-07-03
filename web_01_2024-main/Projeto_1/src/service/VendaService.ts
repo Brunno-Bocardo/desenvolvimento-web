@@ -6,6 +6,8 @@ import { VendaPaes } from '../model/VendaPaes';
 import { ItemVenda } from '../model/ItemVenda';
 import { VendaRepository } from '../repository/VendaRepository';
 import { globalData } from '../global/global';
+import { ModalidadeService } from "../service/ModalidadeService";
+const modalidadeService = new ModalidadeService();
 
 export class VendaService {
     vendaRepository: VendaRepository = new VendaRepository();
@@ -31,11 +33,13 @@ export class VendaService {
                 throw new Error(`Quantidade solicitada ultrapassa a quantidade em estoque para o item ${estoqueItem.modalidadeID}`);
             }
 
+            const nomeItem = modalidadeService.consultarNomeDaModalidade(estoqueItem.id)
+
             const quantidadePedida = item.quantidade;
             estoqueItem.amount -= quantidadePedida;
             total += quantidadePedida * estoqueItem.price;
 
-            resumoItens.push(new ItemVenda(estoqueItem.id, quantidadePedida));
+            resumoItens.push(new ItemVenda(estoqueItem.id, quantidadePedida, nomeItem));
         }
 
         return this.vendaRepository.processarVenda(cpf, resumoItens, total);

@@ -34,6 +34,13 @@ export class ModalidadeService {
         return this.modalidadeRepository.filtraProdutoPorId(id);
     }
 
+    consultarNomeDaModalidade(id: number): string|undefined{  
+        const modalidade = this.modalidadeRepository.filtraProdutoPorId(id);
+        if (modalidade) {
+            return modalidade.name
+        }
+    }
+
     alterarModalidade(modalidadeData: any):ModalidadePaes|undefined {
         const {id, name, vegan} = modalidadeData
 

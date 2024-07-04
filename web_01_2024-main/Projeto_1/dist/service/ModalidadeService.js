@@ -30,6 +30,12 @@ class ModalidadeService {
     consultarModalidade(id) {
         return this.modalidadeRepository.filtraProdutoPorId(id);
     }
+    consultarNomeDaModalidade(id) {
+        const modalidade = this.modalidadeRepository.filtraProdutoPorId(id);
+        if (modalidade) {
+            return modalidade.name;
+        }
+    }
     alterarModalidade(modalidadeData) {
         const { id, name, vegan } = modalidadeData;
         if (!id || !name || typeof vegan !== "boolean") {

@@ -21,9 +21,7 @@ app.get("/api/modalidade/:id", ModalidadeController_1.recuperarModalidadePorID);
 app.put("/api/modalidade/:id", ModalidadeController_1.alterarModalidade); // OK
 app.delete("/api/modalidade", ModalidadeController_1.deletarModalidade); // OK
 // Estoque 
-app.post("/api/estoque", EstoqueController_1.addItem); // quase
-// pode mais de 1 estoque por modalidade?
-// está somando ids pra modalidades não encontradas 
+app.post("/api/estoque", EstoqueController_1.addItem); // OK
 app.get("/api/estoque/todos", EstoqueController_1.recuperaItensEstoque); // OK
 app.get("/api/estoque/:id", EstoqueController_1.buscarItemPorID); // OK
 app.put("/api/estoque", EstoqueController_1.alterarItem); // OK

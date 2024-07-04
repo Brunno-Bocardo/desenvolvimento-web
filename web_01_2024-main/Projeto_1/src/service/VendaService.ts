@@ -25,10 +25,12 @@ export class VendaService {
         for (const item of itens) {
             const estoqueItem = globalData.estoqueList.find((itemEstoque) => itemEstoque.id === item.estoquePaesID);
 
+            // verifica a existencia do item 
             if (!estoqueItem) {
                 throw new Error(`Item com ID ${item.estoquePaesID} não encontrado`);
             }
 
+            // verifica se existe um estoque desse item 
             if (estoqueItem.amount < item.quantidade) {
                 throw new Error(`Quantidade solicitada ultrapassa a quantidade em estoque para o item ${estoqueItem.modalidadeID}`);
             }

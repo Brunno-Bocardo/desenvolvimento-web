@@ -17,7 +17,7 @@ export class EstoqueService {
             throw new Error("Informações incompletas");
         }
 
-        // Verifica se a modalidade existe antes de criar um estoque para ela
+        // Verificar se a modalidade existe antes de criar um estoque para ela
         const modalidade = this.modalidadeService.consultarModalidade(modalidadeID);
         if (!modalidade) {
             throw new Error("Modalidade não encontrada");
@@ -33,7 +33,6 @@ export class EstoqueService {
     }
 
     consultarItemPorId(id: number): Estoque | undefined {  
-        console.log(id);
         return this.estoqueRepository.filtraProdutoPorId(id);
     }
 

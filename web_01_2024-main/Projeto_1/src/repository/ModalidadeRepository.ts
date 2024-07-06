@@ -46,15 +46,14 @@ export class ModalidadePaesRepository {
     }
 
     // delete 
-    deleteModalidade(id: number, name: string, vegan: boolean): boolean {
-        const modalidade = this.rastrearModalidadeGeral(id, name, vegan);
+    deleteModalidade(id: number) {
+        const modalidade = this.filtraProdutoPorId(id);
         if (modalidade) {
             const index = globalData.modalidadeList.indexOf(modalidade);
             if (index !== -1) {
                 globalData.modalidadeList.splice(index, 1);
-                return true;
             }
         }
-        throw new Error("Modalidade não encontrada com o body fornecido");
+        
     }
 }

@@ -38,16 +38,14 @@ class ModalidadePaesRepository {
         }
     }
     // delete 
-    deleteModalidade(id, name, vegan) {
-        const modalidade = this.rastrearModalidadeGeral(id, name, vegan);
+    deleteModalidade(id) {
+        const modalidade = this.filtraProdutoPorId(id);
         if (modalidade) {
             const index = global_1.globalData.modalidadeList.indexOf(modalidade);
             if (index !== -1) {
                 global_1.globalData.modalidadeList.splice(index, 1);
-                return true;
             }
         }
-        throw new Error("Modalidade não encontrada com o body fornecido");
     }
 }
 exports.ModalidadePaesRepository = ModalidadePaesRepository;

@@ -17,6 +17,10 @@ export class EstoqueService {
             throw new Error("Informações incompletas");
         }
 
+        if (amount < 0) {
+            throw new Error("Quantidade negativa inválida");
+        }
+
         // Verificar se a modalidade existe antes de criar um estoque para ela
         const modalidade = this.modalidadeService.consultarModalidade(modalidadeID);
         if (!modalidade) {

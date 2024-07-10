@@ -16,14 +16,8 @@ export class ProductService{
 
     consultarProduto(id: any): Product|undefined{
         const idNumber: number = parseInt(id, 10);
-        if (idNumber) {
-            console.log(id)
-            return this.productRepository.filtraProdutoPorId(idNumber);
-        }
-        else {
-            console.log(id)
-            return this.productRepository.filtraProdutoPorNome(id)
-        }   
+        console.log(id)
+        return this.productRepository.filtraProdutoPorId(idNumber);
     }
 
     getProducts():Product[]{

@@ -10,5 +10,5 @@ function testarVeiculo(veiculo: Veiculo): void {
 const carro = new Carro();
 const bicicleta = new Bicicleta();
 
-// testarVeiculo(carro);
-// testarVeiculo(bicicleta);
+testarVeiculo(carro);
+testarVeiculo(bicicleta);

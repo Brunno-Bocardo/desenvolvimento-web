@@ -8,5 +8,5 @@ function testarVeiculo(veiculo) {
 }
 const carro = new Carro_1.Carro();
 const bicicleta = new Bicicleta_1.Bicicleta();
-// testarVeiculo(carro);
-// testarVeiculo(bicicleta);
+testarVeiculo(carro);
+testarVeiculo(bicicleta);

@@ -3,8 +3,8 @@ export class Livro {
     id:number
     title:string
 
-    constructor(title:string) {
-        this.id = Livro.nextId++
+    constructor(id:number, title:string) {
+        this.id = id || 0;
         this.title = title
     }
 }

@@ -23,6 +23,22 @@ export class LivroRepository {
         }
     }
 
-    
+    async insertLivro(title:string) {
+        const query = "insert into livraria.livro (title) values(?)"
+
+        try {
+            const result = await executarComandoSQL(query, [title])
+            if(result) {
+                console.log("Livro adicionado na estante. ID: ", result.insertId)
+                const newLivro = new Livro(result.insertId, title)
+                return new Promise<Livro>((resolve)=> {
+                    resolve(newLivro)
+                })
+            }
+        } catch (err) {
+            console.log("Erro ao inserir o livro: ", err)
+            throw err
+        }
+    }
 
 }

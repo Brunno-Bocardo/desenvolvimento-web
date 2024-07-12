@@ -18,7 +18,7 @@ export class EstoqueService {
         }
 
         if (amount <= 0) {
-            throw new Error("Quantidade negativa inválida");
+            throw new Error("A quanidade deve ser maior do que zero");
         }
 
         // Verificar se a modalidade existe antes de criar um estoque para ela

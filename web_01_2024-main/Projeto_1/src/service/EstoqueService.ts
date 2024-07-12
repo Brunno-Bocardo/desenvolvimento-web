@@ -17,7 +17,7 @@ export class EstoqueService {
             throw new Error("Informações incompletas");
         }
 
-        if (amount < 0) {
+        if (amount <= 0) {
             throw new Error("Quantidade negativa inválida");
         }
 

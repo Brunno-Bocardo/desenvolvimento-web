@@ -1,11 +1,11 @@
-import mysql, { Connection} from 'mysql2';
+import mysql, { Connection } from 'mysql2';
 
 const dbConfig = {
     host: 'localhost',
     port: 3306,
     user: 'root',
-    password: 'mysql',
-    database: 'vendas'
+    password: 'ifsp',
+    database: 'livraria'
 };
 
 const mysqlConnection: Connection = mysql.createConnection(dbConfig);

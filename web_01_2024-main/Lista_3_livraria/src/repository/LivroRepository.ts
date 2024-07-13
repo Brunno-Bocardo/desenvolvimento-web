@@ -23,7 +23,7 @@ export class LivroRepository {
         }
     }
 
-    async insertLivro(title:string) {
+    async insertLivro(title:string): Promise<any> {
         const query = "insert into livraria.livro (title) values(?)"
 
         try {

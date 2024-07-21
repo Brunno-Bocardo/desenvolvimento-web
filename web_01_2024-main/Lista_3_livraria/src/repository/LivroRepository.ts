@@ -25,7 +25,6 @@ export class LivroRepository {
 
     async insertLivro(title:string): Promise<any> {
         const query = "insert into livraria.livro (title) values(?)"
-
         try {
             const result = await executarComandoSQL(query, [title])
             if(result) {
@@ -41,4 +40,33 @@ export class LivroRepository {
         }
     }
 
+    async buscarLivros() {
+        const query = "SELECT * FROM livraria.livro;";
+        try {
+            const result = await executarComandoSQL(query, []);
+            if (result) {
+                return result;
+            } else {
+                throw new Error("Nenhum livro encontrado");
+            }
+        } catch (err) {
+            console.log("Erro ao buscar livros: ", err);
+            throw err;
+        }
+    }
+    
+    async buscarLivroPorID(id:number) {
+        const query = "SELECT * FROM livraria.livro WHERE id = (?);";
+        try {
+            const result = await executarComandoSQL(query, [id]);
+            if (result.length > 0) {
+                return result;
+            } else {
+                throw new Error("Não existe um livro cadastrado com esse ID");
+            }
+        } catch (err) {
+            console.log("Erro ao buscar livros: ", err);
+            throw err;
+        }
+    }
 }

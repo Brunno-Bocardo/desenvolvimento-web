@@ -17,4 +17,12 @@ export class LivroService {
         return novoLivro;
     }
 
+    async consultarLivros() {
+        return await this.livroRepository.buscarLivros()
+    }
+
+    async consultarLivro(id:number) {
+        return await this.livroRepository.buscarLivroPorID(id)
+    }
+
 }

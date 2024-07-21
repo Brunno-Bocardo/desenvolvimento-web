@@ -11,6 +11,7 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.LivroRepository = void 0;
 const mysql_1 = require("../database/mysql");
+const Livro_1 = require("../model/Livro");
 class LivroRepository {
     constructor() {
         this.createTable();
@@ -27,7 +28,7 @@ class LivroRepository {
                 pages INT NOT NULL,
                 language VARCHAR(50) NOT NULL,
                 publisher VARCHAR(255) NOT NULL
-            )
+            );
         `;
             try {
                 const resultado = yield (0, mysql_1.executarComandoSQL)(query, []);
@@ -38,19 +39,26 @@ class LivroRepository {
             }
         });
     }
-    insertLivro(title, author, publishedDate, isbn, pages, language, publisher) {
+    insertLivro(livroData) {
         return __awaiter(this, void 0, void 0, function* () {
+            const { title, author, publishedDate, isbn, pages, language, publisher } = livroData;
+            const valores = [title, author, publishedDate, isbn, pages, language, publisher];
             const query = `
             INSERT INTO livraria.livro (title, author, publishedDate, isbn, pages, language, publisher)
             VALUES (?, ?, ?, ?, ?, ?, ?);
         `;
-            const valores = [title, author, publishedDate, isbn, pages, language, publisher];
             try {
                 const result = yield (0, mysql_1.executarComandoSQL)(query, valores);
-                return result;
+                if (result) {
+                    console.log("Livro adicionado na estante. ID: ", result.insertId);
+                    const newLivro = new Livro_1.Livro(result.insertId, title, author, publishedDate, isbn, pages, language, publisher);
+                    return new Promise((resolve) => {
+                        resolve(newLivro);
+                    });
+                }
             }
             catch (err) {
-                console.log("Erro ao adicionar livro: ", err);
+                console.log("Erro ao inserir o livro: ", err);
                 throw err;
             }
         });
@@ -60,12 +68,7 @@ class LivroRepository {
             const query = "SELECT * FROM livraria.livro;";
             try {
                 const result = yield (0, mysql_1.executarComandoSQL)(query, []);
-                if (result) {
-                    return result;
-                }
-                else {
-                    throw new Error("Nenhum livro encontrado");
-                }
+                return result;
             }
             catch (err) {
                 console.log("Erro ao buscar livros: ", err);
@@ -78,16 +81,72 @@ class LivroRepository {
             const query = "SELECT * FROM livraria.livro WHERE id = (?);";
             try {
                 const result = yield (0, mysql_1.executarComandoSQL)(query, [id]);
-                if (result.length > 0) {
-                    return result;
-                }
-                else {
-                    throw new Error("Não existe um livro cadastrado com esse ID");
-                }
+                return result;
             }
             catch (err) {
                 console.log("Erro ao buscar livros: ", err);
                 throw err;
+            }
+        });
+    }
+    atualizarLivro(id, livroData) {
+        return __awaiter(this, void 0, void 0, function* () {
+            const { title, author, publishedDate, isbn, pages, language, publisher } = livroData;
+            const valores = [title, author, publishedDate, isbn, pages, language, publisher, id];
+            const query = `
+            UPDATE livraria.livro
+            SET title = ?, author = ?, publishedDate = ?, isbn = ?, pages = ?, language = ?, publisher = ?
+            WHERE id = ?;
+        `;
+            try {
+                const result = yield (0, mysql_1.executarComandoSQL)(query, valores);
+                return result;
+            }
+            catch (err) {
+                throw err;
+            }
+        });
+    }
+    apagarLivro(id) {
+        return __awaiter(this, void 0, void 0, function* () {
+            const query = "DELETE FROM livraria.livro WHERE id = ?;";
+            try {
+                yield (0, mysql_1.executarComandoSQL)(query, [id]);
+            }
+            catch (err) {
+                console.log("Erro ao deletar livro: ", err);
+                throw err;
+            }
+        });
+    }
+    // =============== FUNÇÕES DE VERIFICAÇÃO ===============
+    validarLivroData(livroData) {
+        return __awaiter(this, void 0, void 0, function* () {
+            const { title, author, publishedDate, isbn, pages, language, publisher } = livroData;
+            let mensagem = '';
+            if (!title || typeof title !== 'string' || title.trim() === '') {
+                mensagem = "Título inválido. Deve ser uma string não vazia.";
+            }
+            else if (!author || typeof author !== 'string' || author.trim() === '') {
+                mensagem = "Autor inválido. Deve ser uma string não vazia.";
+            }
+            else if (!publishedDate || typeof publishedDate !== 'string' || publishedDate.trim() === '') {
+                mensagem = "Data de publicação inválida. Deve ser uma string não vazia.";
+            }
+            else if (!isbn || typeof isbn !== 'string' || isbn.trim() === '') {
+                mensagem = "ISBN inválido. Deve ser uma string não vazia.";
+            }
+            else if (typeof pages !== 'number' || isNaN(pages) || pages <= 0) {
+                mensagem = "Número de páginas inválido. Deve ser um número positivo.";
+            }
+            else if (!language || typeof language !== 'string' || language.trim() === '') {
+                mensagem = "Idioma inválido. Deve ser uma string não vazia.";
+            }
+            else if (!publisher || typeof publisher !== 'string' || publisher.trim() === '') {
+                mensagem = "Editora inválida. Deve ser uma string não vazia.";
+            }
+            if (mensagem !== '') {
+                throw new Error(mensagem);
             }
         });
     }
@@ -96,14 +155,23 @@ class LivroRepository {
             const query = "SELECT isbn FROM livraria.livro WHERE isbn = (?);";
             try {
                 const result = yield (0, mysql_1.executarComandoSQL)(query, [isbn]);
-                if (result.length > 0) {
-                    throw new Error("Já existe um livro cadastrado com esse ISBN");
-                }
-                else
-                    return true;
+                return result.length;
             }
             catch (err) {
                 console.log("Erro ao buscar ISBN: ", err);
+                throw err;
+            }
+        });
+    }
+    verificarID(id) {
+        return __awaiter(this, void 0, void 0, function* () {
+            const query = "SELECT id FROM livraria.livro WHERE id = (?);";
+            try {
+                const result = yield (0, mysql_1.executarComandoSQL)(query, [id]);
+                return result.length;
+            }
+            catch (err) {
+                console.log("Erro ao buscar ID: ", err);
                 throw err;
             }
         });

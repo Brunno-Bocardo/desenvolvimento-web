@@ -12,6 +12,8 @@ Object.defineProperty(exports, "__esModule", { value: true });
 exports.inserirLivro = inserirLivro;
 exports.consultarTodosOsLivros = consultarTodosOsLivros;
 exports.consultarLivroPorID = consultarLivroPorID;
+exports.atualizarLivro = atualizarLivro;
+exports.deletarLivro = deletarLivro;
 const LivroService_1 = require("../service/LivroService");
 const livroService = new LivroService_1.LivroService();
 function inserirLivro(req, res) {
@@ -45,6 +47,32 @@ function consultarLivroPorID(req, res) {
             const id = parseInt(req.params.id);
             const livro = yield livroService.consultarLivro(id);
             res.status(200).json(livro);
+        }
+        catch (err) {
+            res.status(400).json({ message: err.message });
+        }
+    });
+}
+function atualizarLivro(req, res) {
+    return __awaiter(this, void 0, void 0, function* () {
+        try {
+            const id = parseInt(req.params.id);
+            const livro = yield livroService.updateLivro(id, req.body);
+            res.status(200).json(livro);
+        }
+        catch (err) {
+            res.status(400).json({ message: err.message });
+        }
+    });
+}
+function deletarLivro(req, res) {
+    return __awaiter(this, void 0, void 0, function* () {
+        try {
+            const id = parseInt(req.params.id);
+            const livro = yield livroService.deletarLivro(id);
+            res.status(200).json({
+                "mensagem": "Seu Livro foi deletado"
+            });
         }
         catch (err) {
             res.status(400).json({ message: err.message });

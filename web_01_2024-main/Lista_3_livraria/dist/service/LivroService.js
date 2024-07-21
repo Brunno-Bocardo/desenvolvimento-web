@@ -17,29 +17,63 @@ class LivroService {
     }
     registrarLivro(livroData) {
         return __awaiter(this, void 0, void 0, function* () {
-            const { title, author, publishedDate, isbn, pages, language, publisher } = livroData;
-            if (!title ||
-                !author ||
-                !publishedDate ||
-                !isbn ||
-                !pages ||
-                !language ||
-                !publisher) {
-                throw new Error("Informações incompletas ou inválidas");
+            const isbn = livroData.isbn;
+            yield this.livroRepository.validarLivroData(livroData);
+            const verificaISBN = yield this.livroRepository.verificarISBN(isbn);
+            if (verificaISBN > 0) {
+                throw new Error("Já existe um livro cadastrado com esse ISBN");
             }
-            const novoLivro = yield this.livroRepository.insertLivro(title, author, publishedDate, isbn, pages, language, publisher);
+            const novoLivro = yield this.livroRepository.insertLivro(livroData);
             console.log("Service - Insert - ", novoLivro);
             return novoLivro;
         });
     }
     consultarLivros() {
         return __awaiter(this, void 0, void 0, function* () {
-            return yield this.livroRepository.buscarLivros();
+            const result = yield this.livroRepository.buscarLivros();
+            if (result) {
+                return result;
+            }
+            else {
+                throw new Error("Nenhum livro encontrado");
+            }
         });
     }
     consultarLivro(id) {
         return __awaiter(this, void 0, void 0, function* () {
-            return yield this.livroRepository.buscarLivroPorID(id);
+            const resultadoBusca = yield this.livroRepository.buscarLivroPorID(id);
+            if (resultadoBusca.length > 0) {
+                return resultadoBusca;
+            }
+            else {
+                throw new Error("Não existe um livro cadastrado com esse ID");
+            }
+        });
+    }
+    updateLivro(id, livroData) {
+        return __awaiter(this, void 0, void 0, function* () {
+            yield this.livroRepository.validarLivroData(livroData);
+            const resultadoBusca = yield this.livroRepository.verificarID(id);
+            if (resultadoBusca > 0) {
+                const livroAtualizado = yield this.livroRepository.atualizarLivro(id, livroData);
+                if (livroAtualizado) {
+                    return this.consultarLivro(id);
+                }
+            }
+            else {
+                throw new Error("Não existe um livro cadastrado com esse ID");
+            }
+        });
+    }
+    deletarLivro(id) {
+        return __awaiter(this, void 0, void 0, function* () {
+            const resultadoBusca = yield this.livroRepository.verificarID(id);
+            if (resultadoBusca > 0) {
+                return yield this.livroRepository.apagarLivro(id);
+            }
+            else {
+                throw new Error("Não existe um livro cadastrado com esse ID");
+            }
         });
     }
 }

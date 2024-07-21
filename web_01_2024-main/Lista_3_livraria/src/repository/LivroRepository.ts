@@ -9,10 +9,16 @@ export class LivroRepository {
 
     private async createTable() {
         const query = `
-            create table if not exists livraria.livro (
-                id int auto_increment primary key,
-                title varchar(255) not null
-            )
+            CREATE TABLE IF NOT EXISTS livraria.livro (
+                id INT AUTO_INCREMENT PRIMARY KEY,
+                title VARCHAR(255) NOT NULL,
+                author VARCHAR(255) NOT NULL,
+                publishedDate VARCHAR(255) NOT NULL,
+                isbn VARCHAR(20) NOT NULL,
+                pages INT NOT NULL,
+                language VARCHAR(50) NOT NULL,
+                publisher VARCHAR(255) NOT NULL
+            );
         `
 
         try {
@@ -23,20 +29,25 @@ export class LivroRepository {
         }
     }
 
-    async insertLivro(title:string): Promise<any> {
-        const query = "insert into livraria.livro (title) values(?)"
+    async insertLivro(title: string, author: string, publishedDate: string, isbn: string, pages: number, language: string, publisher: string): Promise<any> {
+        const valores = [title, author, publishedDate, isbn, pages, language, publisher];
+        const query = `
+            INSERT INTO livraria.livro (title, author, publishedDate, isbn, pages, language, publisher)
+            VALUES (?, ?, ?, ?, ?, ?, ?);
+        `;
+
         try {
-            const result = await executarComandoSQL(query, [title])
-            if(result) {
-                console.log("Livro adicionado na estante. ID: ", result.insertId)
-                const newLivro = new Livro(result.insertId, title)
-                return new Promise<Livro>((resolve)=> {
-                    resolve(newLivro)
-                })
+            const result = await executarComandoSQL(query, valores);
+            if (result) {
+                console.log("Livro adicionado na estante. ID: ", result.insertId);
+                const newLivro = new Livro(result.insertId, title, author, publishedDate, isbn, pages, language, publisher);
+                return new Promise<Livro>((resolve) => {
+                    resolve(newLivro);
+                });
             }
         } catch (err) {
-            console.log("Erro ao inserir o livro: ", err)
-            throw err
+            console.log("Erro ao inserir o livro: ", err);
+            throw err;
         }
     }
 
@@ -44,11 +55,7 @@ export class LivroRepository {
         const query = "SELECT * FROM livraria.livro;";
         try {
             const result = await executarComandoSQL(query, []);
-            if (result) {
-                return result;
-            } else {
-                throw new Error("Nenhum livro encontrado");
-            }
+            return result
         } catch (err) {
             console.log("Erro ao buscar livros: ", err);
             throw err;
@@ -59,13 +66,24 @@ export class LivroRepository {
         const query = "SELECT * FROM livraria.livro WHERE id = (?);";
         try {
             const result = await executarComandoSQL(query, [id]);
-            if (result.length > 0) {
-                return result;
-            } else {
-                throw new Error("Não existe um livro cadastrado com esse ID");
-            }
+            return result
         } catch (err) {
             console.log("Erro ao buscar livros: ", err);
+            throw err;
+        }
+    }
+
+
+
+    // =============== FUNÇÕES DE VERIFICAÇÃO ===============
+
+    async verificarISBN(isbn:string) {
+        const query = "SELECT isbn FROM livraria.livro WHERE isbn = (?);";
+        try {
+            const result = await executarComandoSQL(query, [isbn]);
+            return result.length
+        } catch (err) {
+            console.log("Erro ao buscar ISBN: ", err);
             throw err;
         }
     }

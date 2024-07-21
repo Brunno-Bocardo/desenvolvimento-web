@@ -9,4 +9,6 @@ const app = (0, express_1.default)();
 const PORT = 3000;
 app.use(express_1.default.json());
 app.post("/books", LivroController_1.inserirLivro);
+app.get("/books", LivroController_1.consultarTodosOsLivros);
+app.get("/books/:id", LivroController_1.consultarLivroPorID);
 app.listen(PORT, () => console.log("API online na porta: " + PORT));

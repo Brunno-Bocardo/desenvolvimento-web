@@ -6,23 +6,38 @@ export class LivroService {
     livroRepository: LivroRepository = new LivroRepository()
 
     async registrarLivro(livroData:any): Promise<Livro> {
-        const {title} = livroData
-
-        if (!title) {
-            throw new Error("Informações incompletas");
+        const { title, author, publishedDate, isbn, pages, language, publisher } = livroData;
+        if (!title || !author || !publishedDate || !isbn || !pages || !language || !publisher ){
+            throw new Error("Informações incompletas ou inválidas");
         }
 
-        const novoLivro = await this.livroRepository.insertLivro(title)
+        const verificaISBN = await this.livroRepository.verificarISBN(isbn)
+        if (verificaISBN > 0) {
+            throw new Error("Já existe um livro cadastrado com esse ISBN");
+        }
+
+        const novoLivro = await this.livroRepository.insertLivro(title, author, publishedDate, isbn, pages, language, publisher)
         console.log("Service - Insert - ", novoLivro)
         return novoLivro;
     }
 
     async consultarLivros() {
-        return await this.livroRepository.buscarLivros()
+        const result = await this.livroRepository.buscarLivros()
+        if (result) {
+            return result;
+        } else {
+            throw new Error("Nenhum livro encontrado");
+        }
     }
 
     async consultarLivro(id:number) {
-        return await this.livroRepository.buscarLivroPorID(id)
+        const resultadoBusca = await this.livroRepository.buscarLivroPorID(id)
+        if (resultadoBusca.length > 0) {
+            return resultadoBusca;
+        } else {
+            throw new Error("Não existe um livro cadastrado com esse ID");
+        }
     }
 
+    
 }

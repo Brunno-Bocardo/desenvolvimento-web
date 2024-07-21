@@ -10,6 +10,8 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.inserirLivro = inserirLivro;
+exports.consultarTodosOsLivros = consultarTodosOsLivros;
+exports.consultarLivroPorID = consultarLivroPorID;
 const LivroService_1 = require("../service/LivroService");
 const livroService = new LivroService_1.LivroService();
 function inserirLivro(req, res) {
@@ -20,6 +22,29 @@ function inserirLivro(req, res) {
                 mensagem: "Seu livro foi adicionado com sucesso",
                 livro: novoLivro
             });
+        }
+        catch (err) {
+            res.status(400).json({ message: err.message });
+        }
+    });
+}
+function consultarTodosOsLivros(req, res) {
+    return __awaiter(this, void 0, void 0, function* () {
+        try {
+            const livros = yield livroService.consultarLivros();
+            res.status(200).json(livros);
+        }
+        catch (err) {
+            res.status(400).json({ message: err.message });
+        }
+    });
+}
+function consultarLivroPorID(req, res) {
+    return __awaiter(this, void 0, void 0, function* () {
+        try {
+            const id = parseInt(req.params.id);
+            const livro = yield livroService.consultarLivro(id);
+            res.status(200).json(livro);
         }
         catch (err) {
             res.status(400).json({ message: err.message });

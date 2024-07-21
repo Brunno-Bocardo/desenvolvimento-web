@@ -17,13 +17,29 @@ class LivroService {
     }
     registrarLivro(livroData) {
         return __awaiter(this, void 0, void 0, function* () {
-            const { title } = livroData;
-            if (!title) {
-                throw new Error("Informações incompletas");
+            const { title, author, publishedDate, isbn, pages, language, publisher } = livroData;
+            if (!title ||
+                !author ||
+                !publishedDate ||
+                !isbn ||
+                !pages ||
+                !language ||
+                !publisher) {
+                throw new Error("Informações incompletas ou inválidas");
             }
-            const novoLivro = yield this.livroRepository.insertLivro(title);
+            const novoLivro = yield this.livroRepository.insertLivro(title, author, publishedDate, isbn, pages, language, publisher);
             console.log("Service - Insert - ", novoLivro);
             return novoLivro;
+        });
+    }
+    consultarLivros() {
+        return __awaiter(this, void 0, void 0, function* () {
+            return yield this.livroRepository.buscarLivros();
+        });
+    }
+    consultarLivro(id) {
+        return __awaiter(this, void 0, void 0, function* () {
+            return yield this.livroRepository.buscarLivroPorID(id);
         });
     }
 }

@@ -6,17 +6,16 @@ export class LivroService {
     livroRepository: LivroRepository = new LivroRepository()
 
     async registrarLivro(livroData:any): Promise<Livro> {
-        const { title, author, publishedDate, isbn, pages, language, publisher } = livroData;
-        if (!title || !author || !publishedDate || !isbn || !pages || !language || !publisher ){
-            throw new Error("Informações incompletas ou inválidas");
-        }
+        const isbn = livroData.isbn;
+        
+        await this.livroRepository.validarLivroData(livroData);
 
         const verificaISBN = await this.livroRepository.verificarISBN(isbn)
         if (verificaISBN > 0) {
             throw new Error("Já existe um livro cadastrado com esse ISBN");
         }
 
-        const novoLivro = await this.livroRepository.insertLivro(title, author, publishedDate, isbn, pages, language, publisher)
+        const novoLivro = await this.livroRepository.insertLivro(livroData)
         console.log("Service - Insert - ", novoLivro)
         return novoLivro;
     }
@@ -39,5 +38,14 @@ export class LivroService {
         }
     }
 
-    
+    async updateLivro(id:number, livroData:any) {
+        const resultadoBusca = await this.livroRepository.verificarID(id)
+        if (resultadoBusca.length > 0) {
+            const livroAtualizado = await this.livroRepository.atualizarLivro(id, livroData)
+            return livroAtualizado;
+        } else {
+            throw new Error("Não existe um livro cadastrado com esse ID");
+        }
+    }
+
 }

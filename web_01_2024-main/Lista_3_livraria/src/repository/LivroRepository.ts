@@ -29,7 +29,8 @@ export class LivroRepository {
         }
     }
 
-    async insertLivro(title: string, author: string, publishedDate: string, isbn: string, pages: number, language: string, publisher: string): Promise<any> {
+    async insertLivro(livroData:any): Promise<any> {
+        const { title, author, publishedDate, isbn, pages, language, publisher } = livroData;
         const valores = [title, author, publishedDate, isbn, pages, language, publisher];
         const query = `
             INSERT INTO livraria.livro (title, author, publishedDate, isbn, pages, language, publisher)
@@ -73,9 +74,57 @@ export class LivroRepository {
         }
     }
 
+    async atualizarLivro(id: number, livroData: any): Promise<any> {
+        const { title, author, publishedDate, isbn, pages, language, publisher } = livroData;
+        const valores = [title, author, publishedDate, isbn, pages, language, publisher, id];
+        const query = `
+            UPDATE livraria.livro
+            SET title = ?, author = ?, publishedDate = ?, isbn = ?, pages = ?, language = ?, publisher = ?
+            WHERE id = ?;
+        `;
+
+        try {
+            const result = await executarComandoSQL(query, valores);
+            return result;
+        } catch (err) {
+            throw err;
+        }
+    }
+
 
 
     // =============== FUNÇÕES DE VERIFICAÇÃO ===============
+
+    async validarLivroData(livroData: any) {
+        const { title, author, publishedDate, isbn, pages, language, publisher } = livroData;
+        let mensagem = ''
+    
+        if (!title || typeof title !== 'string' || title.trim() === '') {
+            mensagem = "Título inválido. Deve ser uma string não vazia."
+        }
+        else if (!author || typeof author !== 'string' || author.trim() === '') {
+            mensagem = "Autor inválido. Deve ser uma string não vazia."
+        }
+        else if (!publishedDate || typeof publishedDate !== 'string' || publishedDate.trim() === '') {
+            mensagem = "Data de publicação inválida. Deve ser uma string não vazia."
+        }
+        else if (!isbn || typeof isbn !== 'string' || isbn.trim() === '') {
+            mensagem = "ISBN inválido. Deve ser uma string não vazia."
+        }
+        else if (typeof pages !== 'number' || isNaN(pages) || pages <= 0) {
+            mensagem = "Número de páginas inválido. Deve ser um número positivo."
+        }
+        else if (!language || typeof language !== 'string' || language.trim() === '') {
+            mensagem = "Idioma inválido. Deve ser uma string não vazia."
+        }
+        else if (!publisher || typeof publisher !== 'string' || publisher.trim() === '') {
+            mensagem = "Editora inválida. Deve ser uma string não vazia."
+        }
+
+        if (mensagem !== '') {
+            throw new Error(mensagem);
+        }
+    }
 
     async verificarISBN(isbn:string) {
         const query = "SELECT isbn FROM livraria.livro WHERE isbn = (?);";
@@ -84,6 +133,17 @@ export class LivroRepository {
             return result.length
         } catch (err) {
             console.log("Erro ao buscar ISBN: ", err);
+            throw err;
+        }
+    }
+
+    async verificarID(id:number) {
+        const query = "SELECT id FROM livraria.livro WHERE id = (?);";
+        try {
+            const result = await executarComandoSQL(query, [id]);
+            return result.length
+        } catch (err) {
+            console.log("Erro ao buscar ID: ", err);
             throw err;
         }
     }

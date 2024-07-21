@@ -39,10 +39,13 @@ export class LivroService {
     }
 
     async updateLivro(id:number, livroData:any) {
+        await this.livroRepository.validarLivroData(livroData);
         const resultadoBusca = await this.livroRepository.verificarID(id)
-        if (resultadoBusca.length > 0) {
+        if (resultadoBusca > 0) {
             const livroAtualizado = await this.livroRepository.atualizarLivro(id, livroData)
-            return livroAtualizado;
+            if (livroAtualizado) {
+                return this.consultarLivro(id)
+            }
         } else {
             throw new Error("Não existe um livro cadastrado com esse ID");
         }

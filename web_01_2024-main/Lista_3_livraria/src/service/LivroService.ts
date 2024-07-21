@@ -51,4 +51,13 @@ export class LivroService {
         }
     }
 
+    async deletarLivro(id:number) {
+        const resultadoBusca = await this.livroRepository.verificarID(id)
+        if (resultadoBusca > 0) {
+            return await this.livroRepository.apagarLivro(id)
+        } else {
+            throw new Error("Não existe um livro cadastrado com esse ID");
+        }
+    }
+
 }

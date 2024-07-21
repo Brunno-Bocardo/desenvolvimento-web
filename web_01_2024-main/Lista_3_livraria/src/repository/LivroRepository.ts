@@ -91,6 +91,16 @@ export class LivroRepository {
         }
     }
 
+    async apagarLivro(id: number) {
+        const query = "DELETE FROM livraria.livro WHERE id = ?;";
+        try {
+            await executarComandoSQL(query, [id]);
+        } catch (err) {
+            console.log("Erro ao deletar livro: ", err);
+            throw err;
+        }
+    }
+
 
 
     // =============== FUNÇÕES DE VERIFICAÇÃO ===============

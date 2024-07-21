@@ -43,3 +43,15 @@ export async function atualizarLivro(req:Request, res:Response) {
         res.status(400).json({ message: err.message });
     }
 }
+
+export async function deletarLivro(req:Request, res:Response) {
+    try {
+        const id = parseInt(req.params.id);
+        const livro = await livroService.deletarLivro(id);
+        res.status(200).json({
+            "mensagem": "Seu Livro foi deletado"
+        });
+    } catch (err: any) {
+        res.status(400).json({ message: err.message });
+    }
+}

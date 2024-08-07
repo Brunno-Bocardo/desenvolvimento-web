@@ -13,7 +13,7 @@ app.use('/api', apiRouter);
 RegisterRoutes(app)
 setupSwagger(app) ;
 
-// app.post("/api/product", cadastrarProduto)
+// app.post("/api/product", cadastrarProduto) foi
 // app.put("/api/product", atualizarProduto)
 // app.delete("/api/product", deletarProduto)
 // app.get("/api/product", filtrarProduto)

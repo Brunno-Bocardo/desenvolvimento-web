@@ -14,8 +14,8 @@ RegisterRoutes(app)
 setupSwagger(app) ;
 
 // app.post("/api/product", cadastrarProduto) foi
-// app.put("/api/product", atualizarProduto)
-// app.delete("/api/product", deletarProduto)
+// app.put("/api/product", atualizarProduto) foi
+// app.delete("/api/product", deletarProduto) foi
 // app.get("/api/product", filtrarProduto)
 // app.get("/api/product/all", listarTodosProduto)
 

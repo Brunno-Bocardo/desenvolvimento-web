@@ -1,6 +1,6 @@
 import { Request, Response } from "express";
 import { ProductService } from "../service/ProductService";
-import { Controller, Route, Tags, Body, Res, Post, Put, Delete, Get, TsoaResponse  } from "tsoa";
+import { Controller, Route, Tags, Body, Query, Res, Post, Put, Delete, Get, TsoaResponse  } from "tsoa";
 import { ProductRequestDto } from "../model/dto/ProductRequestDto";
 import { BasicResponseDto } from "../model/dto/BasicResponseDto";
 
@@ -52,6 +52,7 @@ export class ProductController extends Controller {
         }
     }
 
+    
     /** 
         @example dto {
             "name": "Mangas",
@@ -76,42 +77,32 @@ export class ProductController extends Controller {
 
     @Get()
     async filtrarProduto (
-        @Body() dto:ProductRequestDto,
+        @Query() id:number,
         @Res() fail: TsoaResponse<400, BasicResponseDto>,
         @Res() sucess: TsoaResponse<201, BasicResponseDto>
     ): Promise < | void> {
-
+        try {
+            const product = await this.productService.filtrarProduto(id)
+            return sucess(201, new BasicResponseDto("Produto encontrado com sucesso!", product))
+        } catch (error: any) {
+            return fail (400, new BasicResponseDto(error.message, undefined))
+        }
     }
     
     
-    
-    //  async  filtrarProduto (req: Request, res: Response){
-    //     try {
-    //         const produto = await this.productService.filtrarProduto(req.query.id);
-    //         res.status(200).json(
-    //             {
-    //                 mensagem:"Produto encontrado com sucesso!",
-    //                 produto:produto
-    //             }
-    //         );
-    //     } catch (error: any) {
-    //         res.status(400).json({ message: error.message});
-    //     }
-    // };
-    
-    //  async  listarTodosProduto (req: Request, res: Response){
-    //     try {
-    //         const produtos = await this.productService.listarTodosProdutos();
-    //         res.status(200).json(
-    //             {
-    //                 mensagem:"Produtos listados com sucesso!",
-    //                 produtos:produtos
-    //             }
-    //             );
-    //     } catch (error: any) {
-    //         res.status(400).json({ message: error.message});
-    //     }
-    // };
+    @Get("all")
+    async listarTodosProdutos (
+        // @Query() id:number,
+        @Res() fail: TsoaResponse<400, BasicResponseDto>,
+        @Res() sucess: TsoaResponse<201, BasicResponseDto>
+    ): Promise < | void> {
+        try {
+            const product = await this.productService.listarTodosProdutos()
+            return sucess(201, new BasicResponseDto("Produtos listados com sucesso!", product))
+        } catch (error: any) {
+            return fail (400, new BasicResponseDto(error.message, undefined))
+        }
+    }
 }
 
 

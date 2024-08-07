@@ -143,6 +143,69 @@ export function RegisterRoutes(app: Router) {
             }
         });
         // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
+        app.get('/product',
+            ...(fetchMiddlewares<RequestHandler>(ProductController)),
+            ...(fetchMiddlewares<RequestHandler>(ProductController.prototype.filtrarProduto)),
+
+            async function ProductController_filtrarProduto(request: ExRequest, response: ExResponse, next: any) {
+            const args: Record<string, TsoaRoute.ParameterSchema> = {
+                    id: {"in":"query","name":"id","required":true,"dataType":"double"},
+                    fail: {"in":"res","name":"400","required":true,"ref":"BasicResponseDto"},
+                    sucess: {"in":"res","name":"201","required":true,"ref":"BasicResponseDto"},
+            };
+
+            // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
+
+            let validatedArgs: any[] = [];
+            try {
+                validatedArgs = templateService.getValidatedArgs({ args, request, response });
+
+                const controller = new ProductController();
+
+              await templateService.apiHandler({
+                methodName: 'filtrarProduto',
+                controller,
+                response,
+                next,
+                validatedArgs,
+                successStatus: undefined,
+              });
+            } catch (err) {
+                return next(err);
+            }
+        });
+        // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
+        app.get('/product/all',
+            ...(fetchMiddlewares<RequestHandler>(ProductController)),
+            ...(fetchMiddlewares<RequestHandler>(ProductController.prototype.listarTodosProdutos)),
+
+            async function ProductController_listarTodosProdutos(request: ExRequest, response: ExResponse, next: any) {
+            const args: Record<string, TsoaRoute.ParameterSchema> = {
+                    fail: {"in":"res","name":"400","required":true,"ref":"BasicResponseDto"},
+                    sucess: {"in":"res","name":"201","required":true,"ref":"BasicResponseDto"},
+            };
+
+            // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
+
+            let validatedArgs: any[] = [];
+            try {
+                validatedArgs = templateService.getValidatedArgs({ args, request, response });
+
+                const controller = new ProductController();
+
+              await templateService.apiHandler({
+                methodName: 'listarTodosProdutos',
+                controller,
+                response,
+                next,
+                validatedArgs,
+                successStatus: undefined,
+              });
+            } catch (err) {
+                return next(err);
+            }
+        });
+        // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
 
     // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
 

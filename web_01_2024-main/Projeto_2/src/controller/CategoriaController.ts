@@ -24,11 +24,11 @@ export class CategoriaController extends Controller {
             const categoria = await this.categoriaService.cadastrarCategoria(dto)
             return success(201, new BasicResponseDto("Categoria cadastrada com sucesso", categoria))
         } catch (error: any) {
-            return fail (400, new BasicResponseDto(error.message, undefined))
+            return fail(400, new BasicResponseDto(error.message, undefined))
         }
     }
 
-    
+
     /** 
         @example dto {
             "id": 1,
@@ -45,7 +45,7 @@ export class CategoriaController extends Controller {
             const categoria = await this.categoriaService.atualizarCategoria(dto)
             return sucess(201, new BasicResponseDto("Categoria atualizada com sucesso!", categoria))
         } catch (error: any) {
-            return fail (400, new BasicResponseDto(error.message, undefined))
+            return fail(400, new BasicResponseDto(error.message, undefined))
         }
     }
 
@@ -59,7 +59,7 @@ export class CategoriaController extends Controller {
             const product = await this.categoriaService.listarAllCategorias()
             return sucess(201, new BasicResponseDto("Categorias listadas com sucesso!", product))
         } catch (error: any) {
-            return fail (400, new BasicResponseDto(error.message, undefined))
+            return fail(400, new BasicResponseDto(error.message, undefined))
         }
     }
 }

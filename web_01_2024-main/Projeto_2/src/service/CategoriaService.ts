@@ -10,9 +10,14 @@ export class CategoriaService{
         
         const categoria = new Categoria(undefined, name)
 
-        const novoCategoria =  await this.categoriaRepository.insertCategoria(categoria);
-        console.log("Service - Insert ", novoCategoria);
-        return novoCategoria;
+        const existe = await this.categoriaRepository.buscaCategoria(categoria)
+        if (existe) {
+            throw new Error('Categoria já existe');
+        } else {
+            const novoCategoria =  await this.categoriaRepository.insertCategoria(categoria);
+            console.log("Service - Insert ", novoCategoria);
+            return novoCategoria;
+        } 
     }
 
 

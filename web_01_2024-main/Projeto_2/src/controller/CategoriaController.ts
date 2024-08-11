@@ -28,13 +28,14 @@ export class CategoriaController extends Controller {
         }
     }
 
+    
     /** 
         @example dto {
             "id": 1,
             "name": "Mangá"
         }
     */ 
-    @Put()
+    @Put("categoria")
     async atualizarCategoria (
         @Body() dto:CategoriaUpdateRequestDto,
         @Res() fail:TsoaResponse<400, BasicResponseDto>,
@@ -47,9 +48,23 @@ export class CategoriaController extends Controller {
             return fail (400, new BasicResponseDto(error.message, undefined))
         }
     }
+
+
+    @Get("categoria/all")
+    async listarTodosProdutos (
+        @Res() fail: TsoaResponse<400, BasicResponseDto>,
+        @Res() sucess: TsoaResponse<201, BasicResponseDto>
+    ): Promise < | void> {
+        try {
+            const product = await this.categoriaService.listarAllCategorias()
+            return sucess(201, new BasicResponseDto("Categorias listadas com sucesso!", product))
+        } catch (error: any) {
+            return fail (400, new BasicResponseDto(error.message, undefined))
+        }
+    }
 }
 
-
+    
     
 
     
@@ -90,19 +105,7 @@ export class CategoriaController extends Controller {
     // }
     
     
-    // @Get("all")
-    // async listarTodosProdutos (
-    //     // @Query() id:number,
-    //     @Res() fail: TsoaResponse<400, BasicResponseDto>,
-    //     @Res() sucess: TsoaResponse<201, BasicResponseDto>
-    // ): Promise < | void> {
-    //     try {
-    //         const product = await this.productService.listarTodosProdutos()
-    //         return sucess(201, new BasicResponseDto("Produtos listados com sucesso!", product))
-    //     } catch (error: any) {
-    //         return fail (400, new BasicResponseDto(error.message, undefined))
-    //     }
-    // }
+    
 
 
 

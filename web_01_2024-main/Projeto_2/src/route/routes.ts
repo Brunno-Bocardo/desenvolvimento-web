@@ -86,7 +86,7 @@ export function RegisterRoutes(app: Router) {
             }
         });
         // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
-        app.put('/livraria',
+        app.put('/livraria/categoria',
             ...(fetchMiddlewares<RequestHandler>(CategoriaController)),
             ...(fetchMiddlewares<RequestHandler>(CategoriaController.prototype.atualizarCategoria)),
 
@@ -107,6 +107,37 @@ export function RegisterRoutes(app: Router) {
 
               await templateService.apiHandler({
                 methodName: 'atualizarCategoria',
+                controller,
+                response,
+                next,
+                validatedArgs,
+                successStatus: undefined,
+              });
+            } catch (err) {
+                return next(err);
+            }
+        });
+        // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
+        app.get('/livraria/categoria/all',
+            ...(fetchMiddlewares<RequestHandler>(CategoriaController)),
+            ...(fetchMiddlewares<RequestHandler>(CategoriaController.prototype.listarTodosProdutos)),
+
+            async function CategoriaController_listarTodosProdutos(request: ExRequest, response: ExResponse, next: any) {
+            const args: Record<string, TsoaRoute.ParameterSchema> = {
+                    fail: {"in":"res","name":"400","required":true,"ref":"BasicResponseDto"},
+                    sucess: {"in":"res","name":"201","required":true,"ref":"BasicResponseDto"},
+            };
+
+            // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
+
+            let validatedArgs: any[] = [];
+            try {
+                validatedArgs = templateService.getValidatedArgs({ args, request, response });
+
+                const controller = new CategoriaController();
+
+              await templateService.apiHandler({
+                methodName: 'listarTodosProdutos',
                 controller,
                 response,
                 next,

@@ -15,6 +15,7 @@ export class CategoriaService{
         return novoCategoria;
     }
 
+
     async atualizarCategoria(categoriaData: any): Promise<Categoria> {
         const { id, name } = categoriaData;
 
@@ -22,6 +23,13 @@ export class CategoriaService{
 
         await this.categoriaRepository.updateCategoria(categoria);
         console.log("Service - Update ", categoria);
+        return categoria;
+    }
+
+
+    async listarAllCategorias(): Promise<Categoria[]> {
+        const categoria =  await this.categoriaRepository.filterAllCategoria();
+        console.log("Service - Filtrar Todos", categoria);
         return categoria;
     }
 
@@ -43,10 +51,6 @@ export class CategoriaService{
     //     return produto;
     // }
 
-    // async listarTodosProdutos(): Promise<Product[]> {
-    //     const produto =  await this.productRepository.filterAllProduct();
-    //     console.log("Service - Filtrar Todos", produto);
-    //     return produto;
-    // }
+    
 
 }

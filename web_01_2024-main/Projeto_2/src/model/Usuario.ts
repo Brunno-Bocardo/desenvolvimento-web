@@ -1,6 +1,7 @@
 import { Pessoa } from "./Pessoa";
 
 export class Usuario extends Pessoa{
+    
     pessoaID: number;
     senha: string;
 

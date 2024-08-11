@@ -1,4 +1,3 @@
-import { Request, Response } from "express";
 import { ProductService } from "../service/ProductService";
 import { Controller, Route, Tags, Body, Query, Res, Post, Put, Delete, Get, TsoaResponse  } from "tsoa";
 import { ProductRequestDto } from "../model/dto/ProductRequestDto";

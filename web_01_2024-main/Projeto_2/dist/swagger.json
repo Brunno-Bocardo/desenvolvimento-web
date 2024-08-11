@@ -7,14 +7,23 @@
 		"requestBodies": {},
 		"responses": {},
 		"schemas": {
-			"CategoriaRequestDto": {
+			"LivroRequestDto": {
 				"properties": {
-					"name": {
+					"autor": {
 						"type": "string"
+					},
+					"titulo": {
+						"type": "string"
+					},
+					"categoriaID": {
+						"type": "number",
+						"format": "double"
 					}
 				},
 				"required": [
-					"name"
+					"autor",
+					"titulo",
+					"categoriaID"
 				],
 				"type": "object",
 				"additionalProperties": false
@@ -29,6 +38,18 @@
 				"required": [
 					"message",
 					"object"
+				],
+				"type": "object",
+				"additionalProperties": false
+			},
+			"CategoriaRequestDto": {
+				"properties": {
+					"name": {
+						"type": "string"
+					}
+				},
+				"required": [
+					"name"
 				],
 				"type": "object",
 				"additionalProperties": false
@@ -59,6 +80,61 @@
 		"description": "Documentação da API usando Swagger"
 	},
 	"paths": {
+		"/livraria/livro": {
+			"post": {
+				"operationId": "CadastrarLivro",
+				"responses": {
+					"200": {
+						"description": "Ok",
+						"content": {
+							"application/json": {
+								"schema": {}
+							}
+						}
+					},
+					"201": {
+						"description": "",
+						"content": {
+							"application/json": {
+								"schema": {
+									"$ref": "#/components/schemas/BasicResponseDto"
+								}
+							}
+						}
+					},
+					"400": {
+						"description": "",
+						"content": {
+							"application/json": {
+								"schema": {
+									"$ref": "#/components/schemas/BasicResponseDto"
+								}
+							}
+						}
+					}
+				},
+				"tags": [
+					"Livro"
+				],
+				"security": [],
+				"parameters": [],
+				"requestBody": {
+					"required": true,
+					"content": {
+						"application/json": {
+							"schema": {
+								"$ref": "#/components/schemas/LivroRequestDto"
+							},
+							"example": {
+								"titulo": "One Piece",
+								"autor": "Oda",
+								"categoriaID": 2
+							}
+						}
+					}
+				}
+			}
+		},
 		"/livraria/categoria": {
 			"post": {
 				"operationId": "CadastrarCategoria",

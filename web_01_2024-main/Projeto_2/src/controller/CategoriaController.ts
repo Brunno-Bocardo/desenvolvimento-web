@@ -39,11 +39,11 @@ export class CategoriaController extends Controller {
     async atualizarCategoria (
         @Body() dto:CategoriaUpdateRequestDto,
         @Res() fail:TsoaResponse<400, BasicResponseDto>,
-        @Res() sucess: TsoaResponse <201, BasicResponseDto>
+        @Res() success: TsoaResponse <201, BasicResponseDto>
     ): Promise < | void> {
         try {
             const categoria = await this.categoriaService.atualizarCategoria(dto)
-            return sucess(201, new BasicResponseDto("Categoria atualizada com sucesso!", categoria))
+            return success(201, new BasicResponseDto("Categoria atualizada com sucesso!", categoria))
         } catch (error: any) {
             return fail(400, new BasicResponseDto(error.message, undefined))
         }
@@ -53,11 +53,11 @@ export class CategoriaController extends Controller {
     @Get("categoria/all")
     async listarTodosProdutos (
         @Res() fail: TsoaResponse<400, BasicResponseDto>,
-        @Res() sucess: TsoaResponse<201, BasicResponseDto>
+        @Res() success: TsoaResponse<201, BasicResponseDto>
     ): Promise < | void> {
         try {
             const product = await this.categoriaService.listarAllCategorias()
-            return sucess(201, new BasicResponseDto("Categorias listadas com sucesso!", product))
+            return success(201, new BasicResponseDto("Categorias listadas com sucesso!", product))
         } catch (error: any) {
             return fail(400, new BasicResponseDto(error.message, undefined))
         }

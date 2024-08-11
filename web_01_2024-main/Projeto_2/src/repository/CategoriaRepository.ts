@@ -68,17 +68,29 @@ export class CategoriaRepository{
         }
     }
 
-    async buscaCategoria(categoria:Categoria) :Promise<Categoria[]>{
-        const query = "SELECT * FROM livraria.categoria WHERE categoria.name = ?" ;
-
+    async buscaCategoria(categoria: Categoria): Promise<Categoria[]> {
+        const query = "SELECT * FROM livraria.categoria WHERE name = ?";
         try {
             const resultado = await executarComandoSQL(query, [categoria.name]);
-            return resultado
-        } catch (err:any) {
+            return resultado.map((row: any) => new Categoria(row.id, row.name));
+        } catch (err: any) {
             console.error(`Falha ao listar as categorias, gerando o erro: ${err}`);
             throw err;
         }
     }
+
+    async buscaCategoriaID(categoria: Categoria): Promise<Categoria[]> {
+        const query = "SELECT * FROM livraria.categoria WHERE id = ?";
+    
+        try {
+            const resultado = await executarComandoSQL(query, [categoria.id]);
+            return resultado.map((row: any) => new Categoria(row.id, row.name));
+        } catch (err: any) {
+            console.error(`Falha ao listar as categorias, gerando o erro: ${err}`);
+            throw err;
+        }
+    }
+    
 
     // async deleteProduct(product:Product) :Promise<Product>{
     //     const query = "DELETE FROM estoque.product where id = ?;" ;

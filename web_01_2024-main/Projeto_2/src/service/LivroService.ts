@@ -15,7 +15,7 @@ export class LivroService{
     }
 
 
-    // async atualizarCategoria(categoriaData: any): Promise<Categoria> {
+    // async atualizarLivro(categoriaData: any): Promise<Categoria> {
     //     const { id, name } = categoriaData;
 
     //     const categoria = new Categoria(id, name)

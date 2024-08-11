@@ -11,12 +11,16 @@ export class LivroRequestDto {
     }
 }
 
-// export class CategoriaUpdateRequestDto {
-//     id: number;
-//     name: string;
+export class LivroAllRequestDto {
+    id:number;
+    autor: string;
+    titulo: string;
+    categoriaID: number;
 
-//     constructor(name:string, id:number) {
-//         this.name = name;
-//         this.id = id;
-//     }
-// }
+    constructor(id:number, autor:string, titulo:string, categoriaID:number) {
+        this.id = id;
+        this.autor = autor;
+        this.titulo = titulo
+        this.categoriaID = categoriaID
+    }
+}

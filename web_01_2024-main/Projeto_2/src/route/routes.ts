@@ -138,7 +138,7 @@ export function RegisterRoutes(app: Router) {
             const args: Record<string, TsoaRoute.ParameterSchema> = {
                     dto: {"in":"body","name":"dto","required":true,"ref":"CategoriaUpdateRequestDto"},
                     fail: {"in":"res","name":"400","required":true,"ref":"BasicResponseDto"},
-                    sucess: {"in":"res","name":"201","required":true,"ref":"BasicResponseDto"},
+                    success: {"in":"res","name":"201","required":true,"ref":"BasicResponseDto"},
             };
 
             // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
@@ -169,7 +169,7 @@ export function RegisterRoutes(app: Router) {
             async function CategoriaController_listarTodosProdutos(request: ExRequest, response: ExResponse, next: any) {
             const args: Record<string, TsoaRoute.ParameterSchema> = {
                     fail: {"in":"res","name":"400","required":true,"ref":"BasicResponseDto"},
-                    sucess: {"in":"res","name":"201","required":true,"ref":"BasicResponseDto"},
+                    success: {"in":"res","name":"201","required":true,"ref":"BasicResponseDto"},
             };
 
             // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa

@@ -1,7 +1,7 @@
 
 import { LivroService } from "../service/LivroService";
 import { Controller, Route, Tags, Body, Query, Res, Post, Put, Delete, Get, TsoaResponse  } from "tsoa";
-import { LivroRequestDto } from "../model/dto/LivroRequestDto";
+import { LivroRequestDto, LivroAllRequestDto } from "../model/dto/LivroRequestDto";
 import { BasicResponseDto } from "../model/dto/BasicResponseDto";
 
 @Route("livraria")
@@ -31,21 +31,22 @@ export class LivroController extends Controller {
     }
 
 
-    // /** 
-    //     @example dto {
-    //         "id": 1,
-    //         "name": "Mangá"
-    //     }
-    // */ 
-    // @Put("categoria")
+    /** 
+        @example dto {
+            "titulo": "One Piece",
+            "autor": "Oda",
+            "categoriaID": 2
+        }
+    */ 
+    // @Put("livro")
     // async atualizarLivro (
-    //     @Body() dto:LivroUpdateRequestDto,
+    //     @Body() dto:LivroAllRequestDto,
     //     @Res() fail:TsoaResponse<400, BasicResponseDto>,
-    //     @Res() sucess: TsoaResponse <201, BasicResponseDto>
+    //     @Res() success: TsoaResponse <201, BasicResponseDto>
     // ): Promise < | void> {
     //     try {
-    //         const categoria = await this.categoriaService.atualizarLivro(dto)
-    //         return sucess(201, new BasicResponseDto("Livro atualizada com sucesso!", categoria))
+    //         const livro = await this.livroService.atualizarLivro(dto)
+    //         return success(201, new BasicResponseDto("Livro atualizado com sucesso!", livro))
     //     } catch (error: any) {
     //         return fail(400, new BasicResponseDto(error.message, undefined))
     //     }

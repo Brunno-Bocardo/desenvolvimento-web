@@ -11,7 +11,7 @@ export class CategoriaService{
         const categoria = new Categoria(undefined, name)
 
         const existe = await this.categoriaRepository.buscaCategoria(categoria)
-        if (existe) {
+        if (existe.length > 0) {
             throw new Error('Categoria já existe');
         } else {
             const novoCategoria =  await this.categoriaRepository.insertCategoria(categoria);
@@ -26,9 +26,14 @@ export class CategoriaService{
 
         const categoria = new Categoria(id, name)
 
-        await this.categoriaRepository.updateCategoria(categoria);
-        console.log("Service - Update ", categoria);
-        return categoria;
+        const existe = await this.categoriaRepository.buscaCategoriaID(categoria)
+        if (existe.length > 0) {
+            await this.categoriaRepository.updateCategoria(categoria);
+            console.log("Service - Update ", categoria);
+            return categoria;
+        } else {
+            throw new Error('Categoria não existente com o ID passado');
+        }
     }
 
 

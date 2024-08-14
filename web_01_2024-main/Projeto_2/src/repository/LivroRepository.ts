@@ -40,6 +40,22 @@ export class LivroRepository{
         }
     }
 
+
+    async updateLivro(livro:Livro) :Promise<Livro>{
+        const query = "UPDATE livraria.livro SET titulo = ?, autor = ?, categoriaID = ? WHERE id = ?;";
+
+        try {
+            const resultado = await executarComandoSQL(query, [livro.titulo, livro.autor, livro.categoriaID, livro.id]);
+            console.log('Livro atualizado com sucesso, ID: ', livro.id);
+            return new Promise<Livro>((resolve)=>{
+                resolve(livro);
+            })
+        } catch (err:any) {
+            console.error(`Erro ao atualizar o livro de ID ${livro.id} gerando o erro: ${err}`);
+            throw err;
+        }
+    }
+
     // FUNÇÃO DE APOIO
     
 

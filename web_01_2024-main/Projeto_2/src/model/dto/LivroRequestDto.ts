@@ -4,7 +4,7 @@ export class LivroRequestDto {
     titulo: string;
     categoriaID: number;
 
-    constructor(autor:string, titulo:string, categoriaID:number) {
+    constructor(titulo:string, autor:string, categoriaID:number) {
         this.autor = autor;
         this.titulo = titulo
         this.categoriaID = categoriaID
@@ -13,8 +13,8 @@ export class LivroRequestDto {
 
 export class LivroAllRequestDto {
     id:number;
-    autor: string;
     titulo: string;
+    autor: string;
     categoriaID: number;
 
     constructor(id:number, autor:string, titulo:string, categoriaID:number) {

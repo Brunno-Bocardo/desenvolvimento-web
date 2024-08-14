@@ -26,8 +26,8 @@ export class CategoriaService{
 
         const categoria = new Categoria(id, name)
 
-        const existe = await this.categoriaRepository.buscaCategoriaID(categoria)
-        if (existe.length > 0) {
+        const existe = await this.categoriaRepository.buscaCategoriaID(categoria.id)
+        if (existe) {
             await this.categoriaRepository.updateCategoria(categoria);
             console.log("Service - Update ", categoria);
             return categoria;

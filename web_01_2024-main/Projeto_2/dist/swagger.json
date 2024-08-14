@@ -42,6 +42,32 @@
 				"type": "object",
 				"additionalProperties": false
 			},
+			"LivroAllRequestDto": {
+				"properties": {
+					"id": {
+						"type": "number",
+						"format": "double"
+					},
+					"titulo": {
+						"type": "string"
+					},
+					"autor": {
+						"type": "string"
+					},
+					"categoriaID": {
+						"type": "number",
+						"format": "double"
+					}
+				},
+				"required": [
+					"id",
+					"titulo",
+					"autor",
+					"categoriaID"
+				],
+				"type": "object",
+				"additionalProperties": false
+			},
 			"CategoriaRequestDto": {
 				"properties": {
 					"name": {
@@ -126,6 +152,60 @@
 								"$ref": "#/components/schemas/LivroRequestDto"
 							},
 							"example": {
+								"titulo": "One Piece",
+								"autor": "Oda",
+								"categoriaID": 2
+							}
+						}
+					}
+				}
+			},
+			"put": {
+				"operationId": "AtualizarLivro",
+				"responses": {
+					"200": {
+						"description": "Ok",
+						"content": {
+							"application/json": {
+								"schema": {}
+							}
+						}
+					},
+					"201": {
+						"description": "",
+						"content": {
+							"application/json": {
+								"schema": {
+									"$ref": "#/components/schemas/BasicResponseDto"
+								}
+							}
+						}
+					},
+					"400": {
+						"description": "",
+						"content": {
+							"application/json": {
+								"schema": {
+									"$ref": "#/components/schemas/BasicResponseDto"
+								}
+							}
+						}
+					}
+				},
+				"tags": [
+					"Livro"
+				],
+				"security": [],
+				"parameters": [],
+				"requestBody": {
+					"required": true,
+					"content": {
+						"application/json": {
+							"schema": {
+								"$ref": "#/components/schemas/LivroAllRequestDto"
+							},
+							"example": {
+								"id": 1,
 								"titulo": "One Piece",
 								"autor": "Oda",
 								"categoriaID": 2

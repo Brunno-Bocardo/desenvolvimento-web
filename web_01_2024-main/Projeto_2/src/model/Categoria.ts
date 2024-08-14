@@ -5,9 +5,9 @@ export class Categoria{
     name: string;
 
     constructor(id?:number, name?:string){
-        this.validatesInformation(name);
         this.id = id || 0;
         this.name = name || '';
+        this.validatesInformation(name);
     }
 
     private validatesInformation(name:any){

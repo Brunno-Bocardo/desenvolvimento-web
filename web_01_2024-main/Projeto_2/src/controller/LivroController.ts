@@ -33,24 +33,25 @@ export class LivroController extends Controller {
 
     /** 
         @example dto {
+            "id": 1,
             "titulo": "One Piece",
             "autor": "Oda",
             "categoriaID": 2
         }
     */ 
-    // @Put("livro")
-    // async atualizarLivro (
-    //     @Body() dto:LivroAllRequestDto,
-    //     @Res() fail:TsoaResponse<400, BasicResponseDto>,
-    //     @Res() success: TsoaResponse <201, BasicResponseDto>
-    // ): Promise < | void> {
-    //     try {
-    //         const livro = await this.livroService.atualizarLivro(dto)
-    //         return success(201, new BasicResponseDto("Livro atualizado com sucesso!", livro))
-    //     } catch (error: any) {
-    //         return fail(400, new BasicResponseDto(error.message, undefined))
-    //     }
-    // }
+    @Put("livro")
+    async atualizarLivro (
+        @Body() dto:LivroAllRequestDto,
+        @Res() fail:TsoaResponse<400, BasicResponseDto>,
+        @Res() success: TsoaResponse <201, BasicResponseDto>
+    ): Promise < | void> {
+        try {
+            const livro = await this.livroService.atualizarLivro(dto)
+            return success(201, new BasicResponseDto("Livro atualizado com sucesso!", livro))
+        } catch (error: any) {
+            return fail(400, new BasicResponseDto(error.message, undefined))
+        }
+    }
 
 
     // @Get("categoria/all")

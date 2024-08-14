@@ -79,14 +79,14 @@ export class CategoriaRepository{
         }
     }
 
-    async buscaCategoriaID(categoria: Categoria): Promise<Categoria[]> {
-        const query = "SELECT * FROM livraria.categoria WHERE id = ?";
-    
+    async buscaCategoriaID(categoriaID: number): Promise<boolean> {
+        const query = "SELECT COUNT(*) as count FROM livraria.categoria WHERE id = ?";
+        
         try {
-            const resultado = await executarComandoSQL(query, [categoria.id]);
-            return resultado.map((row: any) => new Categoria(row.id, row.name));
+            const resultado = await executarComandoSQL(query, [categoriaID]);
+            return resultado[0].count > 0;
         } catch (err: any) {
-            console.error(`Falha ao listar as categorias, gerando o erro: ${err}`);
+            console.error(`Falha ao buscar a categoria, gerando o erro: ${err}`);
             throw err;
         }
     }

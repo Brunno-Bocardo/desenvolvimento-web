@@ -90,39 +90,5 @@ export class CategoriaRepository{
             throw err;
         }
     }
-    
-
-    // async deleteProduct(product:Product) :Promise<Product>{
-    //     const query = "DELETE FROM estoque.product where id = ?;" ;
-
-    //     try {
-    //         const resultado = await executarComandoSQL(query, [product.id]);
-    //         console.log('Produto deletado com sucesso: ', product);
-    //         return new Promise<Product>((resolve)=>{
-    //             resolve(product);
-    //         })
-    //     } catch (err:any) {
-    //         console.error(`Falha ao deletar o produto de ID ${product.id} gerando o erro: ${err}`);
-    //         throw err;
-    //     }
-    // }
-
-    // async filterProduct(id: number) :Promise<Product>{
-    //     const query = "SELECT * FROM estoque.product where id = ?" ;
-
-    //     try {
-    //         const resultado = await executarComandoSQL(query, [id]);
-    //         console.log('Produto localizado com sucesso, ID: ', resultado);
-    //         return new Promise<Product>((resolve)=>{
-    //             resolve(resultado);
-    //         })
-    //     } catch (err:any) {
-    //         console.error(`Falha ao procurar o produto de ID ${id} gerando o erro: ${err}`);
-    //         throw err;
-    //     }
-    // }
-
-    
-
-    
+       
 }

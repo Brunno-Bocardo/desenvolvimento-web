@@ -9,12 +9,12 @@ export class LivroService{
 
     async cadastrarLivro(livroData: any): Promise<Livro> {
         const { titulo, autor, categoriaID } = livroData;
-        const livro = new Livro(undefined, titulo, autor, categoriaID)
         
-        const categoriaExiste = await this.categoriaRepository.buscaCategoriaID(categoriaID)
+        const livro = Livro.getInstance(undefined, titulo, autor, categoriaID);
+        const categoriaExiste = await this.categoriaRepository.buscaCategoriaID(categoriaID);
 
         if (categoriaExiste) {
-            const novoLivro =  await this.livroRepository.insertLivro(livro);
+            const novoLivro = await this.livroRepository.insertLivro(livro);
             console.log("Service - Insert ", novoLivro);
             return novoLivro;
         } else {
@@ -26,7 +26,7 @@ export class LivroService{
     async atualizarLivro(livroData: any): Promise<Livro> {
         const { id, titulo, autor, categoriaID } = livroData;
 
-        const livro = new Livro(id, titulo, autor, categoriaID)
+        const livro = Livro.getInstance(id, titulo, autor, categoriaID);
         const categoriaExiste = await this.categoriaRepository.buscaCategoriaID(categoriaID)
 
         if (categoriaExiste) {

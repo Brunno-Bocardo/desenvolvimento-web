@@ -39,16 +39,24 @@ export class LivroService{
     }
 
     async listarAllLivros(): Promise<Livro[]> {
-        const livro =  await this.livroRepository.filterAllLivros();
-        console.log("Service - Filtrar Todos", livro);
-        return livro;
+        const livros =  await this.livroRepository.filterAllLivros();
+        if (livros.length === 0) {
+            throw new Error("Nenhum livro encontrado.");
+        }
+        console.log("Service - Filtrar Todos", livros);
+        return livros;
+    }
+
+    async listarLivrosPorNome(titulo: string): Promise<Livro[]> {
+        const livros = await this.livroRepository.buscarLivrosPorNome(titulo);
+
+        if (livros.length === 0) {
+            throw new Error(`Nenhum livro com título '${titulo}' foi encontrado.`);
+        }
+
+        return livros;
     }
 
 
 
-    // async listarAllCategorias(): Promise<Categoria[]> {
-    //     const categoria =  await this.categoriaRepository.filterAllCategoria();
-    //     console.log("Service - Filtrar Todos", categoria);
-    //     return categoria;
-    // }
 }

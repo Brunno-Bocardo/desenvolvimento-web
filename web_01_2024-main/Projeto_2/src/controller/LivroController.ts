@@ -66,6 +66,20 @@ export class LivroController extends Controller {
         }
     }
 
+    @Get("livro/nome")
+    async listarLivroPorNome(
+        @Query() titulo: string,
+        @Res() fail: TsoaResponse<400, BasicResponseDto>,
+        @Res() success: TsoaResponse<200, BasicResponseDto>
+    ): Promise<void> {
+        try {
+            const livro = await this.livroService.listarLivrosPorNome(titulo);
+            return success(200, new BasicResponseDto("Que maravilha! Temos esse livro!", livro));
+        } catch (error: any) {
+            return fail(400, new BasicResponseDto(error.message, undefined));
+        }
+    }
+
 
 
     // @Get("categoria/all")

@@ -59,7 +59,6 @@ export class LivroRepository{
     async filterAllLivros() :Promise<Livro[]>{
         const query = "SELECT * FROM livraria.livro" ;
 
-
         try {
             const resultado = await executarComandoSQL(query, []);
             return new Promise<Livro[]>((resolve)=>{
@@ -71,38 +70,13 @@ export class LivroRepository{
         }
     }
 
+    async buscarLivrosPorNome(titulo: string): Promise<Livro[]> {
+        const query = "SELECT * FROM livraria.livro WHERE titulo = ?";
+        const resultado = await executarComandoSQL(query, [titulo]);
+        return resultado;
+    }
 
-    // FUNÇÃO DE APOIO
+
     
-
-    // async updateCategoria(categoria:Categoria) :Promise<Categoria>{
-    //     const query = "UPDATE livraria.categoria set name = ? WHERE id = ?;" ;
-
-    //     try {
-    //         const resultado = await executarComandoSQL(query, [categoria.name, categoria.id]);
-    //         console.log('Produto atualizado com sucesso, ID: ', resultado);
-    //         return new Promise<Categoria>((resolve)=>{
-    //             resolve(categoria);
-    //         })
-    //     } catch (err:any) {
-    //         console.error(`Erro ao atualizar o produto de ID ${categoria.id} gerando o erro: ${err}`);
-    //         throw err;
-    //     }
-    // }
-
-    // async filterAllCategoria() :Promise<Categoria[]>{
-    //     const query = "SELECT * FROM livraria.categoria" ;
-
-    //     try {
-    //         const resultado = await executarComandoSQL(query, []);
-    //         return new Promise<Categoria[]>((resolve)=>{
-    //             resolve(resultado);
-    //         })
-    //     } catch (err:any) {
-    //         console.error(`Falha ao listar as categorias, gerando o erro: ${err}`);
-    //         throw err;
-    //     }
-    // }
-
     
 }

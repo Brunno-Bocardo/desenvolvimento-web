@@ -53,6 +53,20 @@ export class LivroController extends Controller {
         }
     }
 
+    @Get("livro/all")
+    async listarTodosLivros (
+        @Res() fail: TsoaResponse<400, BasicResponseDto>,
+        @Res() sucess: TsoaResponse<201, BasicResponseDto>
+    ): Promise < | void> {
+        try {
+            const livro = await this.livroService.listarAllLivros()
+            return sucess(201, new BasicResponseDto("Livros listados com sucesso!", livro))
+        } catch (error: any) {
+            return fail(400, new BasicResponseDto(error.message, undefined))
+        }
+    }
+
+
 
     // @Get("categoria/all")
     // async listarTodosProdutos (

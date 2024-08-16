@@ -56,6 +56,22 @@ export class LivroRepository{
         }
     }
 
+    async filterAllLivros() :Promise<Livro[]>{
+        const query = "SELECT * FROM livraria.livro" ;
+
+
+        try {
+            const resultado = await executarComandoSQL(query, []);
+            return new Promise<Livro[]>((resolve)=>{
+                resolve(resultado);
+            })
+        } catch (err:any) {
+            console.error(`Falha ao listar os livros, gerando o erro: ${err}`);
+            throw err;
+        }
+    }
+
+
     // FUNÇÃO DE APOIO
     
 

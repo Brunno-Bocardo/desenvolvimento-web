@@ -38,6 +38,13 @@ export class LivroService{
         }
     }
 
+    async listarAllLivros(): Promise<Livro[]> {
+        const livro =  await this.livroRepository.filterAllLivros();
+        console.log("Service - Filtrar Todos", livro);
+        return livro;
+    }
+
+
 
     // async listarAllCategorias(): Promise<Categoria[]> {
     //     const categoria =  await this.categoriaRepository.filterAllCategoria();

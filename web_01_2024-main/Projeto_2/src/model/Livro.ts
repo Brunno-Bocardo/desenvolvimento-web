@@ -18,7 +18,6 @@ export class Livro {
         if (!Livro.instance) {
             Livro.instance = new Livro(id, titulo, autor, categoriaID);
         } else {
-            // Atualiza a instância existente com novos valores, se necessário
             Livro.instance.id = id || Livro.instance.id;
             Livro.instance.titulo = titulo || Livro.instance.titulo;
             Livro.instance.autor = autor || Livro.instance.autor;

@@ -8,7 +8,7 @@ export class CategoriaService{
     async cadastrarCategoria(categoriaData: any): Promise<Categoria> {
         const { name } = categoriaData;
         
-        const categoria = new Categoria(undefined, name)
+        const categoria = Categoria.getInstance(undefined, name)
 
         const existe = await this.categoriaRepository.buscaCategoria(categoria)
         if (existe.length > 0) {
@@ -24,7 +24,7 @@ export class CategoriaService{
     async atualizarCategoria(categoriaData: any): Promise<Categoria> {
         const { id, name } = categoriaData;
 
-        const categoria = new Categoria(id, name)
+        const categoria = Categoria.getInstance(id, name)
 
         const existe = await this.categoriaRepository.buscaCategoriaID(categoria.id)
         if (existe) {
@@ -42,25 +42,5 @@ export class CategoriaService{
         console.log("Service - Filtrar Todos", categoria);
         return categoria;
     }
-
-    // async deletarProduto(produtoData: any): Promise<Product> {
-    //     const { id, name, price, expirationDate } = produtoData;
-
-    //     const produto = new Product(id, name, price, expirationDate)
-
-    //     await this.productRepository.deleteProduct(produto);
-    //     console.log("Service - Delete ", produto);
-    //     return produto;
-    // }
-
-    // async filtrarProduto(produtoData: any): Promise<Product> {
-    //     const idNumber = parseInt(produtoData, 10);
-
-    //     const produto =  await this.productRepository.filterProduct(idNumber);
-    //     console.log("Service - Filtrar", produto);
-    //     return produto;
-    // }
-
-    
 
 }

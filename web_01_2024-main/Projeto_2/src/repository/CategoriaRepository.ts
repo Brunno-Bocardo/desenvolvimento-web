@@ -1,7 +1,6 @@
 import { executarComandoSQL } from "../database/mysql";
 import { Categoria } from "../model/entity/Categoria";
 
-
 export class CategoriaRepository{
 
     constructor(){
@@ -23,6 +22,7 @@ export class CategoriaRepository{
         }
     }
 
+
     async insertCategoria(categoria:Categoria) :Promise<Categoria>{
         const query = "INSERT INTO livraria.categoria (name) VALUES (?)" ;
 
@@ -39,6 +39,7 @@ export class CategoriaRepository{
         }
     }
 
+
     async updateCategoria(categoria:Categoria) :Promise<Categoria>{
         const query = "UPDATE livraria.categoria set name = ? WHERE id = ?;" ;
 
@@ -54,6 +55,7 @@ export class CategoriaRepository{
         }
     }
 
+
     async filterAllCategoria() :Promise<Categoria[]>{
         const query = "SELECT * FROM livraria.categoria" ;
 
@@ -68,6 +70,7 @@ export class CategoriaRepository{
         }
     }
 
+
     async buscaCategoria(categoria: Categoria): Promise<Categoria[]> {
         const query = "SELECT * FROM livraria.categoria WHERE name = ?";
         try {
@@ -79,6 +82,7 @@ export class CategoriaRepository{
         }
     }
 
+
     async buscaCategoriaID(categoriaID: number): Promise<boolean> {
         const query = "SELECT COUNT(*) as count FROM livraria.categoria WHERE id = ?";
         
@@ -89,6 +93,39 @@ export class CategoriaRepository{
             console.error(`Falha ao buscar a categoria, gerando o erro: ${err}`);
             throw err;
         }
+    }
+
+
+    async buscaCategoriaIDPlusName(categoriaID:number, name:string): Promise<boolean> {
+        const query = "SELECT COUNT(*) as count FROM livraria.categoria WHERE id = ? AND name = ?";
+        
+        try {
+            const resultado = await executarComandoSQL(query, [categoriaID, name]);
+            return resultado[0].count > 0;
+        } catch (err: any) {
+            console.error(`Falha ao buscar a categoria, gerando o erro: ${err}`);
+            throw err;
+        }
+    }
+
+
+    async verificarUsoCategoria(categoriaID: number): Promise<boolean> {
+        const query = `
+            SELECT COUNT(*) as total 
+            FROM livraria.livro 
+            WHERE categoriaID = ?
+        `;
+        const [resultado] = await executarComandoSQL(query, [categoriaID]);
+        return resultado.total > 0;
+    }
+
+
+    async deletarCategoria(categoriaID: number): Promise<void> {
+        const query = `
+            DELETE FROM livraria.categoria 
+            WHERE id = ?
+        `;
+        await executarComandoSQL(query, [categoriaID]);
     }
        
 }

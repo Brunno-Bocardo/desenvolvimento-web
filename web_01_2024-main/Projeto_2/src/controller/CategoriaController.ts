@@ -62,52 +62,25 @@ export class CategoriaController extends Controller {
             return fail(400, new BasicResponseDto(error.message, undefined))
         }
     }
+
+
+    /** 
+        @example dto {
+            "id": 1,
+            "name": "Mangá"
+        }
+    */
+    @Delete("categoria")
+    async deletarCategoria(
+        @Body() dto: CategoriaUpdateRequestDto,
+        @Res() fail: TsoaResponse<400, { message: string }>,
+        @Res() success: TsoaResponse<200, { message: string }>
+    ): Promise<void> {
+        try {
+            await this.categoriaService.deletarCategoria(dto);
+            return success(200, { message: "Categoria deletada com sucesso." });
+        } catch (error: any) {
+            return fail(400, { message: error.message });
+        }
+    }
 }
-
-    
-    
-
-    
-    // /** 
-    //     @example dto {
-    //         "name": "Mangas",
-    //         "price": 10,
-    //         "expirationDate": "01/01/2025"
-    //     }
-    // */
-    // @Delete() 
-    // async deletarProduto (
-    //     @Body() dto:ProductRequestDto,
-    //     @Res() fail: TsoaResponse<400, BasicResponseDto>,
-    //     @Res() sucess: TsoaResponse<201, BasicResponseDto>
-    // ): Promise < | void> {
-    //     try {
-    //         const product = await this.productService.deletarProduto(dto)
-    //         return sucess(201, new BasicResponseDto("Produto deletado com sucesso!", product))
-    //     } catch (error: any) {
-    //         return fail (400, new BasicResponseDto(error.message, undefined))
-    //     }
-    // }
-    
-
-    // @Get()
-    // async filtrarProduto (
-    //     @Query() id:number,
-    //     @Res() fail: TsoaResponse<400, BasicResponseDto>,
-    //     @Res() sucess: TsoaResponse<201, BasicResponseDto>
-    // ): Promise < | void> {
-    //     try {
-    //         const product = await this.productService.filtrarProduto(id)
-    //         return sucess(201, new BasicResponseDto("Produto encontrado com sucesso!", product))
-    //     } catch (error: any) {
-    //         return fail (400, new BasicResponseDto(error.message, undefined))
-    //     }
-    // }
-    
-    
-    
-
-
-
-
- 

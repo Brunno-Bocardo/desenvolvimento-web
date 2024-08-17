@@ -6,7 +6,7 @@
   "scripts": {
     "start": "tsoa spec-and-routes && tsc && node dist/app.js",
     "test": "echo \"Error: no test specified\" && exit 1",
-    "build": ""
+    "build": "tsoa spec-and-routes && tsc"
   },
   "keywords": [],
   "author": "",

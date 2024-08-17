@@ -43,4 +43,22 @@ export class CategoriaService{
         return categoria;
     }
 
+
+    async deletarCategoria(categoriaData: any): Promise<void> {
+        const { id, name } = categoriaData
+
+        const existe = await this.categoriaRepository.buscaCategoriaIDPlusName(id, name)
+        console.log(existe)
+        if (!existe) {
+            throw new Error('Categoria informada não existe.');
+        }
+
+        const categoriaEmUso = await this.categoriaRepository.verificarUsoCategoria(id);
+        if (categoriaEmUso) {
+            throw new Error('Não é possível deletar a categoria, pois ela está sendo usada por algum livro.');
+        }
+
+        // Se não estiver em uso, deletar a categoria
+        await this.categoriaRepository.deletarCategoria(id);
+    }
 }

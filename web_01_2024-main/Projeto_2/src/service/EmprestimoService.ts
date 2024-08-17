@@ -35,4 +35,9 @@ export class EmprestimoService {
         const emprestimo = Emprestimo.getInstance(undefined, livroID, usuarioID, dataEmprestimo, dataDevolucao);
         return this.emprestimoRepository.salvarEmprestimo(emprestimo);
     }
+
+
+    async buscarTodosEmprestimos(): Promise<Emprestimo[]> {
+        return this.emprestimoRepository.buscarTodosEmprestimos();
+    }
 }

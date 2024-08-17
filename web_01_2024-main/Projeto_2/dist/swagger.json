@@ -915,6 +915,52 @@
 				}
 			}
 		},
+		"/livraria/emprestimos": {
+			"get": {
+				"operationId": "ObterTodosEmprestimos",
+				"responses": {
+					"200": {
+						"description": "",
+						"content": {
+							"application/json": {
+								"schema": {
+									"items": {
+										"$ref": "#/components/schemas/EmprestimoRequestDto"
+									},
+									"type": "array"
+								}
+							}
+						}
+					},
+					"204": {
+						"description": "No content"
+					},
+					"400": {
+						"description": "",
+						"content": {
+							"application/json": {
+								"schema": {
+									"properties": {
+										"message": {
+											"type": "string"
+										}
+									},
+									"required": [
+										"message"
+									],
+									"type": "object"
+								}
+							}
+						}
+					}
+				},
+				"tags": [
+					"Empréstimo"
+				],
+				"security": [],
+				"parameters": []
+			}
+		},
 		"/livraria/categoria": {
 			"post": {
 				"operationId": "CadastrarCategoria",

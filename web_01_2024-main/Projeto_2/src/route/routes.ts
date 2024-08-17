@@ -576,6 +576,37 @@ export function RegisterRoutes(app: Router) {
             }
         });
         // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
+        app.get('/livraria/emprestimos',
+            ...(fetchMiddlewares<RequestHandler>(EmprestimoController)),
+            ...(fetchMiddlewares<RequestHandler>(EmprestimoController.prototype.obterTodosEmprestimos)),
+
+            async function EmprestimoController_obterTodosEmprestimos(request: ExRequest, response: ExResponse, next: any) {
+            const args: Record<string, TsoaRoute.ParameterSchema> = {
+                    fail: {"in":"res","name":"400","required":true,"dataType":"nestedObjectLiteral","nestedProperties":{"message":{"dataType":"string","required":true}}},
+                    success: {"in":"res","name":"200","required":true,"dataType":"array","array":{"dataType":"refObject","ref":"EmprestimoRequestDto"}},
+            };
+
+            // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
+
+            let validatedArgs: any[] = [];
+            try {
+                validatedArgs = templateService.getValidatedArgs({ args, request, response });
+
+                const controller = new EmprestimoController();
+
+              await templateService.apiHandler({
+                methodName: 'obterTodosEmprestimos',
+                controller,
+                response,
+                next,
+                validatedArgs,
+                successStatus: undefined,
+              });
+            } catch (err) {
+                return next(err);
+            }
+        });
+        // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
         app.post('/livraria/categoria',
             ...(fetchMiddlewares<RequestHandler>(CategoriaController)),
             ...(fetchMiddlewares<RequestHandler>(CategoriaController.prototype.cadastrarCategoria)),

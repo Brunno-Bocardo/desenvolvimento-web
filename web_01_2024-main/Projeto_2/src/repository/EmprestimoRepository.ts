@@ -60,4 +60,20 @@ export class EmprestimoRepository {
         const [resultado] = await executarComandoSQL(query, [usuarioID]);
         return resultado.total > 0; // Retorna true se o usuário tiver empréstimos ativos
     }
+
+
+    async buscarTodosEmprestimos(): Promise<Emprestimo[]> {
+        const query = "SELECT * FROM livraria.emprestimo";
+        const resultados = await executarComandoSQL(query, []);
+        
+        return resultados.map((resultado: any) => {
+            return Emprestimo.getInstance(
+                resultado.id,
+                resultado.livroID,
+                resultado.usuarioID,
+                new Date(resultado.dataEmprestimo),
+                new Date(resultado.dataDevolucao)
+            );
+        });
+    }
 }

@@ -1,9 +1,11 @@
 import { Pessoa } from "../model/entity/Pessoa";
 import { PessoaRepository } from "../repository/PessoaRepository";
+import { UsuarioRepository } from "../repository/UsuarioRepository";
 
 export class PessoaService {
 
     pessoaRepository: PessoaRepository = new PessoaRepository();
+    usuarioRepository: UsuarioRepository = new UsuarioRepository();
 
     async cadastrarPessoa(pessoaData: any): Promise<Pessoa> {
         const { name, email } = pessoaData;
@@ -35,5 +37,17 @@ export class PessoaService {
         }
         console.log("opa")
         return pessoa;
+    }
+
+
+    async deletarPessoa(pessoaData: any): Promise<void> {
+        const { id, email, name } = pessoaData
+
+        const associadaAoUsuario = await this.usuarioRepository.buscarUsuarioPorPessoaID(id);
+        if (associadaAoUsuario) {
+            throw new Error('Não é possível deletar a pessoa, pois ela está associada a um usuário.');
+        }
+
+        await this.pessoaRepository.deletarPessoa(id, email, name);
     }
 }

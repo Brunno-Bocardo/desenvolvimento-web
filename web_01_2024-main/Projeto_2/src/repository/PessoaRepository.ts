@@ -108,5 +108,13 @@ export class PessoaRepository {
             throw err;
         }
     }
-    
+
+
+    async deletarPessoa(id:number, email:string, name:string): Promise<void> {
+        const query = `
+            DELETE FROM livraria.pessoa 
+            WHERE id = ? AND email = ? AND name = ?;
+        `;
+        await executarComandoSQL(query, [id, email, name]);
+    }
 }

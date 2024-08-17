@@ -3,7 +3,7 @@ export class Pessoa {
 
     id: number;
     name: string;
-    email: string;
+    email: string
 
     private constructor(id?: number, name?: string, email?: string) {
         this.id = id || 0;

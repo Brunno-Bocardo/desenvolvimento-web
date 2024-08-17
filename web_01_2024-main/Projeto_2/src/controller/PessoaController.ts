@@ -1,5 +1,5 @@
 import { PessoaService } from "../service/PessoaService";
-import { Controller, Route, Tags, Body, Query, Res, Post, Put, Get, TsoaResponse } from "tsoa";
+import { Controller, Route, Tags, Body, Query, Res, Post, Put, Get, Delete, TsoaResponse } from "tsoa";
 import { PessoaRequestDto, PessoaAllRequestDto } from "../model/dto/PessoaRequestDto";
 import { BasicResponseDto } from "../model/dto/BasicResponseDto";
 
@@ -65,6 +65,28 @@ export class PessoaController extends Controller {
             return success(200, new BasicResponseDto("Pessoa encontrada com sucesso!", pessoa));
         } catch (error: any) {
             return fail(400, new BasicResponseDto(error.message, undefined));
+        }
+    }
+
+
+    /** 
+        @example dto {
+            "id": 1,
+            "name": "Satoru Gojo",
+            "email": "foi.de.f@texto.com"
+        }
+    */ 
+    @Delete("pessoa")
+    async deletarPessoa(
+        @Body() dto: PessoaAllRequestDto,
+        @Res() fail: TsoaResponse<400, { message: string }>,
+        @Res() success: TsoaResponse<200, { message: string }>
+    ): Promise<void> {
+        try {
+            await this.pessoaService.deletarPessoa(dto);
+            return success(200, { message: "Pessoa deletada com sucesso." });
+        } catch (error: any) {
+            return fail(400, { message: error.message });
         }
     }
 }

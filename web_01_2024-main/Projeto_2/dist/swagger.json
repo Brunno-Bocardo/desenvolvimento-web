@@ -139,6 +139,24 @@
 				"type": "object",
 				"additionalProperties": false
 			},
+			"EmprestimoRequestDto": {
+				"properties": {
+					"livroID": {
+						"type": "number",
+						"format": "double"
+					},
+					"usuarioID": {
+						"type": "number",
+						"format": "double"
+					}
+				},
+				"required": [
+					"livroID",
+					"usuarioID"
+				],
+				"type": "object",
+				"additionalProperties": false
+			},
 			"CategoriaRequestDto": {
 				"properties": {
 					"name": {
@@ -654,6 +672,55 @@
 						}
 					}
 				]
+			}
+		},
+		"/livraria/emprestimo": {
+			"post": {
+				"operationId": "RegistrarEmprestimo",
+				"responses": {
+					"201": {
+						"description": "",
+						"content": {
+							"application/json": {
+								"schema": {
+									"$ref": "#/components/schemas/BasicResponseDto"
+								}
+							}
+						}
+					},
+					"204": {
+						"description": "No content"
+					},
+					"400": {
+						"description": "",
+						"content": {
+							"application/json": {
+								"schema": {
+									"$ref": "#/components/schemas/BasicResponseDto"
+								}
+							}
+						}
+					}
+				},
+				"tags": [
+					"Empréstimo"
+				],
+				"security": [],
+				"parameters": [],
+				"requestBody": {
+					"required": true,
+					"content": {
+						"application/json": {
+							"schema": {
+								"$ref": "#/components/schemas/EmprestimoRequestDto"
+							},
+							"example": {
+								"livroID": 1,
+								"usuarioID": 1
+							}
+						}
+					}
+				}
 			}
 		},
 		"/livraria/categoria": {

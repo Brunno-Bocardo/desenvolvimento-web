@@ -1,30 +1,40 @@
 import { stringParaData, verificaFormatoData } from "../util/DataUtil";
 
-export class Emprestimo{
+export class Emprestimo {
     id: number;
     livroID: number;
     usuarioID: number;
     dataEmprestimo: Date;
     dataDevolucao: Date;
 
-    constructor(id?:number, livroID?:number, usuarioID?:number, dataEmprestimo?:string, dataDevolucao?:string,){
-        this.validatesInformation(dataEmprestimo, dataDevolucao);
+    private static instance: Emprestimo;
+
+    constructor(id?: number, livroID?: number, usuarioID?: number, dataEmprestimo?: Date, dataDevolucao?: Date) {
         this.id = id || 0;
         this.livroID = livroID || 0;
         this.usuarioID = usuarioID || 0;
-        this.dataEmprestimo = stringParaData(dataEmprestimo || '');
-        this.dataDevolucao = stringParaData(dataDevolucao || '');
+        this.dataEmprestimo = dataEmprestimo || new Date();
+        this.dataDevolucao = this.calculaDataDevolucao(this.dataEmprestimo);
     }
+    
 
-    private validatesInformation(dataEmprestimo:any, dataDevolucao:any){
-        let error ='';
-
-        if(!verificaFormatoData(dataEmprestimo || dataDevolucao)){
-            error += ("A data deve possuir o formato: dd/MM/yyyy");
+    public static getInstance(id?: number, livroID?: number, usuarioID?: number, dataEmprestimo?: Date, dataDevolucao?: Date): Emprestimo {
+        if (!Emprestimo.instance) {
+            Emprestimo.instance = new Emprestimo(id, livroID, usuarioID, dataEmprestimo, dataDevolucao);
+        } else {
+            if (id !== undefined) Emprestimo.instance.id = id;
+            if (usuarioID !== undefined) Emprestimo.instance.usuarioID = usuarioID;
+            if (livroID !== undefined) Emprestimo.instance.livroID = livroID;
+            if (dataEmprestimo !== undefined) Emprestimo.instance.dataEmprestimo = dataEmprestimo;
+            if (dataDevolucao !== undefined) Emprestimo.instance.dataDevolucao = dataDevolucao;
         }
+        return Emprestimo.instance;
+    }    
 
-        if(error != ''){
-            throw new Error(error);
-        }
+    
+    private calculaDataDevolucao(dataEmprestimo: Date): Date {
+        const data = new Date(dataEmprestimo);
+        data.setDate(data.getDate() + 7);
+        return data;
     }
 }

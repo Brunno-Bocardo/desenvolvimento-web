@@ -13,7 +13,7 @@ export class UsuarioRepository {
             id INT AUTO_INCREMENT PRIMARY KEY,
             pessoaID INT NOT NULL,
             senha VARCHAR(255) NOT NULL
-        )`;
+        );`;
 
         try {
             const resultado = await executarComandoSQL(query, []);
@@ -53,10 +53,10 @@ export class UsuarioRepository {
 
     async buscarUsuarioPorEmail(email: string): Promise<Usuario | null> {
         const query = `
-        SELECT u.*, p.id AS pessoaID
-        FROM livraria.usuario u
-        JOIN livraria.pessoa p ON u.pessoaID = p.id
-        WHERE p.email = ?
+            SELECT u.*, p.id AS pessoaID
+            FROM livraria.usuario u
+            JOIN livraria.pessoa p ON u.pessoaID = p.id
+            WHERE p.email = ?
         `;
 
         try {

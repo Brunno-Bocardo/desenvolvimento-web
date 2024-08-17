@@ -85,4 +85,11 @@ export class LivroRepository{
         }
     }
 
+
+    async buscarLivroPorId(livroID: number): Promise<boolean> {
+        const query = "SELECT COUNT(*) as total FROM livraria.livro WHERE id = ?";
+        const [resultado] = await executarComandoSQL(query, [livroID]);
+        return resultado.total > 0;
+    }
+
 }

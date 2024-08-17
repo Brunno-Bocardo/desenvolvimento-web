@@ -15,6 +15,10 @@ export class Pessoa {
     public static getInstance(id?: number, name?: string, email?: string): Pessoa {
         if (!Pessoa.instance) {
             Pessoa.instance = new Pessoa(id, name, email);
+        } else {
+            Pessoa.instance.id = id || Pessoa.instance.id;
+            Pessoa.instance.name = name || Pessoa.instance.name
+            Pessoa.instance.email = email || Pessoa.instance.email; 
         }
         return Pessoa.instance;
     }

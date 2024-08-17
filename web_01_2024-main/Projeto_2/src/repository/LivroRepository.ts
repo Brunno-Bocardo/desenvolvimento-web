@@ -24,6 +24,7 @@ export class LivroRepository{
         }
     }
 
+
     async insertLivro(livro:Livro) :Promise<Livro>{
         const query = "INSERT INTO livraria.livro (titulo, autor, categoriaID) VALUES (?, ?, ?)" ;
 
@@ -56,6 +57,7 @@ export class LivroRepository{
         }
     }
 
+
     async filterAllLivros() :Promise<Livro[]>{
         const query = "SELECT * FROM livraria.livro" ;
 
@@ -70,13 +72,17 @@ export class LivroRepository{
         }
     }
 
+
     async buscarLivrosPorNome(titulo: string): Promise<Livro[]> {
         const query = "SELECT * FROM livraria.livro WHERE titulo = ?";
-        const resultado = await executarComandoSQL(query, [titulo]);
-        return resultado;
+        
+        try {
+            const resultado = await executarComandoSQL(query, [titulo]);
+            return resultado;
+        } catch (err:any) {
+            console.error(`Falha ao buscar livro: ${err}`);
+            throw err;
+        }
     }
 
-
-    
-    
 }

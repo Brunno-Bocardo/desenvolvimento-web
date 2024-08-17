@@ -53,7 +53,6 @@ export class LivroService{
         if (livros.length === 0) {
             throw new Error(`Nenhum livro com título '${titulo}' foi encontrado.`);
         }
-
         return livros;
     }
 

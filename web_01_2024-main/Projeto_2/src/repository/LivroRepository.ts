@@ -92,4 +92,13 @@ export class LivroRepository{
         return resultado.total > 0;
     }
 
+
+    async deletarLivro(id:number, titulo:string, autor:string, categoriaID:number): Promise<any> {
+        const query = `
+            DELETE FROM livraria.livro 
+            WHERE id = ? AND titulo = ? AND autor = ? AND categoriaID = ?;
+        `;
+        const result = await executarComandoSQL(query, [id, titulo, autor, categoriaID]);
+        return result;
+    }
 }

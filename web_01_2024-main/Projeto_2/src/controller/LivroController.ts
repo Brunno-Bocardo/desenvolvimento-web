@@ -80,17 +80,25 @@ export class LivroController extends Controller {
     }
 
 
-
-    // @Get("categoria/all")
-    // async listarTodosProdutos (
-    //     @Res() fail: TsoaResponse<400, BasicResponseDto>,
-    //     @Res() sucess: TsoaResponse<201, BasicResponseDto>
-    // ): Promise < | void> {
-    //     try {
-    //         const product = await this.categoriaService.listarAllLivros()
-    //         return sucess(201, new BasicResponseDto("Livros listadas com sucesso!", product))
-    //     } catch (error: any) {
-    //         return fail(400, new BasicResponseDto(error.message, undefined))
-    //     }
-    // }
+    /** 
+        @example dto {
+            "id": 1,
+            "titulo": "One Piece",
+            "autor": "Oda",
+            "categoriaID": 2
+        }
+    */
+    @Delete("livro")
+    async deletarLivro(
+        @Body() dto: LivroAllRequestDto,
+        @Res() fail: TsoaResponse<400, { message: string }>,
+        @Res() success: TsoaResponse<200, { message: string }>
+    ): Promise<void> {
+        try {
+            await this.livroService.deletarLivro(dto);
+            return success(200, { message: "Livro deletado com sucesso." });
+        } catch (error: any) {
+            return fail(400, { message: error.message });
+        }
+    }
 }

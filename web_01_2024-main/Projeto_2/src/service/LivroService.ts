@@ -1,11 +1,13 @@
 import { Livro } from "../model/entity/Livro";
 import { LivroRepository } from "../repository/LivroRepository";
 import { CategoriaRepository } from "../repository/CategoriaRepository";
+import { EmprestimoRepository } from "../repository/EmprestimoRepository";
 
 export class LivroService{
 
     livroRepository: LivroRepository = new LivroRepository();
     categoriaRepository: CategoriaRepository = new CategoriaRepository();
+    emprestimoRepository: EmprestimoRepository = new EmprestimoRepository();
 
     async cadastrarLivro(livroData: any): Promise<Livro> {
         const { titulo, autor, categoriaID } = livroData;
@@ -57,5 +59,17 @@ export class LivroService{
     }
 
 
+    async deletarLivro(livroData: any): Promise<void> {
+        const { id, titulo, autor, categoriaID } = livroData
 
+        const livroEmprestado = await this.emprestimoRepository.verificarEmprestimoAtivo(id);
+        if (livroEmprestado) {
+            throw new Error('Não é possível deletar o livro, pois ele está atualmente emprestado.');
+        }
+
+        const deletado = await this.livroRepository.deletarLivro(id, titulo, autor, categoriaID);
+        if (!deletado) {
+            throw new Error('Livro não existe');
+        }
+    }
 }

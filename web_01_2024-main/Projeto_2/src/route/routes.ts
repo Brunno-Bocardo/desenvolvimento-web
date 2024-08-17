@@ -512,6 +512,38 @@ export function RegisterRoutes(app: Router) {
             }
         });
         // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
+        app.delete('/livraria/livro',
+            ...(fetchMiddlewares<RequestHandler>(LivroController)),
+            ...(fetchMiddlewares<RequestHandler>(LivroController.prototype.deletarLivro)),
+
+            async function LivroController_deletarLivro(request: ExRequest, response: ExResponse, next: any) {
+            const args: Record<string, TsoaRoute.ParameterSchema> = {
+                    dto: {"in":"body","name":"dto","required":true,"ref":"LivroAllRequestDto"},
+                    fail: {"in":"res","name":"400","required":true,"dataType":"nestedObjectLiteral","nestedProperties":{"message":{"dataType":"string","required":true}}},
+                    success: {"in":"res","name":"200","required":true,"dataType":"nestedObjectLiteral","nestedProperties":{"message":{"dataType":"string","required":true}}},
+            };
+
+            // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
+
+            let validatedArgs: any[] = [];
+            try {
+                validatedArgs = templateService.getValidatedArgs({ args, request, response });
+
+                const controller = new LivroController();
+
+              await templateService.apiHandler({
+                methodName: 'deletarLivro',
+                controller,
+                response,
+                next,
+                validatedArgs,
+                successStatus: undefined,
+              });
+            } catch (err) {
+                return next(err);
+            }
+        });
+        // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
         app.post('/livraria/emprestimo',
             ...(fetchMiddlewares<RequestHandler>(EmprestimoController)),
             ...(fetchMiddlewares<RequestHandler>(EmprestimoController.prototype.registrarEmprestimo)),

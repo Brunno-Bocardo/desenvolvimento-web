@@ -102,4 +102,14 @@ export class UsuarioRepository {
         }
     }
     
+
+    async deletarUsuario(id:number, senha:string): Promise<any> {
+        console.log(id + " " + senha)
+        const query = `
+            DELETE FROM livraria.usuario 
+            WHERE id = ? AND senha = ?;
+        `;
+        const resultado = await executarComandoSQL(query, [id, senha]);
+        return resultado;
+    }
 }

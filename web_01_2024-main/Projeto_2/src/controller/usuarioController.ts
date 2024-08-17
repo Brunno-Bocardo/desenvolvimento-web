@@ -1,5 +1,5 @@
 import { UsuarioService } from "../service/UsuarioService";
-import { Controller, Route, Tags, Body, Query, Res, Post, Put, Get, TsoaResponse } from "tsoa";
+import { Controller, Route, Tags, Body, Query, Res, Post, Put, Get, Delete, TsoaResponse } from "tsoa";
 import { UsuarioRequestDto, UsuarioAllRequestDto } from "../model/dto/UsuarioRequestDto"
 import { BasicResponseDto } from "../model/dto/BasicResponseDto";
 
@@ -67,4 +67,24 @@ export class UsuarioController extends Controller {
         }
     }
 
+
+    /**
+       @example dto {
+            "id": 1,
+            "senha": "senhaSegura2?"
+       }
+    */
+    @Delete("usuario")
+    async deletarUsuario(
+        @Body() dto: UsuarioAllRequestDto,
+        @Res() fail: TsoaResponse<400, { message: string }>,
+        @Res() success: TsoaResponse<200, { message: string }>
+    ): Promise<void> {
+        try {
+            await this.usuarioService.deletarUsuario(dto);
+            return success(200, { message: "Usuário deletado com sucesso." });
+        } catch (error: any) {
+            return fail(400, { message: error.message });
+        }
+    }
 }

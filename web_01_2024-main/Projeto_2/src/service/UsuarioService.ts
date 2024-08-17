@@ -1,9 +1,10 @@
 import { Usuario } from "../model/entity/Usuario";
 import { UsuarioRepository } from "../repository/UsuarioRepository";
 import { PessoaRepository } from "../repository/PessoaRepository"; 
+import { EmprestimoRepository } from "../repository/EmprestimoRepository";
 
 export class UsuarioService {
-
+    emprestimoRepository: EmprestimoRepository = new EmprestimoRepository();
     usuarioRepository: UsuarioRepository = new UsuarioRepository();
     pessoaRepository: PessoaRepository = new PessoaRepository(); 
 
@@ -33,7 +34,6 @@ export class UsuarioService {
     }
     
 
-
     async buscarUsuarioPorEmail(email: string): Promise<Usuario | null> {
         const pessoa = await this.pessoaRepository.buscarPessoaPorEmail(email);
         if (!pessoa) {
@@ -44,4 +44,18 @@ export class UsuarioService {
         return usuario;
     }
     
+
+    async deletarUsuario(usuarioData: any): Promise<void> {
+        const { id, senha } = usuarioData
+
+        const temEmprestimosAtivos = await this.emprestimoRepository.verificarEmprestimosAtivos(id);
+        if (temEmprestimosAtivos) {
+            throw new Error('Não é possível deletar o usuário, pois ele possui empréstimos ativos.');
+        }
+
+        const resultado = await this.usuarioRepository.deletarUsuario(id, senha);
+        if (resultado.affectedRows === 0) {
+            throw new Error('Usuário não encontrado ou senha incorreta.');
+        }
+    }
 }

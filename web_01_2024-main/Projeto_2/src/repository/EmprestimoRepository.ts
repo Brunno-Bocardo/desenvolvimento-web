@@ -29,8 +29,7 @@ export class EmprestimoRepository {
         const query = `
             SELECT COUNT(*) as total 
             FROM livraria.emprestimo 
-            WHERE livroID = ? 
-              AND (dataDevolucao IS NULL OR dataDevolucao >= CURDATE())
+            WHERE livroID = ? AND (dataDevolucao IS NULL OR dataDevolucao >= CURDATE())
         `;
         const [resultado] = await executarComandoSQL(query, [livroID]);
     
@@ -49,5 +48,17 @@ export class EmprestimoRepository {
 
         emprestimo.id = resultado.insertId;
         return emprestimo;
+    }
+
+
+    async verificarEmprestimosAtivos(usuarioID: number): Promise<boolean> {
+        const query = `
+            SELECT COUNT(*) as total 
+            FROM livraria.emprestimo 
+            WHERE usuarioID = ? 
+              AND (dataDevolucao IS NULL OR dataDevolucao >= CURDATE())
+        `;
+        const [resultado] = await executarComandoSQL(query, [usuarioID]);
+        return resultado.total > 0; // Retorna true se o usuário tiver empréstimos ativos
     }
 }

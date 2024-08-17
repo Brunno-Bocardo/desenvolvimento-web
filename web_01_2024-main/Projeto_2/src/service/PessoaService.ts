@@ -8,7 +8,6 @@ export class PessoaService {
     async cadastrarPessoa(pessoaData: any): Promise<Pessoa> {
         const { name, email } = pessoaData;
     
-        // Verificar se a pessoa com o e-mail já existe
         const pessoaExiste = await this.pessoaRepository.buscarPessoaByEmail(email);
         if (pessoaExiste) {
             throw new Error('Já existe uma pessoa com este e-mail.');
@@ -29,11 +28,12 @@ export class PessoaService {
 
 
     async buscarPessoaPorEmail(email: string): Promise<Pessoa | null> {
-        // Busca a pessoa pelo e-mail no repositório
+        console.log("opa!")
         const pessoa = await this.pessoaRepository.buscarPessoaByEmail(email);
         if (!pessoa) {
             throw new Error('Pessoa não encontrada');
         }
+        console.log("opa")
         return pessoa;
     }
 }

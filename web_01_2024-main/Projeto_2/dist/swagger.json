@@ -7,18 +7,19 @@
 		"requestBodies": {},
 		"responses": {},
 		"schemas": {
-			"PessoaRequestDto": {
+			"UsuarioRequestDto": {
 				"properties": {
-					"name": {
-						"type": "string"
+					"pessoaID": {
+						"type": "number",
+						"format": "double"
 					},
-					"email": {
+					"senha": {
 						"type": "string"
 					}
 				},
 				"required": [
-					"name",
-					"email"
+					"pessoaID",
+					"senha"
 				],
 				"type": "object",
 				"additionalProperties": false
@@ -33,6 +34,39 @@
 				"required": [
 					"message",
 					"object"
+				],
+				"type": "object",
+				"additionalProperties": false
+			},
+			"UsuarioAllRequestDto": {
+				"properties": {
+					"id": {
+						"type": "number",
+						"format": "double"
+					},
+					"senha": {
+						"type": "string"
+					}
+				},
+				"required": [
+					"id",
+					"senha"
+				],
+				"type": "object",
+				"additionalProperties": false
+			},
+			"PessoaRequestDto": {
+				"properties": {
+					"name": {
+						"type": "string"
+					},
+					"email": {
+						"type": "string"
+					}
+				},
+				"required": [
+					"name",
+					"email"
 				],
 				"type": "object",
 				"additionalProperties": false
@@ -143,6 +177,146 @@
 		"description": "Documentação da API usando Swagger"
 	},
 	"paths": {
+		"/livraria/usuario": {
+			"post": {
+				"operationId": "CadastrarUsuario",
+				"responses": {
+					"201": {
+						"description": "",
+						"content": {
+							"application/json": {
+								"schema": {
+									"$ref": "#/components/schemas/BasicResponseDto"
+								}
+							}
+						}
+					},
+					"204": {
+						"description": "No content"
+					},
+					"400": {
+						"description": "",
+						"content": {
+							"application/json": {
+								"schema": {
+									"$ref": "#/components/schemas/BasicResponseDto"
+								}
+							}
+						}
+					}
+				},
+				"tags": [
+					"Usuário"
+				],
+				"security": [],
+				"parameters": [],
+				"requestBody": {
+					"required": true,
+					"content": {
+						"application/json": {
+							"schema": {
+								"$ref": "#/components/schemas/UsuarioRequestDto"
+							},
+							"example": {
+								"senha": "senhaSegura",
+								"pessoaID": "1"
+							}
+						}
+					}
+				}
+			},
+			"put": {
+				"operationId": "AtualizarUsuario",
+				"responses": {
+					"200": {
+						"description": "",
+						"content": {
+							"application/json": {
+								"schema": {
+									"$ref": "#/components/schemas/BasicResponseDto"
+								}
+							}
+						}
+					},
+					"204": {
+						"description": "No content"
+					},
+					"400": {
+						"description": "",
+						"content": {
+							"application/json": {
+								"schema": {
+									"$ref": "#/components/schemas/BasicResponseDto"
+								}
+							}
+						}
+					}
+				},
+				"tags": [
+					"Usuário"
+				],
+				"security": [],
+				"parameters": [],
+				"requestBody": {
+					"required": true,
+					"content": {
+						"application/json": {
+							"schema": {
+								"$ref": "#/components/schemas/UsuarioAllRequestDto"
+							},
+							"example": {
+								"id": 1,
+								"senha": "senhaSegura2?"
+							}
+						}
+					}
+				}
+			}
+		},
+		"/livraria/usuario/email": {
+			"get": {
+				"operationId": "BuscarUsuarioPorEmail",
+				"responses": {
+					"200": {
+						"description": "",
+						"content": {
+							"application/json": {
+								"schema": {
+									"$ref": "#/components/schemas/BasicResponseDto"
+								}
+							}
+						}
+					},
+					"204": {
+						"description": "No content"
+					},
+					"400": {
+						"description": "",
+						"content": {
+							"application/json": {
+								"schema": {
+									"$ref": "#/components/schemas/BasicResponseDto"
+								}
+							}
+						}
+					}
+				},
+				"tags": [
+					"Usuário"
+				],
+				"security": [],
+				"parameters": [
+					{
+						"in": "query",
+						"name": "email",
+						"required": true,
+						"schema": {
+							"type": "string"
+						}
+					}
+				]
+			}
+		},
 		"/livraria/pessoa": {
 			"post": {
 				"operationId": "CadastrarPessoa",
@@ -236,6 +410,7 @@
 								"$ref": "#/components/schemas/PessoaAllRequestDto"
 							},
 							"example": {
+								"id": 1,
 								"name": "Satoru Gojo",
 								"email": "foi.de.f@texto.com"
 							}

@@ -23,6 +23,7 @@ export class PessoaRepository {
         }
     }
 
+
     async insertPessoa(pessoa: Pessoa): Promise<Pessoa> {
         const query = "INSERT INTO livraria.pessoa (name, email) VALUES (?, ?)";
 
@@ -38,6 +39,7 @@ export class PessoaRepository {
             throw err;
         }
     }
+
 
     async updatePessoa(pessoa: Pessoa): Promise<Pessoa> {
         const query = "UPDATE livraria.pessoa SET name = ?, email = ? WHERE id = ?";
@@ -57,6 +59,7 @@ export class PessoaRepository {
         }
     }
 
+
     async buscarPessoaByEmail(email: string): Promise<Pessoa | null> {
         const query = "SELECT * FROM livraria.pessoa WHERE email = ?";
 
@@ -73,4 +76,37 @@ export class PessoaRepository {
         }
     }
 
+
+    async buscarPessoaPorID(id: number): Promise<Pessoa | null> {
+        const query = "SELECT * FROM livraria.pessoa WHERE id = ?";
+
+        try {
+            const resultados = await executarComandoSQL(query, [id]);
+            if (resultados.length > 0) {
+                const resultado = resultados[0];
+                return Pessoa.getInstance(resultado.id, resultado.name, resultado.email);
+            }
+            return null;
+        } catch (err) {
+            console.error('Erro ao buscar pessoa por ID:', err);
+            throw err;
+        }
+    }
+
+
+    async buscarPessoaPorEmail(email: string): Promise<Pessoa | null> {
+        const query = "SELECT * FROM livraria.pessoa WHERE email = ?";
+    
+        try {
+            const resultado = await executarComandoSQL(query, [email]);
+            if (resultado.length > 0) {
+                return resultado[0];
+            }
+            return null;
+        } catch (err) {
+            console.error(`Erro ao buscar pessoa por e-mail: ${err}`);
+            throw err;
+        }
+    }
+    
 }

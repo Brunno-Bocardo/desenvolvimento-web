@@ -1,4 +1,4 @@
-import { stringParaData, verificaFormatoData } from "../util/DataUtil";
+import { stringParaData, verificaFormatoData } from "../../util/DataUtil";
 
 export class Emprestimo {
     id: number;

@@ -1,4 +1,4 @@
-import { Emprestimo } from '../model/Emprestimo';
+import { Emprestimo } from '../model/entity/Emprestimo';
 import { UsuarioRepository } from "../repository/UsuarioRepository";
 import { LivroRepository } from "../repository/LivroRepository";
 import { EmprestimoRepository } from "../repository/EmprestimoRepository";

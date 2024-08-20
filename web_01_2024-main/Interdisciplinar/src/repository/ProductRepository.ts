@@ -1,5 +1,5 @@
 import { executarComandoSQL } from "../database/mysql";
-import { Product } from "../model/Tutor";
+import { Product } from "../model/entity/Tutor";
 
 
 export class ProductRepository{

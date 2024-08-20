@@ -1,5 +1,5 @@
 import { Product } from "../model/entity/Tutor";
-import { ProductRepository } from "../repository/ProductRepository";
+import { ProductRepository } from "../repository/PetRepository";
 
 export class ProductService{
 

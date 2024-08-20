@@ -1,32 +1,30 @@
-import { PetService } from "../service/PetService";
+import { FichaService } from "../service/FichaService";
 import { Controller, Route, Tags, Body, Query, Res, Post, Put, Delete, Get, TsoaResponse  } from "tsoa";
-import { PetRequestDto } from "../model/dto/PetRequestDto";
-import { PetDto } from "../model/dto/PetDto";
+import { FichaRequestDto } from "../model/dto/FichaRequestDto";
+import { FichaDto } from "../model/dto/FichaDto";
 import { BasicResponseDto } from "../model/dto/BasicResponseDto";
 
-@Route("pet")
-@Tags("Pet")
-export class PetController extends Controller {
-    petService = new PetService();
+@Route("ficha")
+@Tags("Ficha")
+export class FichaController extends Controller {
+    fichaService = new FichaService();
 
     /** 
         @example dto {
-            "name": "Linux",
-            "idade": 10,
-            "tutorID": 1,
-            "peso": 8,
-            "raca": "Vira-lata"
+            "petID": 1,
+            "relatorio": "Ele tá bonzinho",
+            "data_hora": ?????
         }
     */ 
     @Post()
-    async cadastrarPet (
-        @Body() dto:PetRequestDto,
+    async cadastrarFicha (
+        @Body() dto:FichaRequestDto,
         @Res() fail:TsoaResponse<400, BasicResponseDto>,
         @Res() success: TsoaResponse <201, BasicResponseDto>
     ): Promise < | void> {
         try {
-            const pet = await this.petService.cadastrarPet(dto)
-            return success(201, new BasicResponseDto("Pet criado com successo", pet))
+            const ficha = await this.fichaService.cadastrarFicha(dto)
+            return success(201, new BasicResponseDto("Ficha criado com successo", ficha))
         } catch (error: any) {
             return fail (400, new BasicResponseDto(error.message, undefined))
         }
@@ -36,22 +34,20 @@ export class PetController extends Controller {
     /** 
         @example dto {
             "id": 1,
-            "name": "Linux",
-            "idade": 9,
-            "tutorID": 1,
-            "peso": 8,
-            "raca": "Vira-lata"
+            "petID": 1,
+            "relatorio": "Ele tá bonzinho :D",
+            "data_hora": ?????
         }
     */ 
     @Put()
-    async atualizarPet (
-        @Body() dto:PetDto,
+    async atualizarFicha (
+        @Body() dto:FichaDto,
         @Res() fail:TsoaResponse<400, BasicResponseDto>,
         @Res() success: TsoaResponse <201, BasicResponseDto>
     ): Promise < | void> {
         try {
-            const pet = await this.petService.atualizarPet(dto)
-            return success(201, new BasicResponseDto("Pet atualizado com successo!", pet))
+            const ficha = await this.fichaService.atualizarFicha(dto)
+            return success(201, new BasicResponseDto("Ficha atualizada com successo!", ficha))
         } catch (error: any) {
             return fail (400, new BasicResponseDto(error.message, undefined))
         }
@@ -61,22 +57,20 @@ export class PetController extends Controller {
     /** 
         @example dto {
             "id": 1,
-            "name": "Linux",
-            "idade": 9,
-            "tutorID": 1,
-            "peso": 8,
-            "raca": "Vira-lata"
+            "petID": 1,
+            "relatorio": "Ele tá bonzinho :D",
+            "data_hora": ?????
         }
     */
     @Delete() 
-    async deletarPet (
-        @Body() dto:PetDto,
+    async deletarFicha (
+        @Body() dto:FichaDto,
         @Res() fail: TsoaResponse<400, BasicResponseDto>,
         @Res() success: TsoaResponse<201, BasicResponseDto>
     ): Promise < | void> {
         try {
-            const pet = await this.petService.deletarPet(dto)
-            return success(201, new BasicResponseDto("Pet deletado com successo!", pet))
+            const ficha = await this.fichaService.deletarFicha(dto)
+            return success(201, new BasicResponseDto("Ficha deletada com successo!", ficha))
         } catch (error: any) {
             return fail (400, new BasicResponseDto(error.message, undefined))
         }
@@ -84,14 +78,14 @@ export class PetController extends Controller {
     
     
     @Get("all")
-    async listarTodosPets (
+    async listarTodosFichas (
         // @Query() id:number,
         @Res() fail: TsoaResponse<400, BasicResponseDto>,
         @Res() success: TsoaResponse<201, BasicResponseDto>
     ): Promise < | void> {
         try {
-            const pet = await this.petService.listarTodosPets()
-            return success(201, new BasicResponseDto("Pets listados com successo!", pet))
+            const ficha = await this.fichaService.listarTodosFichas()
+            return success(201, new BasicResponseDto("Fichas listadas com successo!", ficha))
         } catch (error: any) {
             return fail (400, new BasicResponseDto(error.message, undefined))
         }

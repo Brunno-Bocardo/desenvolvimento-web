@@ -2,10 +2,7 @@ import { executarComandoSQL } from "../database/mysql";
 import { Ficha } from "../model/entity/Ficha";
 
 
-
-
 export class FichaRepository{
-
 
     constructor(){
         this.createTable();

@@ -466,6 +466,38 @@ export function RegisterRoutes(app: Router) {
             }
         });
         // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
+        app.get('/ficha/id/:id',
+            ...(fetchMiddlewares<RequestHandler>(FichaController)),
+            ...(fetchMiddlewares<RequestHandler>(FichaController.prototype.filtraFicha)),
+
+            async function FichaController_filtraFicha(request: ExRequest, response: ExResponse, next: any) {
+            const args: Record<string, TsoaRoute.ParameterSchema> = {
+                    id: {"in":"path","name":"id","required":true,"dataType":"double"},
+                    notFound: {"in":"res","name":"400","required":true,"ref":"BasicResponseDto"},
+                    sucess: {"in":"res","name":"201","required":true,"ref":"BasicResponseDto"},
+            };
+
+            // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
+
+            let validatedArgs: any[] = [];
+            try {
+                validatedArgs = templateService.getValidatedArgs({ args, request, response });
+
+                const controller = new FichaController();
+
+              await templateService.apiHandler({
+                methodName: 'filtraFicha',
+                controller,
+                response,
+                next,
+                validatedArgs,
+                successStatus: undefined,
+              });
+            } catch (err) {
+                return next(err);
+            }
+        });
+        // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
         app.get('/ficha/all',
             ...(fetchMiddlewares<RequestHandler>(FichaController)),
             ...(fetchMiddlewares<RequestHandler>(FichaController.prototype.listarTodosFichas)),

@@ -1,5 +1,5 @@
 import { FichaService } from "../service/FichaService";
-import { Controller, Route, Tags, Body, Query, Res, Post, Put, Delete, Get, TsoaResponse  } from "tsoa";
+import { Controller, Route, Tags, Body, Path, Res, Post, Put, Delete, Get, TsoaResponse  } from "tsoa";
 import { FichaRequestDto } from "../model/dto/FichaRequestDto";
 import { FichaDto } from "../model/dto/FichaDto";
 import { BasicResponseDto } from "../model/dto/BasicResponseDto";
@@ -76,6 +76,19 @@ export class FichaController extends Controller {
         }
     }
     
+    @Get("id/{id}")
+    async filtraFicha (
+        @Path() id: number,
+        @Res() notFound: TsoaResponse<400, BasicResponseDto>,
+        @Res() sucess: TsoaResponse<201, BasicResponseDto>
+    ): Promise < | void> {
+        try {
+            const ficha = await this.fichaService.filtrarFicha(id);
+            return sucess(201, new BasicResponseDto("Ficha encontrada com sucesso!", ficha))
+        } catch (error: any) {
+            return notFound(400, new BasicResponseDto(error.message, undefined))
+        }
+    }
     
     @Get("all")
     async listarTodosFichas (

@@ -1,4 +1,4 @@
-import { stringParaData } from "../../util/DataUtil";
+import { stringParaData, verificaFormatoData } from "../../util/DataUtil";
 
 export class Ficha {
     private static instance: Ficha | null = null;
@@ -8,7 +8,7 @@ export class Ficha {
     data_hora: Date;
 
     private constructor(id?: number, petID?: number, relatorio?: string, data_hora?: string) {
-        this.validatesInformation(petID, relatorio);
+        this.validatesInformation(petID, relatorio, data_hora);
         this.id = id || 0;
         this.petID = petID || 0;
         this.relatorio = relatorio || '';
@@ -27,11 +27,15 @@ export class Ficha {
         return Ficha.instance;
     }
 
-    private validatesInformation(petID?: number, relatorio?: string) {
+    private validatesInformation(petID?: number, relatorio?: string, data_hora?:string) {
         let error = '';
 
         if (typeof petID !== 'number' || typeof relatorio !== 'string') {
             error += "Informações incompletas ou incorretas. ";
+        }
+
+        if(!verificaFormatoData(data_hora)){
+            error += "Formato correto da data: dd/mm/aaaa. ";
         }
 
         if (error !== '') {

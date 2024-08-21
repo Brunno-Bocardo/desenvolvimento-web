@@ -81,14 +81,14 @@ export class FichaRepository{
     }
 
 
-    async filterFicha(id: number) :Promise<Ficha>{
+    async filterFicha(id: number) :Promise<Ficha[]>{
         const query = "SELECT * FROM caokimia.Ficha where id = ?" ;
 
 
         try {
             const resultado = await executarComandoSQL(query, [id]);
             console.log('Ficha localizado com sucesso, ID: ', resultado);
-            return new Promise<Ficha>((resolve)=>{
+            return new Promise<Ficha[]>((resolve)=>{
                 resolve(resultado);
             })
         } catch (err:any) {

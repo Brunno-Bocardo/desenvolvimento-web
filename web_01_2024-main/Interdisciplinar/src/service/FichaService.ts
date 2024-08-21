@@ -17,8 +17,14 @@ export class FichaService{
 
     async atualizarFicha(fichaData: any): Promise<Ficha> {
         const { id, petID, relatorio, data_hora  } = fichaData;
+        const idNumber = parseInt(id, 10);
 
-        const ficha = Ficha.getInstance(id, petID, relatorio, data_hora)
+        const ficha = Ficha.getInstance(idNumber, petID, relatorio, data_hora)
+
+        const FichaExiste = await this.fichaRepository.filterFicha(ficha.id);
+        if(FichaExiste.length == 0){
+            throw new Error("O id informado não existe!"); 
+        }
 
         await this.fichaRepository.updateFicha(ficha);
         console.log("Service - Update ", ficha);
@@ -27,18 +33,28 @@ export class FichaService{
 
     async deletarFicha(fichaData: any): Promise<Ficha> {
         const { id, petID, relatorio, data_hora } = fichaData;
+        const idNumber = parseInt(id, 10);
 
-        const ficha = Ficha.getInstance(id, petID, relatorio, data_hora)
+        const ficha = Ficha.getInstance(idNumber, petID, relatorio, data_hora)
+
+        const FichaExiste = await this.fichaRepository.filterFicha(ficha.id);
+        if(FichaExiste.length == 0){
+            throw new Error("O id informado não existe!"); 
+        }
 
         await this.fichaRepository.deleteFicha(ficha);
         console.log("Service - Delete ", ficha);
         return ficha; 
     }
 
-    async filtrarFicha(fichaData: any): Promise<Ficha> {
+    async filtrarFicha(fichaData: any): Promise<Ficha[]> {
         const idNumber = parseInt(fichaData, 10);
 
         const ficha =  await this.fichaRepository.filterFicha(idNumber);
+        if(ficha.length == 0){
+            throw new Error("Ficha não encontrada!");
+        }
+
         console.log("Service - Filtrar", ficha);
         return ficha;
     }

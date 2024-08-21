@@ -1,7 +1,7 @@
-export function verificaFormatoData(dataString: string): boolean {
+export function verificaFormatoData(dataString?: string): boolean {
     let dateIsCorrect = false;
     const regex = /^\d{2}\/\d{2}\/\d{4}$/;
-    if (regex.test(dataString)) {
+    if (regex.test(dataString || '')) {
         dateIsCorrect = true;
     }
     return dateIsCorrect;

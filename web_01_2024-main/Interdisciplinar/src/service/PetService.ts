@@ -17,8 +17,14 @@ export class PetService{
 
     async atualizarPet(petData: any): Promise<Pet> {
         const { id, name, idade, tutorID, peso, raca  } = petData;
+        const idNumber = parseInt(id, 10);
 
-        const pet = Pet.getInstance(id, name, idade, tutorID, peso, raca)
+        const pet = Pet.getInstance(idNumber, name, idade, tutorID, peso, raca)
+
+        const PetExiste = await this.petRepository.filterPet(pet.id)
+        if(PetExiste.length == 0){
+            throw new Error("Pet não encontrado!");
+        }
 
         await this.petRepository.updatePet(pet);
         console.log("Service - Update ", pet);
@@ -27,15 +33,21 @@ export class PetService{
 
     async deletarPet(petData: any): Promise<Pet> {
         const { id, name, idade, tutorID, peso, raca } = petData;
+        const idNumber = parseInt(id, 10);
 
-        const pet = Pet.getInstance(id, name, idade, tutorID, peso, raca)
+        const pet = Pet.getInstance(idNumber, name, idade, tutorID, peso, raca)
+
+        const PetExiste = await this.petRepository.filterPet(pet.id)
+        if(PetExiste.length == 0){
+            throw new Error("Pet não encontrado!");
+        }
 
         await this.petRepository.deletePet(pet);
         console.log("Service - Delete ", pet);
         return pet; 
     }
 
-    async filtrarPet(petData: any): Promise<Pet> {
+    async filtrarPet(petData: any): Promise<Pet[]> {
         const idNumber = parseInt(petData, 10);
 
         const pet =  await this.petRepository.filterPet(idNumber);

@@ -83,14 +83,14 @@ export class TutorRepository{
     }
 
 
-    async filterTutor(id: number) :Promise<Tutor>{
+    async filterTutor(id: number) :Promise<Tutor[]>{
         const query = "SELECT * FROM caokimia.Tutor where id = ?" ;
 
 
         try {
             const resultado = await executarComandoSQL(query, [id]);
             console.log('Tutor localizado com sucesso, ID: ', resultado);
-            return new Promise<Tutor>((resolve)=>{
+            return new Promise<Tutor[]>((resolve)=>{
                 resolve(resultado);
             })
         } catch (err:any) {

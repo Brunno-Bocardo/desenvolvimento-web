@@ -74,13 +74,13 @@ export class PetRepository{
         }
     }
 
-    async filterPet(id: number) :Promise<Pet>{
+    async filterPet(id: number) :Promise<Pet[]>{
         const query = "SELECT * FROM caokimia.Pet where id = ?" ;
 
         try {
             const resultado = await executarComandoSQL(query, [id]);
             console.log('Pet localizado com sucesso, ID: ', resultado);
-            return new Promise<Pet>((resolve)=>{
+            return new Promise<Pet[]>((resolve)=>{
                 resolve(resultado);
             })
         } catch (err:any) {

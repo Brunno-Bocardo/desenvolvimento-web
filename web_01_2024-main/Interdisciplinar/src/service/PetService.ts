@@ -1,52 +1,52 @@
-import { Product } from "../model/entity/Tutor";
-import { ProductRepository } from "../repository/PetRepository";
+import { Pet } from "../model/entity/Pet";
+import { PetRepository } from "../repository/PetRepository";
 
-export class ProductService{
+export class PetService{
 
-    productRepository: ProductRepository = new ProductRepository();
+    petRepository: PetRepository = new PetRepository();
 
-    async cadastrarProduto(produtoData: any): Promise<Product> {
-        const { name, price, expirationDate } = produtoData;
+    async cadastrarPet(petData: any): Promise<Pet> {
+        const { name, idade, tutorID, peso, raca } = petData;
         
-        const produto = new Product(undefined, name, price, expirationDate)
+        const pet = Pet.getInstance(undefined, name, idade, tutorID, peso, raca) 
 
-        const novoProduto =  await this.productRepository.insertProduct(produto);
-        console.log("Service - Insert ", novoProduto);
-        return novoProduto;
+        const novoPet =  await this.petRepository.insertPet(pet);
+        console.log("Service - Insert ", novoPet);
+        return novoPet;
     }
 
-    async atualizarProduto(produtoData: any): Promise<Product> {
-        const { id, name, price, expirationDate } = produtoData;
+    async atualizarPet(petData: any): Promise<Pet> {
+        const { id, name, idade, tutorID, peso, raca  } = petData;
 
-        const produto = new Product(id, name, price, expirationDate)
+        const pet = Pet.getInstance(id, name, idade, tutorID, peso, raca)
 
-        await this.productRepository.updateProduct(produto);
-        console.log("Service - Update ", produto);
-        return produto;
+        await this.petRepository.updatePet(pet);
+        console.log("Service - Update ", pet);
+        return pet;
     }
 
-    async deletarProduto(produtoData: any): Promise<Product> {
-        const { id, name, price, expirationDate } = produtoData;
+    async deletarPet(petData: any): Promise<Pet> {
+        const { id, name, idade, tutorID, peso, raca } = petData;
 
-        const produto = new Product(id, name, price, expirationDate)
+        const pet = Pet.getInstance(id, name, idade, tutorID, peso, raca)
 
-        await this.productRepository.deleteProduct(produto);
-        console.log("Service - Delete ", produto);
-        return produto;
+        await this.petRepository.deletePet(pet);
+        console.log("Service - Delete ", pet);
+        return pet; 
     }
 
-    async filtrarProduto(produtoData: any): Promise<Product> {
-        const idNumber = parseInt(produtoData, 10);
+    async filtrarPet(petData: any): Promise<Pet> {
+        const idNumber = parseInt(petData, 10);
 
-        const produto =  await this.productRepository.filterProduct(idNumber);
-        console.log("Service - Filtrar", produto);
-        return produto;
+        const pet =  await this.petRepository.filterPet(idNumber);
+        console.log("Service - Filtrar", pet);
+        return pet;
     }
 
-    async listarTodosProdutos(): Promise<Product[]> {
-        const produto =  await this.productRepository.filterAllProduct();
-        console.log("Service - Filtrar Todos", produto);
-        return produto;
+    async listarTodosPets(): Promise<Pet[]> {
+        const pet =  await this.petRepository.filterAllPet();
+        console.log("Service - Filtrar Todos", pet);
+        return pet;
     }
 
 }

@@ -114,6 +114,4 @@ export class TutorRepository{
             throw err;
         }
     }
-
-
 }

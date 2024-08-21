@@ -17,7 +17,7 @@ export class Ficha {
 
     public static getInstance(id?: number, petID?: number, relatorio?: string, data_hora?: string): Ficha {
         if (!Ficha.instance) {
-            Ficha.instance = new Ficha(id, petID, relatorio);
+            Ficha.instance = new Ficha(id, petID, relatorio, data_hora);
         } else {
             Ficha.instance.id = id || Ficha.instance.id;
             Ficha.instance.petID = petID || Ficha.instance.petID;

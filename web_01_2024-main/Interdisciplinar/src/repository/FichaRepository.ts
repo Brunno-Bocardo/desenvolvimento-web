@@ -35,7 +35,7 @@ export class FichaRepository{
 
         try {
             const resultado = await executarComandoSQL(query, [ficha.petID, ficha.relatorio, ficha.data_hora]);
-            console.log('Ficha inserido com sucesso, ID: ', resultado.insertId);
+            console.log('Ficha inserida com sucesso, ID: ', resultado.insertId);
             ficha.id = resultado.insertId;
             return new Promise<Ficha>((resolve)=>{
                 resolve(ficha);
@@ -70,7 +70,7 @@ export class FichaRepository{
 
         try {
             const resultado = await executarComandoSQL(query, [ficha.id]);
-            console.log('Ficha deletado com sucesso: ', ficha);
+            console.log('Ficha deletada com sucesso: ', ficha);
             return new Promise<Ficha>((resolve)=>{
                 resolve(ficha);
             })

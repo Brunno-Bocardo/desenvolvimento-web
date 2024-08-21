@@ -15,7 +15,7 @@ export class FichaRepository{
             id INT AUTO_INCREMENT PRIMARY KEY,
             petID INT NOT NULL,
             relatorio VARCHAR(255) NOT NULL,
-            data_hora DATE NOT NULL,
+            data_hora DATE NULL,
             FOREIGN KEY (petID) REFERENCES Pet (id)
         )`;
 

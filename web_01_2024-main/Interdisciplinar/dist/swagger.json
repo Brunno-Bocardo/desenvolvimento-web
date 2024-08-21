@@ -7,23 +7,39 @@
 		"requestBodies": {},
 		"responses": {},
 		"schemas": {
-			"ProductRequestDto": {
+			"TutorRequestDto": {
 				"properties": {
 					"name": {
 						"type": "string"
 					},
-					"price": {
+					"telefone": {
+						"type": "string"
+					},
+					"email": {
+						"type": "string"
+					},
+					"cidade": {
+						"type": "string"
+					},
+					"bairro": {
+						"type": "string"
+					},
+					"rua": {
+						"type": "string"
+					},
+					"numero": {
 						"type": "number",
 						"format": "double"
-					},
-					"expirationDate": {
-						"type": "string"
 					}
 				},
 				"required": [
 					"name",
-					"price",
-					"expirationDate"
+					"telefone",
+					"email",
+					"cidade",
+					"bairro",
+					"rua",
+					"numero"
 				],
 				"type": "object",
 				"additionalProperties": false
@@ -41,6 +57,162 @@
 				],
 				"type": "object",
 				"additionalProperties": false
+			},
+			"TutorDto": {
+				"properties": {
+					"id": {
+						"type": "number",
+						"format": "double"
+					},
+					"name": {
+						"type": "string"
+					},
+					"telefone": {
+						"type": "string"
+					},
+					"email": {
+						"type": "string"
+					},
+					"cidade": {
+						"type": "string"
+					},
+					"bairro": {
+						"type": "string"
+					},
+					"rua": {
+						"type": "string"
+					},
+					"numero": {
+						"type": "number",
+						"format": "double"
+					}
+				},
+				"required": [
+					"id",
+					"name",
+					"telefone",
+					"email",
+					"cidade",
+					"bairro",
+					"rua",
+					"numero"
+				],
+				"type": "object",
+				"additionalProperties": false
+			},
+			"PetRequestDto": {
+				"properties": {
+					"name": {
+						"type": "string"
+					},
+					"idade": {
+						"type": "number",
+						"format": "double"
+					},
+					"tutorID": {
+						"type": "number",
+						"format": "double"
+					},
+					"peso": {
+						"type": "number",
+						"format": "double"
+					},
+					"raca": {
+						"type": "string"
+					}
+				},
+				"required": [
+					"name",
+					"idade",
+					"tutorID",
+					"peso",
+					"raca"
+				],
+				"type": "object",
+				"additionalProperties": false
+			},
+			"PetDto": {
+				"properties": {
+					"id": {
+						"type": "number",
+						"format": "double"
+					},
+					"name": {
+						"type": "string"
+					},
+					"idade": {
+						"type": "number",
+						"format": "double"
+					},
+					"tutorID": {
+						"type": "number",
+						"format": "double"
+					},
+					"peso": {
+						"type": "number",
+						"format": "double"
+					},
+					"raca": {
+						"type": "string"
+					}
+				},
+				"required": [
+					"id",
+					"name",
+					"idade",
+					"tutorID",
+					"peso",
+					"raca"
+				],
+				"type": "object",
+				"additionalProperties": false
+			},
+			"FichaRequestDto": {
+				"properties": {
+					"petID": {
+						"type": "number",
+						"format": "double"
+					},
+					"relatorio": {
+						"type": "string"
+					},
+					"data_hora": {
+						"type": "string"
+					}
+				},
+				"required": [
+					"petID",
+					"relatorio",
+					"data_hora"
+				],
+				"type": "object",
+				"additionalProperties": false
+			},
+			"FichaDto": {
+				"properties": {
+					"id": {
+						"type": "number",
+						"format": "double"
+					},
+					"petID": {
+						"type": "number",
+						"format": "double"
+					},
+					"relatorio": {
+						"type": "string"
+					},
+					"data_hora": {
+						"type": "string"
+					}
+				},
+				"required": [
+					"id",
+					"petID",
+					"relatorio",
+					"data_hora"
+				],
+				"type": "object",
+				"additionalProperties": false
 			}
 		},
 		"securitySchemes": {}
@@ -51,9 +223,9 @@
 		"description": "Documentação da API usando Swagger"
 	},
 	"paths": {
-		"/product": {
+		"/tutor": {
 			"post": {
-				"operationId": "CadastrarProduto",
+				"operationId": "CadastrarTutor",
 				"responses": {
 					"200": {
 						"description": "Ok",
@@ -85,7 +257,7 @@
 					}
 				},
 				"tags": [
-					"Product"
+					"Tutor"
 				],
 				"security": [],
 				"parameters": [],
@@ -94,19 +266,23 @@
 					"content": {
 						"application/json": {
 							"schema": {
-								"$ref": "#/components/schemas/ProductRequestDto"
+								"$ref": "#/components/schemas/TutorRequestDto"
 							},
 							"example": {
-								"name": "Bananas",
-								"price": 10,
-								"expirationDate": "01/01/2025"
+								"name": "Flavita",
+								"telefone": "555-666",
+								"email": "flavita@email.com",
+								"cidade": "Boitucity",
+								"bairro": "Boitu-Vera",
+								"rua": "Boitu-rua",
+								"numero": 27
 							}
 						}
 					}
 				}
 			},
 			"put": {
-				"operationId": "AtualizarProduto",
+				"operationId": "AtualizarTutor",
 				"responses": {
 					"200": {
 						"description": "Ok",
@@ -138,7 +314,7 @@
 					}
 				},
 				"tags": [
-					"Product"
+					"Tutor"
 				],
 				"security": [],
 				"parameters": [],
@@ -147,19 +323,24 @@
 					"content": {
 						"application/json": {
 							"schema": {
-								"$ref": "#/components/schemas/ProductRequestDto"
+								"$ref": "#/components/schemas/TutorDto"
 							},
 							"example": {
-								"name": "Mangas",
-								"price": 10,
-								"expirationDate": "01/01/2025"
+								"id": 1,
+								"name": "Flavita",
+								"telefone": "555-666",
+								"email": "flavita@email.com",
+								"cidade": "Boitucity",
+								"bairro": "Boitu-Vera",
+								"rua": "Boitu-rua",
+								"numero": 27
 							}
 						}
 					}
 				}
 			},
 			"delete": {
-				"operationId": "DeletarProduto",
+				"operationId": "DeletarTutor",
 				"responses": {
 					"200": {
 						"description": "Ok",
@@ -191,7 +372,7 @@
 					}
 				},
 				"tags": [
-					"Product"
+					"Tutor"
 				],
 				"security": [],
 				"parameters": [],
@@ -200,19 +381,121 @@
 					"content": {
 						"application/json": {
 							"schema": {
-								"$ref": "#/components/schemas/ProductRequestDto"
+								"$ref": "#/components/schemas/TutorDto"
 							},
 							"example": {
-								"name": "Mangas",
-								"price": 10,
-								"expirationDate": "01/01/2025"
+								"id": 1,
+								"name": "Flavita",
+								"telefone": "555-666",
+								"email": "flavita@email.com",
+								"cidade": "Boitucity",
+								"bairro": "Boitu-Vera",
+								"rua": "Boitu-rua",
+								"numero": 27
+							}
+						}
+					}
+				}
+			}
+		},
+		"/tutor/all": {
+			"get": {
+				"operationId": "ListarTodosTutors",
+				"responses": {
+					"200": {
+						"description": "Ok",
+						"content": {
+							"application/json": {
+								"schema": {}
+							}
+						}
+					},
+					"201": {
+						"description": "",
+						"content": {
+							"application/json": {
+								"schema": {
+									"$ref": "#/components/schemas/BasicResponseDto"
+								}
+							}
+						}
+					},
+					"400": {
+						"description": "",
+						"content": {
+							"application/json": {
+								"schema": {
+									"$ref": "#/components/schemas/BasicResponseDto"
+								}
+							}
+						}
+					}
+				},
+				"tags": [
+					"Tutor"
+				],
+				"security": [],
+				"parameters": []
+			}
+		},
+		"/pet": {
+			"post": {
+				"operationId": "CadastrarPet",
+				"responses": {
+					"200": {
+						"description": "Ok",
+						"content": {
+							"application/json": {
+								"schema": {}
+							}
+						}
+					},
+					"201": {
+						"description": "",
+						"content": {
+							"application/json": {
+								"schema": {
+									"$ref": "#/components/schemas/BasicResponseDto"
+								}
+							}
+						}
+					},
+					"400": {
+						"description": "",
+						"content": {
+							"application/json": {
+								"schema": {
+									"$ref": "#/components/schemas/BasicResponseDto"
+								}
+							}
+						}
+					}
+				},
+				"tags": [
+					"Pet"
+				],
+				"security": [],
+				"parameters": [],
+				"requestBody": {
+					"required": true,
+					"content": {
+						"application/json": {
+							"schema": {
+								"$ref": "#/components/schemas/PetRequestDto"
+							},
+							"example": {
+								"name": "Linux",
+								"idade": 10,
+								"tutorID": 1,
+								"peso": 8,
+								"raca": "Vira-lata"
 							}
 						}
 					}
 				}
 			},
-			"get": {
-				"operationId": "FiltrarProduto",
+			"put": {
+				"operationId": "AtualizarPet",
 				"responses": {
 					"200": {
 						"description": "Ok",
@@ -244,25 +527,31 @@
 					}
 				},
 				"tags": [
-					"Product"
+					"Pet"
 				],
 				"security": [],
-				"parameters": [
-					{
-						"in": "query",
-						"name": "id",
-						"required": true,
-						"schema": {
-							"format": "double",
-							"type": "number"
+				"parameters": [],
+				"requestBody": {
+					"required": true,
+					"content": {
+						"application/json": {
+							"schema": {
+								"$ref": "#/components/schemas/PetDto"
+							},
+							"example": {
+								"id": 1,
+								"name": "Linux",
+								"idade": 9,
+								"tutorID": 1,
+								"peso": 8,
+								"raca": "Vira-lata"
+							}
 						}
 					}
-				]
-			}
-		},
-		"/product/all": {
-			"get": {
-				"operationId": "ListarTodosProdutos",
+				}
+			},
+			"delete": {
+				"operationId": "DeletarPet",
 				"responses": {
 					"200": {
 						"description": "Ok",
@@ -294,7 +583,268 @@
 					}
 				},
 				"tags": [
-					"Product"
+					"Pet"
+				],
+				"security": [],
+				"parameters": [],
+				"requestBody": {
+					"required": true,
+					"content": {
+						"application/json": {
+							"schema": {
+								"$ref": "#/components/schemas/PetDto"
+							},
+							"example": {
+								"id": 1,
+								"name": "Linux",
+								"idade": 9,
+								"tutorID": 1,
+								"peso": 8,
+								"raca": "Vira-lata"
+							}
+						}
+					}
+				}
+			}
+		},
+		"/pet/all": {
+			"get": {
+				"operationId": "ListarTodosPets",
+				"responses": {
+					"200": {
+						"description": "Ok",
+						"content": {
+							"application/json": {
+								"schema": {}
+							}
+						}
+					},
+					"201": {
+						"description": "",
+						"content": {
+							"application/json": {
+								"schema": {
+									"$ref": "#/components/schemas/BasicResponseDto"
+								}
+							}
+						}
+					},
+					"400": {
+						"description": "",
+						"content": {
+							"application/json": {
+								"schema": {
+									"$ref": "#/components/schemas/BasicResponseDto"
+								}
+							}
+						}
+					}
+				},
+				"tags": [
+					"Pet"
+				],
+				"security": [],
+				"parameters": []
+			}
+		},
+		"/ficha": {
+			"post": {
+				"operationId": "CadastrarFicha",
+				"responses": {
+					"200": {
+						"description": "Ok",
+						"content": {
+							"application/json": {
+								"schema": {}
+							}
+						}
+					},
+					"201": {
+						"description": "",
+						"content": {
+							"application/json": {
+								"schema": {
+									"$ref": "#/components/schemas/BasicResponseDto"
+								}
+							}
+						}
+					},
+					"400": {
+						"description": "",
+						"content": {
+							"application/json": {
+								"schema": {
+									"$ref": "#/components/schemas/BasicResponseDto"
+								}
+							}
+						}
+					}
+				},
+				"tags": [
+					"Ficha"
+				],
+				"security": [],
+				"parameters": [],
+				"requestBody": {
+					"required": true,
+					"content": {
+						"application/json": {
+							"schema": {
+								"$ref": "#/components/schemas/FichaRequestDto"
+							},
+							"example": {
+								"petID": 1,
+								"relatorio": "Ele tá bonzinho",
+								"data_hora": "04/08/2024"
+							}
+						}
+					}
+				}
+			},
+			"put": {
+				"operationId": "AtualizarFicha",
+				"responses": {
+					"200": {
+						"description": "Ok",
+						"content": {
+							"application/json": {
+								"schema": {}
+							}
+						}
+					},
+					"201": {
+						"description": "",
+						"content": {
+							"application/json": {
+								"schema": {
+									"$ref": "#/components/schemas/BasicResponseDto"
+								}
+							}
+						}
+					},
+					"400": {
+						"description": "",
+						"content": {
+							"application/json": {
+								"schema": {
+									"$ref": "#/components/schemas/BasicResponseDto"
+								}
+							}
+						}
+					}
+				},
+				"tags": [
+					"Ficha"
+				],
+				"security": [],
+				"parameters": [],
+				"requestBody": {
+					"required": true,
+					"content": {
+						"application/json": {
+							"schema": {
+								"$ref": "#/components/schemas/FichaDto"
+							},
+							"example": {
+								"id": 1,
+								"petID": 1,
+								"relatorio": "Ele tá bonzinho :D",
+								"data_hora": "04/08/2024"
+							}
+						}
+					}
+				}
+			},
+			"delete": {
+				"operationId": "DeletarFicha",
+				"responses": {
+					"200": {
+						"description": "Ok",
+						"content": {
+							"application/json": {
+								"schema": {}
+							}
+						}
+					},
+					"201": {
+						"description": "",
+						"content": {
+							"application/json": {
+								"schema": {
+									"$ref": "#/components/schemas/BasicResponseDto"
+								}
+							}
+						}
+					},
+					"400": {
+						"description": "",
+						"content": {
+							"application/json": {
+								"schema": {
+									"$ref": "#/components/schemas/BasicResponseDto"
+								}
+							}
+						}
+					}
+				},
+				"tags": [
+					"Ficha"
+				],
+				"security": [],
+				"parameters": [],
+				"requestBody": {
+					"required": true,
+					"content": {
+						"application/json": {
+							"schema": {
+								"$ref": "#/components/schemas/FichaDto"
+							},
+							"example": {
+								"id": 1,
+								"petID": 1,
+								"relatorio": "Ele tá bonzinho :D",
+								"data_hora": "04/08/2024"
+							}
+						}
+					}
+				}
+			}
+		},
+		"/ficha/all": {
+			"get": {
+				"operationId": "ListarTodosFichas",
+				"responses": {
+					"200": {
+						"description": "Ok",
+						"content": {
+							"application/json": {
+								"schema": {}
+							}
+						}
+					},
+					"201": {
+						"description": "",
+						"content": {
+							"application/json": {
+								"schema": {
+									"$ref": "#/components/schemas/BasicResponseDto"
+								}
+							}
+						}
+					},
+					"400": {
+						"description": "",
+						"content": {
+							"application/json": {
+								"schema": {
+									"$ref": "#/components/schemas/BasicResponseDto"
+								}
+							}
+						}
+					}
+				},
+				"tags": [
+					"Ficha"
 				],
 				"security": [],
 				"parameters": []

@@ -13,7 +13,7 @@ export class FichaController extends Controller {
         @example dto {
             "petID": 1,
             "relatorio": "Ele tá bonzinho",
-            "data_hora": ?????
+            "data_hora": "04/08/2024"
         }
     */ 
     @Post()
@@ -36,7 +36,7 @@ export class FichaController extends Controller {
             "id": 1,
             "petID": 1,
             "relatorio": "Ele tá bonzinho :D",
-            "data_hora": ?????
+            "data_hora": "04/08/2024"
         }
     */ 
     @Put()
@@ -59,7 +59,7 @@ export class FichaController extends Controller {
             "id": 1,
             "petID": 1,
             "relatorio": "Ele tá bonzinho :D",
-            "data_hora": ?????
+            "data_hora": "04/08/2024"
         }
     */
     @Delete() 

@@ -1,4 +1,4 @@
-export class TutorDto {
+export class TutorRequestDto {
     name: string;
     telefone: string;
     email: string;

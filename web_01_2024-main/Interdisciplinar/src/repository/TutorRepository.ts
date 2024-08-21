@@ -19,8 +19,7 @@ export class TutorRepository{
             cidade VARCHAR(255) NOT NULL,
             bairro VARCHAR(255) NOT NULL,
             rua VARCHAR(255) NOT NULL,
-            numero INT NOT NULL,
-            FOREIGN KEY (petID) REFERENCES Pet (id)
+            numero INT NOT NULL
         )`;
 
 

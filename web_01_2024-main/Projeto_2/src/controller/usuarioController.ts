@@ -11,7 +11,7 @@ export class UsuarioController extends Controller {
     /**
        @example dto {
             "senha": "senhaSegura",
-            "pessoaID": "1"
+            "pessoaID": 1
        }
     */
     @Post("usuario")

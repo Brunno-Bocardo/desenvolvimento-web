@@ -576,7 +576,7 @@ export function RegisterRoutes(app: Router) {
             }
         });
         // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
-        app.get('/livraria/emprestimos',
+        app.get('/livraria/emprestimo/all',
             ...(fetchMiddlewares<RequestHandler>(EmprestimoController)),
             ...(fetchMiddlewares<RequestHandler>(EmprestimoController.prototype.obterTodosEmprestimos)),
 

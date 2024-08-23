@@ -915,7 +915,7 @@
 				}
 			}
 		},
-		"/livraria/emprestimos": {
+		"/livraria/emprestimo/all": {
 			"get": {
 				"operationId": "ObterTodosEmprestimos",
 				"responses": {
